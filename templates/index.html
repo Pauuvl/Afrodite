@@ -1,0 +1,145 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Afrodite | Cosméticos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #fff0f5;
+        }
+        .navbar {
+            background-color: #ed8f8f;
+        }
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.8rem;
+            color: white !important;
+        }
+        .hero {
+            background: linear-gradient(to right, #f8bbd0, #f48fb1);
+            padding: 100px 0;
+            color: white;
+            text-align: center;
+        }
+        .product-card {
+            transition: transform 0.3s ease;
+        }
+        .product-card:hover {
+            transform: scale(1.05);
+        }
+        footer {
+            background-color:#f5cccc;
+            color: white;
+            padding: 30px 0;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/">Afrodite</a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="menu">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="#">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Productos</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Ofertas</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Contacto</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="container">
+        <h1 class="display-4">Descubre tu Belleza Natural</h1>
+        <p class="lead">Cosméticos de alta calidad para realzar tu esencia.</p>
+        <a href="#" class="btn btn-light btn-lg mt-3">Ver Productos</a>
+    </div>
+</section>
+
+<!-- CATEGORÍAS -->
+<section class="container py-5">
+    <h2 class="text-center mb-4">Categorías</h2>
+    <div class="row text-center">
+        <div class="col-md-3">
+            <div class="card p-3">Maquillaje</div>
+        </div>
+        <div class="col-md-3">
+            <div class="card p-3">Cuidado Facial</div>
+        </div>
+        <div class="col-md-3">
+            <div class="card p-3">Perfumes</div>
+        </div>
+        <div class="col-md-3">
+            <div class="card p-3">Accesorios</div>
+        </div>
+    </div>
+</section>
+
+<!-- PRODUCTOS DESTACADOS -->
+<section class="container py-5">
+    <h2 class="text-center mb-4">Productos Destacados</h2>
+    <div class="row">
+
+        <div class="col-md-4">
+            <div class="card product-card">
+                <img src="https://via.placeholder.com/400x300" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">Labial Matte</h5>
+                    <p class="card-text">$45.000</p>
+                    <button class="btn btn-primary w-100">Agregar al carrito</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card product-card">
+                <img src="https://via.placeholder.com/400x300" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">Base Líquida</h5>
+                    <p class="card-text">$70.000</p>
+                    <button class="btn btn-primary w-100">Agregar al carrito</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card product-card">
+                <img src="https://via.placeholder.com/400x300" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">Perfume Floral</h5>
+                    <p class="card-text">$120.000</p>
+                    <button class="btn btn-primary w-100">Agregar al carrito</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="container text-center">
+        <p>&copy; 2026 Afrodite Cosméticos. Todos los derechos reservados.</p>
+        <p>Síguenos en Instagram | Facebook | TikTok</p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
