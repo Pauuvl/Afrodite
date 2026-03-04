@@ -8,21 +8,34 @@
 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <style>
         body {
-            background-color: #fff0f5;
+            background-color: #e7e7e7;
         }
         .navbar {
-            background-color: #ed8f8f;
+            background-color: #f19f9f;
+            
         }
         .navbar-brand {
             font-weight: bold;
             font-size: 1.8rem;
-            color: white !important;
+            color: white ;
         }
+        .navbar .nav-link {
+    color: white !important;
+    font-weight: 500;
+}
+
+.navbar .nav-link:hover {
+    color: #f8f9fa !important;
+}
+
+.navbar-brand {
+    color: white !important;
+}
         .hero {
-            background: linear-gradient(to right, #f8bbd0, #f48fb1);
+            background: linear-gradient(to right, #f7adad, #f7adad);
             padding: 100px 0;
             color: white;
             text-align: center;
@@ -34,8 +47,8 @@
             transform: scale(1.05);
         }
         footer {
-            background-color:#f5cccc;
-            color: white;
+            background-color:#f7adad;
+            
             padding: 30px 0;
         }
     </style>
@@ -45,92 +58,140 @@
 
 <!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg navbar-dark">
+    
     <div class="container">
-        <a class="navbar-brand" href="/">Afrodite</a>
 
+        <!-- Nombre de la marca (lado izquierdo) -->
+        <a class="navbar-brand fw-bold fs-4" href="#">
+            AFRODITE
+        </a>
+
+        <!-- Botón responsive -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
             <span class="navbar-toggler-icon"></span>
         </button>
 
+        <!-- Menú lado derecho -->
         <div class="collapse navbar-collapse" id="menu">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" href="#">Inicio</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Productos</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Ofertas</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Contacto</a></li>
+            <ul class="navbar-nav ms-auto align-items-center">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Inicio</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Productos</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Ofertas</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contacto</a>
+                </li>
+
+                <!-- Carrito -->
+                <li class="nav-item ms-3">
+                    <a class="nav-link" href="#">
+                        <i class="bi bi-cart3 fs-5"></i>
+                    </a>
+                </li>
+
+                <!-- Perfil -->
+                <li class="nav-item ms-2">
+                    <a class="nav-link" href="#">
+                        <i class="bi bi-person-circle fs-5"></i>
+                    </a>
+                </li>
+
             </ul>
         </div>
+
     </div>
+
 </nav>
 
 <!-- HERO -->
-<section class="hero">
-    <div class="container">
-        <h1 class="display-4">Descubre tu Belleza Natural</h1>
-        <p class="lead">Cosméticos de alta calidad para realzar tu esencia.</p>
-        <a href="#" class="btn btn-light btn-lg mt-3">Ver Productos</a>
-    </div>
+<!-- IMAGEN PRINCIPAL FULL WIDTH -->
+<section class="py-3">
+    <img src="{% static 'images/indeximage.png' %}" 
+      class="w-100"
+         style="height: 300px; object-fit: cover;"
+         alt="Imagen principal Afrodite">
 </section>
 
 <!-- CATEGORÍAS -->
-<section class="container py-5">
-    <h2 class="text-center mb-4">Categorías</h2>
-    <div class="row text-center">
-        <div class="col-md-3">
-            <div class="card p-3">Maquillaje</div>
-        </div>
-        <div class="col-md-3">
-            <div class="card p-3">Cuidado Facial</div>
-        </div>
-        <div class="col-md-3">
-            <div class="card p-3">Perfumes</div>
-        </div>
-        <div class="col-md-3">
-            <div class="card p-3">Accesorios</div>
-        </div>
-    </div>
-</section>
+<section class="container py-2">
+    <h2 class="text-center mb-2">Categorías</h2>
 
-<!-- PRODUCTOS DESTACADOS -->
-<section class="container py-5">
-    <h2 class="text-center mb-4">Productos Destacados</h2>
-    <div class="row">
-
-        <div class="col-md-4">
-            <div class="card product-card">
-                <img src="https://via.placeholder.com/400x300" class="card-img-top">
-                <div class="card-body">
-                    <h5 class="card-title">Labial Matte</h5>
-                    <p class="card-text">$45.000</p>
-                    <button class="btn btn-primary w-100">Agregar al carrito</button>
-                </div>
-            </div>
+    <div class="row justify-content-center text-center">
+        
+        <div class="col-md-3">
+            <div class="card p-4">Maquillaje</div>
         </div>
 
-        <div class="col-md-4">
-            <div class="card product-card">
-                <img src="https://via.placeholder.com/400x300" class="card-img-top">
-                <div class="card-body">
-                    <h5 class="card-title">Base Líquida</h5>
-                    <p class="card-text">$70.000</p>
-                    <button class="btn btn-primary w-100">Agregar al carrito</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="card product-card">
-                <img src="https://via.placeholder.com/400x300" class="card-img-top">
-                <div class="card-body">
-                    <h5 class="card-title">Perfume Floral</h5>
-                    <p class="card-text">$120.000</p>
-                    <button class="btn btn-primary w-100">Agregar al carrito</button>
-                </div>
-            </div>
+        <div class="col-md-3">
+            <div class="card p-4">Cuidado Facial</div>
         </div>
 
     </div>
 </section>
+<!-- PRODUCTOS -->
+<section class="container py-5">
+
+    <h2 class="text-center mb-4">LO MÁS VENDIDO</h2>
+
+    <!-- MAQUILLAJE -->
+    <h4 class="mt-4">Maquillaje</h4>
+    <div class="row justify-content-center mb-4">
+
+        <div class="col-md-4">
+            <div class="border p-3 bg-white">
+                <h5>Labial Matte</h5>
+                <p>Acabado mate de larga duración</p>
+                <p><strong>$45.000</strong></p>
+                <button class="btn btn-dark w-100">Agregar</button>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="border p-3 bg-white">
+                <h5>Base Líquida</h5>
+                <p>Cobertura media a alta</p>
+                <p><strong>$70.000</strong></p>
+                <button class="btn btn-dark w-100">Agregar</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- CUIDADO FACIAL -->
+    <h4 class="mt-4">Cuidado Facial</h4>
+    <div class="row justify-content-center">
+
+        <div class="col-md-4">
+            <div class="border p-3 bg-white">
+                <h5>Crema Hidratante</h5>
+                <p>Hidratación profunda 24h</p>
+                <p><strong>$55.000</strong></p>
+                <button class="btn btn-dark w-100">Agregar</button>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="border p-3 bg-white">
+                <h5>Sérum Facial</h5>
+                <p>Reafirma y revitaliza la piel</p>
+                <p><strong>$80.000</strong></p>
+                <button class="btn btn-dark w-100">Agregar</button>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
 
 <!-- FOOTER -->
 <footer>
