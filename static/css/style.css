@@ -22,3 +22,23 @@ nav a {
 section {
     padding: 40px;
 }
+.icon-arrow svg {
+  width: 40px;
+  height: 40px;
+}
+
+.icon-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  z-index: 10;
+}
+
+.icon-arrow-left {
+  left: 10px;
+}
+
+.icon-arrow-right {
+  right: 10px;
+}
