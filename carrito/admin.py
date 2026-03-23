@@ -1,3 +1,5 @@
+# Autor: Viviana Arango Tabares
+
 from django.contrib import admin
 from .models import Cart, CartItem, Order, Payment
 

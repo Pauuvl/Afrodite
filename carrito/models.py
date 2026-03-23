@@ -1,3 +1,5 @@
+# Autor: Viviana Arango Tabares
+
 from django.db import models
 from django.contrib.auth.models import User
 
