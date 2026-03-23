@@ -1,7 +1,7 @@
 from decimal import Decimal
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
-from .models import Cart, CartItem
+from .models import Cart, CartItem, Order, Payment
 
 
 @login_required
@@ -71,3 +71,45 @@ def remove_cart_item(request, item_id):
         item.delete()
 
     return redirect('cart_detail')
+
+
+@login_required
+def checkout(request):
+    cart = get_object_or_404(Cart, user=request.user, is_active=True)
+    items = CartItem.objects.filter(cart=cart)
+    total = sum(item.unit_price * item.quantity for item in items)
+
+    if not items.exists():
+        return redirect('cart_detail')
+
+    if request.method == 'POST':
+        method = request.POST.get('method')
+
+        order = Order.objects.create(
+            user=request.user,
+            total=total,
+            status='paid'
+        )
+
+        Payment.objects.create(
+            order=order,
+            method=method,
+            status='completed',
+            transaction_id=f"TXN-{order.id}-{request.user.id}"
+        )
+
+        cart.is_active = False
+        cart.save()
+
+        return redirect('payment_success')
+
+    return render(request, 'carrito/checkout.html', {
+        'cart': cart,
+        'items': items,
+        'total': total,
+    })
+
+
+@login_required
+def payment_success(request):
+    return render(request, 'carrito/payment_success.html')

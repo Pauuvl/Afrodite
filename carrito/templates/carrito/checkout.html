@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+</head>
+<body>
+    <h1>Checkout</h1>
+
+    <h2>Order summary</h2>
+    <ul>
+        {% for item in items %}
+            <li>
+                {{ item.product_name }} - ${{ item.unit_price }} x {{ item.quantity }}
+            </li>
+        {% endfor %}
+    </ul>
+
+    <h3>Total: ${{ total }}</h3>
+
+    <h2>Select payment method</h2>
+    <form method="post">
+        {% csrf_token %}
+        
+        <label>
+            <input type="radio" name="method" value="card" required>
+            Card
+        </label>
+        <br><br>
+
+        <label>
+            <input type="radio" name="method" value="transfer" required>
+            Bank Transfer
+        </label>
+        <br><br>
+
+        <button type="submit">Confirm payment</button>
+    </form>
+</body>
+</html>
