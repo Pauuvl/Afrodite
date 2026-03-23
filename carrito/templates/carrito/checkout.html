@@ -1,41 +1,218 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout</title>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Checkout - Afrodite</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+    body{
+        font-family:'Poppins',sans-serif;
+        background:#fafafa;
+    }
+
+    .navbar-brand{
+        font-family:'Playfair Display',serif;
+        letter-spacing:3px;
+        font-size:30px;
+    }
+
+    .nav-link{
+        font-size:14px;
+        font-weight:500;
+        color:#333 !important;
+        margin:0 10px;
+    }
+
+    .nav-link:hover{
+        color:black !important;
+    }
+
+    .nav-icon{
+        font-size:18px;
+        color:#333;
+    }
+
+    .titulo{
+        font-family:'Playfair Display',serif;
+    }
+
+    .checkout-section{
+        padding:60px 0;
+    }
+
+    .checkout-card,
+    .payment-card{
+        background:#fff;
+        border:1px solid #eee;
+        border-radius:12px;
+        box-shadow:0 4px 14px rgba(0,0,0,0.04);
+        padding:28px;
+    }
+
+    .checkout-item{
+        padding:16px 0;
+        border-bottom:1px solid #f0f0f0;
+    }
+
+    .checkout-item:last-child{
+        border-bottom:none;
+    }
+
+    .item-name{
+        font-weight:500;
+        color:#222;
+    }
+
+    .item-price{
+        color:#777;
+        font-size:14px;
+    }
+
+    .payment-option{
+        border:1px solid #ececec;
+        border-radius:10px;
+        padding:16px;
+        margin-bottom:14px;
+        transition:0.3s;
+        background:#fff;
+    }
+
+    .payment-option:hover{
+        border-color:#d9d9d9;
+        background:#fcfcfc;
+    }
+
+    .btn-afrodite{
+        background:#111;
+        color:#fff;
+        border:none;
+        padding:12px 18px;
+        border-radius:8px;
+        transition:0.3s;
+        width:100%;
+    }
+
+    .btn-afrodite:hover{
+        background:#333;
+    }
+
+    .total-line{
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        font-size:20px;
+        font-weight:600;
+        margin-top:20px;
+    }
+
+    footer{
+        margin-top:60px;
+    }
+</style>
 </head>
+
 <body>
-    <h1>Checkout</h1>
 
-    <h2>Order summary</h2>
-    <ul>
-        {% for item in items %}
-            <li>
-                {{ item.product_name }} - ${{ item.unit_price }} x {{ item.quantity }}
-            </li>
-        {% endfor %}
-    </ul>
+<nav class="navbar navbar-expand-lg bg-white border-bottom py-3">
+    <div class="container">
+        <a class="navbar-brand" href="/">AFRODITE</a>
 
-    <h3>Total: ${{ total }}</h3>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <h2>Select payment method</h2>
-    <form method="post">
-        {% csrf_token %}
-        
-        <label>
-            <input type="radio" name="method" value="card" required>
-            Card
-        </label>
-        <br><br>
+        <div class="collapse navbar-collapse" id="menu">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item"><a class="nav-link" href="/">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" href="/catalogo/">Catálogo</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Ofertas</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Contacto</a></li>
+            </ul>
 
-        <label>
-            <input type="radio" name="method" value="transfer" required>
-            Bank Transfer
-        </label>
-        <br><br>
+            <div class="d-flex gap-3">
+                <a href="#"><i class="bi bi-heart nav-icon"></i></a>
+                <a href="{% url 'cart_detail' %}"><i class="bi bi-cart nav-icon"></i></a>
+                <a href="#"><i class="bi bi-person nav-icon"></i></a>
+            </div>
+        </div>
+    </div>
+</nav>
 
-        <button type="submit">Confirm payment</button>
-    </form>
+<section class="checkout-section">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h1 class="titulo">Finaliza tu compra</h1>
+            <p class="text-muted">Finaliza tu compra y selecciona tu método de pago</p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-lg-7">
+                <div class="checkout-card">
+                    <h4 class="titulo mb-4">Detalles de tu pedido 🛍️</h4>
+
+                    {% for item in items %}
+                        <div class="checkout-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <div class="item-name">{{ item.product_name }}</div>
+                                <div class="item-price">Cantidad: {{ item.quantity }}</div>
+                            </div>
+                            <div class="item-price">${{ item.unit_price }}</div>
+                        </div>
+                    {% endfor %}
+
+                    <div class="total-line">
+                        <span>Total</span>
+                        <span>${{ total }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-5">
+                <div class="payment-card">
+                    <h4 class="titulo mb-4">Escoge tu método de pago</h4>
+
+                    <form method="post">
+                        {% csrf_token %}
+
+                        <label class="payment-option d-flex align-items-center gap-3 w-100">
+                            <input type="radio" name="method" value="card" required>
+                            <span>
+                                <strong>Tarjeta</strong><br>
+                                <small class="text-muted">Paga fácilmente con tarjeta de crédito o débito</small>
+                            </span>
+                        </label>
+
+                        <label class="payment-option d-flex align-items-center gap-3 w-100">
+                            <input type="radio" name="method" value="transfer" required>
+                            <span>
+                                <strong>Transferencia bancaria</strong><br>
+                                <small class="text-muted">Realiza tu pago por transferencia</small>
+                            </span>
+                        </label>
+
+                        <button type="submit" class="btn-afrodite mt-3">Confirmar pago</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="bg-white border-top text-center py-4">
+    <p class="text-muted mb-0">© 2026 Afrodite - Tienda de Belleza</p>
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
