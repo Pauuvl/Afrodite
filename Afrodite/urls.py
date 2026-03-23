@@ -1,11 +1,7 @@
-from django.contrib import admin
 from django.urls import path
-from django.shortcuts import render
-
-def home(request):
-    return render(request, 'index.html')
+from . import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', home, name='home'),
+    path('', views.index, name='index'),
+    path('catalogo/', views.catalogo, name='catalogo'),
 ]

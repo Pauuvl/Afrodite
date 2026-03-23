@@ -1,4 +1,9 @@
 from django.shortcuts import render
 
-def home(request):
-    return render(request, 'base.html')
+# Página principal
+def index(request):
+    return render(request, 'index.html')
+
+# Página catálogo
+def catalogo(request):
+    return render(request, 'catalogo.html')
