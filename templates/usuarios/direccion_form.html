@@ -1,0 +1,106 @@
+<!-- Autores: Helen Sanabria -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ accion }} Dirección - Afrodite</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <style>
+    body { font-family: 'Poppins', sans-serif; background: #f7f5f3; margin: 0; }
+    .navbar-brand { font-family: 'Playfair Display', serif; letter-spacing: 3px; font-size: 30px; }
+    .nav-link { font-size: 14px; font-weight: 500; color: #333 !important; margin: 0 10px; }
+    .nav-link:hover { color: black !important; }
+    .nav-icon { font-size: 18px; color: #333; }
+    .form-card {
+      max-width: 580px; margin: 50px auto 80px; background: white;
+      border-radius: 4px; padding: 40px;
+      box-shadow: 0 1px 8px rgba(0,0,0,0.06);
+    }
+    .form-titulo { font-family: 'Playfair Display', serif; font-size: 26px; margin-bottom: 24px; }
+    label { font-size: 12px; font-weight: 500; color: #666; margin-bottom: 5px; }
+    .form-control:focus { border-color: #1a1a1a; box-shadow: 0 0 0 0.15rem rgba(26,26,26,0.1); }
+    .btn-afrodite {
+      background: #1a1a1a; color: white; border: none;
+      padding: 11px 28px; font-size: 12px; letter-spacing: 2px;
+      text-transform: uppercase; transition: background 0.3s; border-radius: 2px;
+    }
+    .btn-afrodite:hover { background: #3a3a3a; color: white; }
+    .btn-cancelar {
+      background: transparent; color: #999; border: 1px solid #ddd;
+      padding: 11px 22px; font-size: 12px; letter-spacing: 1px;
+      text-transform: uppercase; border-radius: 2px; text-decoration: none; transition: all 0.2s;
+    }
+    .btn-cancelar:hover { color: #333; border-color: #999; }
+  </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-white border-bottom py-3">
+  <div class="container">
+    <a class="navbar-brand" href="/">AFRODITE</a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item"><a class="nav-link" href="/">Inicio</a></li>
+        <li class="nav-item"><a class="nav-link" href="/catalogo/">Catálogo</a></li>
+      </ul>
+      <div class="d-flex gap-3">
+        <a href="/perfil/"><i class="bi bi-person-fill nav-icon"></i></a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="form-card">
+    <h2 class="form-titulo">{{ accion }} dirección</h2>
+    <form method="POST">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label>Nombre completo</label>
+        {{ form.nombre_destinatario }}
+      </div>
+      <div class="mb-3">
+        <label>Dirección</label>
+        {{ form.direccion }}
+      </div>
+      <div class="mb-3">
+        <label>Información adicional (apto, torre, etc.)</label>
+        {{ form.info_adicional }}
+      </div>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label>Ciudad</label>
+          {{ form.ciudad }}
+        </div>
+        <div class="col-md-6 mb-3">
+          <label>Departamento</label>
+          {{ form.departamento }}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label>País</label>
+          {{ form.pais }}
+        </div>
+        <div class="col-md-6 mb-3">
+          <label>Teléfono</label>
+          {{ form.telefono }}
+        </div>
+      </div>
+      <div class="mb-4 d-flex align-items-center gap-2">
+        {{ form.es_predeterminada }}
+        <label class="mb-0" style="font-size:13px; color:#555;">Establecer como dirección predeterminada</label>
+      </div>
+      <div class="d-flex gap-3">
+        <button type="submit" class="btn btn-afrodite">{{ accion }} dirección</button>
+        <a href="/perfil/" class="btn-cancelar">Cancelar</a>
+      </div>
+    </form>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
