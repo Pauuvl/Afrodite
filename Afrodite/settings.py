@@ -63,6 +63,8 @@ DATABASES = {
 LANGUAGE_CODE = 'es'
 
 TIME_ZONE = 'UTC'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'productos')
 
 STATIC_URL = '/static/'
 STATIC_ROOT = '/app/static/'
