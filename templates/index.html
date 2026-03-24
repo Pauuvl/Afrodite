@@ -1,104 +1,85 @@
-<!-- Paulina velasquez -->
-
-
+<!-- Paulina Velasquez -->
 {% load static %}
-
 <!DOCTYPE html>
-
 <html lang="es">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <title>Afrodite</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
-
-body{
-font-family:'Poppins',sans-serif;
-background:#fafafa;
-margin:0;
+:root {
+    --rosa:   #f7c5d0;
+    --oscuro: #2b2b2b;
+    --gris:   #777;
+    --fondo:  #fafafa;
 }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Poppins', sans-serif; background: var(--fondo); }
 
 /* NAVBAR */
-
-.navbar-brand{
-font-family:'Playfair Display',serif;
-letter-spacing:3px;
-font-size:30px;
-}
-
-.nav-link{
-font-size:14px;
-font-weight:500;
-color:#333 !important;
-margin:0 10px;
-}
-
-.nav-link:hover{
-color:black !important;
-}
-
-.nav-icon{
-font-size:18px;
-color:#333;
-}
+.navbar-brand { font-family: 'Playfair Display', serif; letter-spacing: 3px; font-size: 28px; color: var(--oscuro) !important; }
+.nav-link { font-size: 13px; font-weight: 500; color: #444 !important; margin: 0 8px; position: relative; transition: color .2s; }
+.nav-link::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 1px; background: var(--oscuro); transition: width .3s; }
+.nav-link:hover::after { width: 100%; }
+.nav-link:hover { color: var(--oscuro) !important; }
+.nav-icon { font-size: 18px; color: #444; transition: color .2s; }
+.nav-icon:hover { color: var(--oscuro); }
 
 /* BANNER */
+.banner-wrap { position: relative; overflow: hidden; max-height: 420px; }
+.banner-wrap img { width: 100%; height: 420px; object-fit: cover; display: block; }
+.banner-overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(0,0,0,.35) 0%, transparent 60%); display: flex; align-items: center; padding-left: 8%; }
+.banner-overlay h1 { font-family: 'Playfair Display', serif; color: white; font-size: clamp(1.8rem, 4vw, 3rem); max-width: 400px; line-height: 1.2; }
+.banner-overlay p { color: rgba(255,255,255,.85); font-size: 14px; margin-top: 10px; }
+.banner-overlay .btn-ver { display: inline-block; margin-top: 20px; padding: 10px 28px; background: white; color: var(--oscuro); font-size: 13px; font-weight: 500; border-radius: 30px; text-decoration: none; transition: background .2s, color .2s; }
+.banner-overlay .btn-ver:hover { background: var(--oscuro); color: white; }
 
-.banner{
-width:100%;
-height:320px;
-object-fit:cover;
-}
+/* SECCIÓN */
+.seccion-titulo { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--oscuro); margin-bottom: 6px; }
+.seccion-linea { width: 50px; height: 2px; background: var(--rosa); margin-bottom: 30px; }
 
-/* TITULOS */
+/* TARJETA */
+.product-card { background: white; border-radius: 12px; overflow: hidden; transition: box-shadow .3s, transform .3s; position: relative; }
+.product-card:hover { box-shadow: 0 12px 35px rgba(0,0,0,.10); transform: translateY(-4px); }
+.product-card .img-wrap { position: relative; overflow: hidden; aspect-ratio: 1 / 1; background: #f5f0f2; }
+.product-card .img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; }
+.product-card:hover .img-wrap img { transform: scale(1.07); }
 
-.titulo{
-font-family:'Playfair Display',serif;
-}
+.badge-cat { position: absolute; top: 12px; left: 12px; background: white; color: var(--oscuro); font-size: 10px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+.btn-wish { position: absolute; top: 12px; right: 12px; width: 34px; height: 34px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; color: #bbb; box-shadow: 0 2px 8px rgba(0,0,0,.08); cursor: pointer; transition: color .2s, transform .2s; border: none; text-decoration: none; }
+.btn-wish:hover { color: #e57373; transform: scale(1.15); }
+.product-card .info { padding: 14px 16px 16px; }
+.product-card .nombre { font-size: 14px; font-weight: 500; color: var(--oscuro); margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.product-card .precio { font-size: 13px; color: var(--gris); }
+.img-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #f0e8ec; color: #ccc; font-size: 2.5rem; }
+.empty-msg { text-align: center; color: #bbb; padding: 40px 0; font-size: 14px; width: 100%; }
+.empty-msg i { font-size: 2rem; display: block; margin-bottom: 8px; }
 
-/* PRODUCTOS */
+/* BANNER INTERMEDIO */
+.mid-banner { background: linear-gradient(135deg, #fce4ec, #fdf6f9 50%, #f8e8f0); padding: 60px 0; text-align: center; margin: 20px 0; }
+.mid-banner h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.5rem, 3vw, 2.2rem); color: var(--oscuro); margin-bottom: 12px; }
+.mid-banner p { color: var(--gris); font-size: 14px; max-width: 500px; margin: 0 auto 24px; }
+.btn-oscuro { display: inline-block; padding: 12px 34px; background: var(--oscuro); color: white; border-radius: 30px; font-size: 13px; font-weight: 500; text-decoration: none; transition: background .2s, transform .2s; }
+.btn-oscuro:hover { background: #444; transform: translateY(-2px); color: white; }
 
-.product img{
-width:100%;
-border-radius:4px;
-transition:0.3s;
-}
+/* FOOTER */
+footer { background: white; border-top: 1px solid #eee; text-align: center; padding: 24px; }
+footer p { color: var(--gris); font-size: 13px; }
 
-.product img:hover{
-transform:scale(1.05);
-}
-
-.price{
-color:#777;
-}
-
-/* FLECHAS CARRUSEL */
-
-.carousel-control-prev-icon,
-.carousel-control-next-icon{
-background-color:black;
-border-radius:50%;
-padding:15px;
-}
-
+/* ANIMACIONES */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.fade-up { animation: fadeUp .5s ease both; }
 </style>
-
 </head>
 
 <body>
 
 <!-- NAVBAR -->
-
 <nav class="navbar navbar-expand-lg bg-white border-bottom py-3">
 
 <div class="container">
@@ -134,7 +115,11 @@ padding:15px;
 
 <div class="d-flex gap-3">
 
-<a href="#"><i class="bi bi-heart nav-icon"></i></a> <a href="#"><i class="bi bi-cart nav-icon"></i></a> <a href="#"><i class="bi bi-person nav-icon"></i></a>
+<a href="#"><i class="bi bi-heart nav-icon"></i></a> <a href="#"><i class="bi bi-cart nav-icon"></i></a>{% if user.is_authenticated %}
+  <a href="/perfil/"><i class="bi bi-person-fill nav-icon" style="color:#1a1a1a;"></i></a>
+{% else %}
+  <a href="/login/"><i class="bi bi-person nav-icon"></i></a>
+{% endif %}
 
 </div>
 
@@ -144,429 +129,108 @@ padding:15px;
 
 </nav>
 
-<img src="{% static 'images/indeximage.png' %}" class="banner">
 
-<section id="billboard" class="bg-light py-5">
-  <div class="container">
-
-    <div class="row justify-content-center">
-      <h1 class="section-title text-center mt-4" data-aos="fade-up">Nuevas Colecciones</h1>
-
-      <div class="col-md-6 text-center" data-aos="fade-up" data-aos-delay="300">
-        <p>
-          Descubre las nuevas colecciones de belleza de Afrodite. Productos de maquillaje y cuidado de la piel
-          diseñados para resaltar tu belleza natural y brindarle a tu piel el cuidado que merece.
-        </p>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="swiper main-swiper py-4" data-aos="fade-up" data-aos-delay="600">
-        <div class="swiper-wrapper d-flex border-animation-left">
-
-          <!-- Producto 1 -->
-          <div class="swiper-slide">
-            <div class="banner-item image-zoom-effect">
-              <div class="image-holder">
-                <a href="#">
-                  <img src="{% static 'images/banner-image-6.jpg' %}" alt="producto" class="img-fluid">
-                </a>
-              </div>
-              <div class="banner-content py-4">
-                <h5 class="element-title text-uppercase">
-                  <a href="#" class="item-anchor">Set Hidratante de Skincare</a>
-                </h5>
-                <p>Una rutina completa para hidratar profundamente y revitalizar tu piel.</p>
-                <div class="btn-left">
-                  <a href="#" class="btn-link fs-6 text-uppercase item-anchor text-decoration-none">Descubrir ahora</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Producto 2 -->
-          <div class="swiper-slide">
-            <div class="banner-item image-zoom-effect">
-              <div class="image-holder">
-                <a href="#">
-                  <img src="{% static 'images/banner-image-1.jpg' %}" alt="producto" class="img-fluid">
-                </a>
-              </div>
-              <div class="banner-content py-4">
-                <h5 class="element-title text-uppercase">
-                  <a href="#" class="item-anchor">Kit de Maquillaje Glow</a>
-                </h5>
-                <p>Consigue un look radiante con nuestros esenciales de maquillaje.</p>
-                <div class="btn-left">
-                  <a href="#" class="btn-link fs-6 text-uppercase item-anchor text-decoration-none">Descubrir ahora</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Producto 3 -->
-          <div class="swiper-slide">
-            <div class="banner-item image-zoom-effect">
-              <div class="image-holder">
-                <a href="#">
-                  <img src="{% static 'images/banner-image-2.jpg' %}" alt="producto" class="img-fluid">
-                </a>
-              </div>
-              <div class="banner-content py-4">
-                <h5 class="element-title text-uppercase">
-                  <a href="#" class="item-anchor">Sérums Faciales Premium</a>
-                </h5>
-                <p>Fórmulas concentradas que iluminan y revitalizan tu piel.</p>
-                <div class="btn-left">
-                  <a href="#" class="btn-link fs-6 text-uppercase item-anchor text-decoration-none">Descubrir ahora</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Producto 4 -->
-          <div class="swiper-slide">
-            <div class="banner-item image-zoom-effect">
-              <div class="image-holder">
-                <a href="#">
-                  <img src="{% static 'images/banner-image-3.jpg' %}" alt="producto" class="img-fluid">
-                </a>
-              </div>
-              <div class="banner-content py-4">
-                <h5 class="element-title text-uppercase">
-                  <a href="#" class="item-anchor">Colección de Labiales Mate</a>
-                </h5>
-                <p>Colores intensos y de larga duración para cualquier ocasión.</p>
-                <div class="btn-left">
-                  <a href="#" class="btn-link fs-6 text-uppercase item-anchor text-decoration-none">Descubrir ahora</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Producto 5 -->
-          <div class="swiper-slide">
-            <div class="banner-item image-zoom-effect">
-              <div class="image-holder">
-                <a href="#">
-                  <img src="{% static 'images/banner-image-4.jpg' %}" alt="producto" class="img-fluid">
-                </a>
-              </div>
-              <div class="banner-content py-4">
-                <h5 class="element-title text-uppercase">
-                  <a href="#" class="item-anchor">Esenciales de Skincare Diario</a>
-                </h5>
-                <p>Todo lo que necesitas para una rutina de cuidado facial saludable.</p>
-                <div class="btn-left">
-                  <a href="#" class="btn-link fs-6 text-uppercase item-anchor text-decoration-none">Descubrir ahora</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Producto 6 -->
-          <div class="swiper-slide">
-            <div class="banner-item image-zoom-effect">
-              <div class="image-holder">
-                <a href="#">
-                  <img src="{% static 'images/banner-image-5.jpg' %}" alt="producto" class="img-fluid">
-                </a>
-              </div>
-              <div class="banner-content py-4">
-                <h5 class="element-title text-uppercase">
-                  <a href="#" class="item-anchor">Favoritos de Afrodite</a>
-                </h5>
-                <p>Una selección especial de los productos más queridos por nuestras clientas.</p>
-                <div class="btn-left">
-                  <a href="#" class="btn-link fs-6 text-uppercase item-anchor text-decoration-none">Descubrir ahora</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
+<!-- BANNER PRINCIPAL -->
+<div class="banner-wrap">
+    <img src="{% static 'images/indeximage.png' %}" alt="Afrodite Banner">
+    <div class="banner-overlay">
+        <div>
+            <h1>Belleza que<br>inspira confianza</h1>
+            <p>Maquillaje y skincare para resaltar tu mejor versión</p>
+            <a href="/catalogo/" class="btn-ver">Ver colección</a>
         </div>
-
-        <div class="swiper-pagination"></div>
-      </div>
-
-      <div class="icon-arrow icon-arrow-left">
-        <svg width="50" height="50" viewBox="0 0 24 24">
-          <use xlink:href="#arrow-left"></use>
-        </svg>
-      </div>
-
-      <div class="icon-arrow icon-arrow-right">
-        <svg width="50" height="50" viewBox="0 0 24 24">
-          <use xlink:href="#arrow-right"></use>
-        </svg>
-      </div>
-
     </div>
-  </div>
+</div>
+
+<!-- SKINCARE -->
+<section class="container py-5">
+    <div class="d-flex justify-content-between align-items-end mb-1">
+        <h2 class="seccion-titulo mb-0">Nuevos en Skincare</h2>
+        <a href="/catalogo/" class="text-muted" style="font-size:13px; text-decoration:none;">
+            Ver todos <i class="bi bi-arrow-right"></i>
+        </a>
+    </div>
+    <div class="seccion-linea"></div>
+
+    <div class="row g-4">
+        {% for producto in skincare %}
+        <div class="col-6 col-md-4 col-lg-3 fade-up" style="animation-delay:{{ forloop.counter0 }}00ms">
+            <div class="product-card h-100">
+                <div class="img-wrap">
+                    {% if producto.imagen %}
+                        <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}">
+                    {% else %}
+                        <div class="img-placeholder"><i class="bi bi-image"></i></div>
+                    {% endif %}
+                    <span class="badge-cat">Skincare</span>
+                    <a href="#" class="btn-wish"><i class="bi bi-heart"></i></a>
+                </div>
+                <div class="info">
+                    <div class="nombre">{{ producto.nombre }}</div>
+                    <div class="precio">${{ producto.precio|floatformat:"0" }}</div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="empty-msg">
+            <i class="bi bi-box-seam"></i>
+            No hay productos de skincare disponibles aún.
+        </div>
+        {% endfor %}
+    </div>
 </section>
 
+<!-- BANNER INTERMEDIO -->
+<div class="mid-banner">
+    <h2>Cuidado facial que<br>transforma tu piel</h2>
+    <p>Descubre rutinas diseñadas para todo tipo de piel con los mejores ingredientes.</p>
+    <a href="/catalogo/" class="btn-oscuro">Explorar skincare</a>
+</div>
 
-
-<section id="new-arrival" class="new-arrival product-carousel py-5 position-relative overflow-hidden">
-    <div class="container">
-      <div class="d-flex flex-wrap justify-content-between align-items-center mt-5 mb-3">
-        <h4 class="text-uppercase">Nuevos Productos de Skincare</h4>
-        <a href="index.html" class="btn-link">Ver Todos los Productos</a>
-      </div>
-      <div class="swiper product-swiper open-up" data-aos="zoom-out">
-        <div class="swiper-wrapper d-flex">
-          <div class="swiper-slide">
-            <div class="product-item image-zoom-effect link-effect">
-              <div class="image-holder position-relative">
-                <a href="index.html">
-                  <img src="images/product-item-1.jpg" alt="categories" class="product-image img-fluid">
-                </a>
-                <a href="index.html" class="btn-icon btn-wishlist">
-                  <svg width="24" height="24" viewBox="0 0 24 24">
-                    <use xlink:href="#heart"></use>
-                  </svg>
-                </a>
-                <div class="product-content">
-                  <h5 class="element-title text-uppercase fs-5 mt-3">
-                    <a href="index.html">Sérum Facial Hidratante</a>
-                  </h5>
-                  <a href="#" class="text-decoration-none" data-after="Agregar al carrito"><span>$95.00</span></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="product-item image-zoom-effect link-effect">
-              <div class="image-holder position-relative">
-                <a href="index.html">
-                  <img src="images/product-item-2.jpg" alt="categories" class="product-image img-fluid">
-                </a>
-                <a href="index.html" class="btn-icon btn-wishlist">
-                  <svg width="24" height="24" viewBox="0 0 24 24">
-                    <use xlink:href="#heart"></use>
-                  </svg>
-                </a>
-                <div class="product-content">
-                  <h5 class="text-uppercase fs-5 mt-3">
-                    <a href="index.html">Crema Facial Nutritiva</a>
-                  </h5>
-                  <a href="#" class="text-decoration-none" data-after="Agregar al carrito"><span>$55.00</span></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="product-item image-zoom-effect link-effect">
-              <div class="image-holder position-relative">
-                <a href="index.html">
-                  <img src="images/product-item-3.jpg" alt="categories" class="product-image img-fluid">
-                </a>
-                <a href="index.html" class="btn-icon btn-wishlist">
-                  <svg width="24" height="24" viewBox="0 0 24 24">
-                    <use xlink:href="#heart"></use>
-                  </svg>
-                </a>
-                <div class="product-content">
-                  <h5 class="text-uppercase fs-5 mt-3">
-                    <a href="index.html">Tónico Facial Refrescante</a>
-                  </h5>
-                  <a href="#" class="text-decoration-none" data-after="Agregar al carrito"><span>$65.00</span></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="product-item image-zoom-effect link-effect">
-              <div class="image-holder position-relative">
-                <a href="index.html">
-                  <img src="images/product-item-4.jpg" alt="categories" class="product-image img-fluid">
-                </a>
-                <a href="index.html" class="btn-icon btn-wishlist">
-                  <svg width="24" height="24" viewBox="0 0 24 24">
-                    <use xlink:href="#heart"></use>
-                  </svg>
-                </a>
-                <div class="product-content">
-                  <h5 class="text-uppercase fs-5 mt-3">
-                    <a href="index.html">Mascarilla Facial Hidratante</a>
-                  </h5>
-                  <a href="#" class="text-decoration-none" data-after="Agregar al carrito"><span>$50.00</span></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="product-item image-zoom-effect link-effect">
-              <div class="image-holder position-relative">
-                <a href="index.html">
-                  <img src="images/product-item-10.jpg" alt="categories" class="product-image img-fluid">
-                </a>
-                <a href="index.html" class="btn-icon btn-wishlist">
-                  <svg width="24" height="24" viewBox="0 0 24 24">
-                    <use xlink:href="#heart"></use>
-                  </svg>
-                </a>
-                <div class="product-content">
-                  <h5 class="text-uppercase fs-5 mt-3">
-                    <a href="index.html">Protector Solar Facial</a>
-                  </h5>
-                  <a href="#" class="text-decoration-none" data-after="Agregar al carrito"><span>$70.00</span></a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="swiper-pagination"></div>
-      </div>
-      <div class="icon-arrow icon-arrow-left"><svg width="50" height="50" viewBox="0 0 24 24">
-          <use xlink:href="#arrow-left"></use>
-        </svg></div>
-      <div class="icon-arrow icon-arrow-right"><svg width="50" height="50" viewBox="0 0 24 24">
-          <use xlink:href="#arrow-right"></use>
-        </svg></div>
+<!-- MAQUILLAJE -->
+<section class="container py-5">
+    <div class="d-flex justify-content-between align-items-end mb-1">
+        <h2 class="seccion-titulo mb-0">Nuevos en Maquillaje</h2>
+        <a href="/catalogo/" class="text-muted" style="font-size:13px; text-decoration:none;">
+            Ver todos <i class="bi bi-arrow-right"></i>
+        </a>
     </div>
-  </section><section id="new-arrival" class="new-arrival product-carousel py-5 position-relative overflow-hidden">
-    <div class="container">
-      <div class="d-flex flex-wrap justify-content-between align-items-center mt-5 mb-3">
-        <h4 class="text-uppercase">Nuevos Productos de Maquillaje</h4>
-        <a href="index.html" class="btn-link">Ver Todos los Productos</a>
-      </div>
-      <div class="swiper product-swiper open-up" data-aos="zoom-out">
-        <div class="swiper-wrapper d-flex">
-          <div class="swiper-slide">
-            <div class="product-item image-zoom-effect link-effect">
-              <div class="image-holder position-relative">
-                <a href="index.html">
-                  <img src="images/product-item-1.jpg" alt="categories" class="product-image img-fluid">
-                </a>
-                <a href="index.html" class="btn-icon btn-wishlist">
-                  <svg width="24" height="24" viewBox="0 0 24 24">
-                    <use xlink:href="#heart"></use>
-                  </svg>
-                </a>
-                <div class="product-content">
-                  <h5 class="element-title text-uppercase fs-5 mt-3">
-                    <a href="index.html">Base de Maquillaje Líquida</a>
-                  </h5>
-                  <a href="#" class="text-decoration-none" data-after="Agregar al carrito"><span>$95.00</span></a>
-                </div>
-              </div>
-            </div>
-          </div>
+    <div class="seccion-linea"></div>
 
-          <div class="swiper-slide">
-            <div class="product-item image-zoom-effect link-effect">
-              <div class="image-holder position-relative">
-                <a href="index.html">
-                  <img src="images/product-item-2.jpg" alt="categories" class="product-image img-fluid">
-                </a>
-                <a href="index.html" class="btn-icon btn-wishlist">
-                  <svg width="24" height="24" viewBox="0 0 24 24">
-                    <use xlink:href="#heart"></use>
-                  </svg>
-                </a>
-                <div class="product-content">
-                  <h5 class="text-uppercase fs-5 mt-3">
-                    <a href="index.html">Corrector de Alta Cobertura</a>
-                  </h5>
-                  <a href="#" class="text-decoration-none" data-after="Agregar al carrito"><span>$55.00</span></a>
+    <div class="row g-4">
+        {% for producto in maquillaje %}
+        <div class="col-6 col-md-4 col-lg-3 fade-up" style="animation-delay:{{ forloop.counter0 }}00ms">
+            <div class="product-card h-100">
+                <div class="img-wrap">
+                    {% if producto.imagen %}
+                        <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}">
+                    {% else %}
+                        <div class="img-placeholder"><i class="bi bi-image"></i></div>
+                    {% endif %}
+                    <span class="badge-cat">Maquillaje</span>
+                    <a href="#" class="btn-wish"><i class="bi bi-heart"></i></a>
                 </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="swiper-slide">
-            <div class="product-item image-zoom-effect link-effect">
-              <div class="image-holder position-relative">
-                <a href="index.html">
-                  <img src="images/product-item-3.jpg" alt="categories" class="product-image img-fluid">
-                </a>
-                <a href="index.html" class="btn-icon btn-wishlist">
-                  <svg width="24" height="24" viewBox="0 0 24 24">
-                    <use xlink:href="#heart"></use>
-                  </svg>
-                </a>
-                <div class="product-content">
-                  <h5 class="text-uppercase fs-5 mt-3">
-                    <a href="index.html">Paleta de Sombras Profesional</a>
-                  </h5>
-                  <a href="#" class="text-decoration-none" data-after="Agregar al carrito"><span>$65.00</span></a>
+                <div class="info">
+                    <div class="nombre">{{ producto.nombre }}</div>
+                    <div class="precio">${{ producto.precio|floatformat:"0" }}</div>
                 </div>
-              </div>
             </div>
-          </div>
-
-          <div class="swiper-slide">
-            <div class="product-item image-zoom-effect link-effect">
-              <div class="image-holder position-relative">
-                <a href="index.html">
-                  <img src="images/product-item-4.jpg" alt="categories" class="product-image img-fluid">
-                </a>
-                <a href="index.html" class="btn-icon btn-wishlist">
-                  <svg width="24" height="24" viewBox="0 0 24 24">
-                    <use xlink:href="#heart"></use>
-                  </svg>
-                </a>
-                <div class="product-content">
-                  <h5 class="text-uppercase fs-5 mt-3">
-                    <a href="index.html">Rubor en Polvo Natural</a>
-                  </h5>
-                  <a href="#" class="text-decoration-none" data-after="Agregar al carrito"><span>$50.00</span></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="swiper-slide">
-            <div class="product-item image-zoom-effect link-effect">
-              <div class="image-holder position-relative">
-                <a href="index.html">
-                  <img src="images/product-item-10.jpg" alt="categories" class="product-image img-fluid">
-                </a>
-                <a href="index.html" class="btn-icon btn-wishlist">
-                  <svg width="24" height="24" viewBox="0 0 24 24">
-                    <use xlink:href="#heart"></use>
-                  </svg>
-                </a>
-                <div class="product-content">
-                  <h5 class="text-uppercase fs-5 mt-3">
-                    <a href="index.html">Labial Mate de Larga Duración</a>
-                  </h5>
-                  <a href="#" class="text-decoration-none" data-after="Agregar al carrito"><span>$70.00</span></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
         </div>
-        <div class="swiper-pagination"></div>
-      </div>
-
-      <div class="icon-arrow icon-arrow-left">
-        <svg width="50" height="50" viewBox="0 0 24 24">
-          <use xlink:href="#arrow-left"></use>
-        </svg>
-      </div>
-
-      <div class="icon-arrow icon-arrow-right">
-        <svg width="50" height="50" viewBox="0 0 24 24">
-          <use xlink:href="#arrow-right"></use>
-        </svg>
-      </div>
+        {% empty %}
+        <div class="empty-msg">
+            <i class="bi bi-box-seam"></i>
+            No hay productos de maquillaje disponibles aún.
+        </div>
+        {% endfor %}
     </div>
 </section>
+
 <!-- FOOTER -->
-
-<footer class="bg-white border-top text-center py-4">
-
-<p class="text-muted">
-© 2026 Afrodite - Tienda de Belleza
-</p>
-
+<footer>
+    <p>© 2026 Afrodite - Tienda de Belleza</p>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
-
 </html>
