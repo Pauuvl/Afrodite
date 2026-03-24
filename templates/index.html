@@ -134,7 +134,11 @@ padding:15px;
 
 <div class="d-flex gap-3">
 
-<a href="#"><i class="bi bi-heart nav-icon"></i></a> <a href="#"><i class="bi bi-cart nav-icon"></i></a> <a href="#"><i class="bi bi-person nav-icon"></i></a>
+<a href="#"><i class="bi bi-heart nav-icon"></i></a> <a href="#"><i class="bi bi-cart nav-icon"></i></a>{% if user.is_authenticated %}
+  <a href="/perfil/"><i class="bi bi-person-fill nav-icon" style="color:#1a1a1a;"></i></a>
+{% else %}
+  <a href="/login/"><i class="bi bi-person nav-icon"></i></a>
+{% endif %}
 
 </div>
 
