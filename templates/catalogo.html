@@ -1,0 +1,199 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Catálogo - Afrodite</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:#fafafa;
+}
+
+/* NAVBAR */
+.navbar-brand{
+    font-family:'Playfair Display',serif;
+    letter-spacing:3px;
+    font-size:30px;
+}
+
+.nav-link{
+    font-size:14px;
+    font-weight:500;
+    color:#333 !important;
+    margin:0 10px;
+}
+
+.nav-link:hover{
+    color:black !important;
+}
+
+.nav-icon{
+    font-size:18px;
+    color:#333;
+}
+
+/* TITULOS */
+.titulo{
+    font-family:'Playfair Display',serif;
+}
+
+/* PRODUCTOS */
+.product{
+    text-align:center;
+}
+
+.product img{
+    width:100%;
+    border-radius:6px;
+    transition:0.3s;
+}
+
+.product img:hover{
+    transform:scale(1.05);
+}
+
+.price{
+    color:#777;
+    font-size:14px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR (IGUAL AL INDEX) -->
+<nav class="navbar navbar-expand-lg bg-white border-bottom py-3">
+<div class="container">
+
+<a class="navbar-brand" href="/">AFRODITE</a>
+
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+<span class="navbar-toggler-icon"></span>
+</button>
+
+<div class="collapse navbar-collapse" id="menu">
+
+<ul class="navbar-nav mx-auto">
+
+<li class="nav-item">
+<a class="nav-link" href="/">Inicio</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link active" href="/catalogo/">Catálogo</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="#">Ofertas</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="#">Contacto</a>
+</li>
+
+</ul>
+
+<div class="d-flex gap-3">
+<a href="#"><i class="bi bi-heart nav-icon"></i></a>
+<a href="{% url 'cart_detail' %}"><i class="bi bi-cart nav-icon"></i></a>
+<a href="#"><i class="bi bi-person nav-icon"></i></a>
+</div>
+
+</div>
+</div>
+</nav>
+
+<!-- TÍTULO -->
+<section class="py-5 text-center">
+    <h2 class="titulo">Catálogo de Productos</h2>
+    <p class="text-muted">Explora nuestras colecciones de maquillaje y skincare</p>
+</section>
+
+<!-- SKINCARE -->
+<section class="container py-4">
+    <h3 class="titulo mb-4">Skincare</h3>
+
+    <div class="row g-4">
+
+        <div class="col-md-3 product">
+            <img src="{% static 'images/product-item-1.jpg' %}">
+            <h6 class="mt-2">Sérum Hidratante</h6>
+            <p class="price">$95.000</p>
+        </div>
+
+        <div class="col-md-3 product">
+            <img src="{% static 'images/product-item-2.jpg' %}">
+            <h6 class="mt-2">Crema Facial</h6>
+            <p class="price">$55.000</p>
+        </div>
+
+        <div class="col-md-3 product">
+            <img src="{% static 'images/product-item-3.jpg' %}">
+            <h6 class="mt-2">Tónico Facial</h6>
+            <p class="price">$65.000</p>
+        </div>
+
+        <div class="col-md-3 product">
+            <img src="{% static 'images/product-item-4.jpg' %}">
+            <h6 class="mt-2">Mascarilla</h6>
+            <p class="price">$50.000</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- MAQUILLAJE -->
+<section class="container py-5">
+    <h3 class="titulo mb-4">Maquillaje</h3>
+
+    <div class="row g-4">
+
+        <div class="col-md-3 product">
+            <img src="{% static 'images/product-item-1.jpg' %}">
+            <h6 class="mt-2">Base Líquida</h6>
+            <p class="price">$95.000</p>
+        </div>
+
+        <div class="col-md-3 product">
+            <img src="{% static 'images/product-item-2.jpg' %}">
+            <h6 class="mt-2">Corrector</h6>
+            <p class="price">$55.000</p>
+        </div>
+
+        <div class="col-md-3 product">
+            <img src="{% static 'images/product-item-3.jpg' %}">
+            <h6 class="mt-2">Paleta de Sombras</h6>
+            <p class="price">$65.000</p>
+        </div>
+
+        <div class="col-md-3 product">
+            <img src="{% static 'images/product-item-10.jpg' %}">
+            <h6 class="mt-2">Labial Mate</h6>
+            <p class="price">$70.000</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-white border-top text-center py-4">
+<p class="text-muted">© 2026 Afrodite - Tienda de Belleza</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

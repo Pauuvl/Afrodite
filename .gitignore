@@ -25,3 +25,5 @@ media/
 
 # Docker
 *.pid
+
+gunicorn.ctl
