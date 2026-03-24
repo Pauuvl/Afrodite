@@ -164,10 +164,22 @@
                     {% for item in items %}
                         <div class="checkout-item d-flex justify-content-between align-items-center">
                             <div>
-                                <div class="item-name">{{ item.product_name }}</div>
-                                <div class="item-price">Cantidad: {{ item.quantity }}</div>
+                                {% if item.product %}
+                                    <div class="item-name">{{ item.product.nombre }}</div>
+                                    <div class="item-price">Cantidad: {{ item.quantity }}</div>
+                                {% else %}
+                                    <div class="item-name">{{ item.product_name }}</div>
+                                    <div class="item-price">Cantidad: {{ item.quantity }}</div>
+                                {% endif %}
                             </div>
-                            <div class="item-price">${{ item.unit_price }}</div>
+
+                            <div class="item-price">
+                                {% if item.product %}
+                                    ${{ item.product.precio }}
+                                {% else %}
+                                    ${{ item.unit_price }}
+                                {% endif %}
+                            </div>
                         </div>
                     {% endfor %}
 

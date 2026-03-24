@@ -16,11 +16,14 @@ class Cart(models.Model):
 
 class CartItem(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
-    product_name = models.CharField(max_length=255)
-    unit_price = models.DecimalField(max_digits=10, decimal_places=2)
+    product = models.ForeignKey('catalogo.Producto', on_delete=models.CASCADE, null=True, blank=True)
+    product_name = models.CharField(max_length=255, blank=True, null=True)
+    unit_price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     quantity = models.PositiveIntegerField(default=1)
 
     def __str__(self):
+        if self.product:
+            return f"{self.product.nombre} x {self.quantity}"
         return f"{self.product_name} x {self.quantity}"
 
 
