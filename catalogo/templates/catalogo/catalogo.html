@@ -71,6 +71,17 @@ body { font-family: 'Poppins', sans-serif; background: var(--fondo); margin: 0; 
 
 .badge-cat { position: absolute; top: 12px; left: 12px; background: white; color: var(--oscuro); font-size: 10px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; box-shadow: 0 2px 8px rgba(0,0,0,.08); }
 
+/* BADGE RECOMENDADO */
+.badge-recomendado {
+    position: absolute; top: 12px; left: 12px;
+    background: linear-gradient(135deg, #f7c5d0, #e8a0b8);
+    color: #5a1a2e;
+    font-size: 10px; font-weight: 700; letter-spacing: .8px;
+    text-transform: uppercase; padding: 4px 10px;
+    border-radius: 20px; box-shadow: 0 2px 10px rgba(247,197,208,.5);
+    display: flex; align-items: center; gap: 4px;
+}
+
 .btn-wish { position: absolute; top: 12px; right: 12px; width: 34px; height: 34px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; color: #bbb; box-shadow: 0 2px 8px rgba(0,0,0,.08); cursor: pointer; transition: color .2s, transform .2s; border: none; text-decoration: none; }
 .btn-wish:hover { color: #e57373; transform: scale(1.15); }
 
@@ -81,6 +92,41 @@ body { font-family: 'Poppins', sans-serif; background: var(--fondo); margin: 0; 
 .img-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #f0e8ec; color: #ccc; font-size: 2.5rem; }
 .empty-msg { text-align: center; color: #bbb; padding: 40px 0; font-size: 14px; width: 100%; }
 .empty-msg i { font-size: 2rem; display: block; margin-bottom: 8px; }
+
+/* SECCIÓN RECOMENDADOS */
+.seccion-recomendados {
+    background: linear-gradient(135deg, #fff5f7 0%, #fdf6f9 100%);
+    border-top: 1px solid #f0dde4;
+    border-bottom: 1px solid #f0dde4;
+}
+.piel-chip {
+    display: inline-block;
+    background: var(--rosa);
+    color: #5a1a2e;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 3px 14px;
+    border-radius: 20px;
+    margin-left: 10px;
+    vertical-align: middle;
+    text-transform: capitalize;
+}
+.login-prompt {
+    text-align: center;
+    padding: 30px 20px;
+    background: white;
+    border-radius: 12px;
+    border: 1.5px dashed #f7c5d0;
+}
+.login-prompt i { font-size: 2rem; color: var(--rosa); display: block; margin-bottom: 10px; }
+.login-prompt p { color: var(--gris); font-size: 14px; margin-bottom: 14px; }
+.btn-rosa {
+    background: var(--oscuro); color: white; border: none;
+    padding: 9px 28px; border-radius: 30px; font-size: 13px;
+    font-family: 'Poppins', sans-serif; font-weight: 500;
+    text-decoration: none; transition: opacity .2s;
+}
+.btn-rosa:hover { opacity: .8; color: white; }
 
 /* FOOTER */
 footer { background: white; border-top: 1px solid #eee; text-align: center; padding: 24px; }
@@ -126,6 +172,81 @@ footer p { color: var(--gris); font-size: 13px; margin: 0; }
     <h1>Catálogo de Productos</h1>
     <p>Explora nuestras colecciones de maquillaje y skincare</p>
 </div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- SECCIÓN RECOMENDADOS PARA TI                       -->
+<!-- ══════════════════════════════════════════════════ -->
+<section class="seccion-recomendados py-5">
+    <div class="container">
+
+        {% if user.is_authenticated %}
+
+            {% if tipo_piel %}
+                <!-- Usuario logueado CON tipo de piel configurado -->
+                <div class="d-flex align-items-center mb-1 flex-wrap gap-2">
+                    <h2 class="seccion-titulo mb-0">
+                        <i class="bi bi-stars me-2" style="color:var(--rosa);font-size:1.3rem;"></i>
+                        Recomendados para ti
+                    </h2>
+                    <span class="piel-chip">Piel {{ tipo_piel }}</span>
+                </div>
+                <div class="seccion-linea"></div>
+
+                {% if recomendados %}
+                <div class="row g-4">
+                    {% for producto in recomendados %}
+                    <div class="col-6 col-md-4 col-lg-3 fade-up" style="animation-delay:{{ forloop.counter0 }}00ms">
+                        <div class="product-card h-100">
+                            <div class="img-wrap">
+                                {% if producto.imagen %}
+                                    <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}">
+                                {% else %}
+                                    <div class="img-placeholder"><i class="bi bi-image"></i></div>
+                                {% endif %}
+                                <!-- Badge especial de recomendado -->
+                                <span class="badge-recomendado">
+                                    <i class="bi bi-stars"></i> Para ti
+                                </span>
+                                <a href="#" class="btn-wish"><i class="bi bi-heart"></i></a>
+                            </div>
+                            <div class="info">
+                                <div class="nombre">{{ producto.nombre }}</div>
+                                <div class="precio">${{ producto.precio|floatformat:"0" }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                {% else %}
+                <!-- Logueado, tiene tipo de piel, pero no hay productos que coincidan -->
+                <div class="empty-msg">
+                    <i class="bi bi-bag-heart"></i>
+                    Aún no tenemos productos específicos para piel {{ tipo_piel }}, ¡pero pronto habrá novedades!
+                </div>
+                {% endif %}
+
+            {% else %}
+                <!-- Usuario logueado PERO sin tipo de piel configurado -->
+                <div class="login-prompt">
+                    <i class="bi bi-person-lines-fill"></i>
+                    <p>Completa tu perfil con tu tipo de piel y te mostraremos los productos perfectos para ti.</p>
+                    <a href="/perfil/" class="btn-rosa">Ir a mi perfil</a>
+                </div>
+            {% endif %}
+
+        {% else %}
+            <!-- Usuario NO logueado -->
+            <div class="login-prompt">
+                <i class="bi bi-magic"></i>
+                <p>Inicia sesión y cuéntanos tu tipo de piel para ver productos recomendados especialmente para ti.</p>
+                <a href="/login/" class="btn-rosa">Iniciar sesión</a>
+            </div>
+        {% endif %}
+
+    </div>
+</section>
+<!-- ══════════════════════════════════════════════════ -->
 
 <!-- FILTROS -->
 <div class="filtros">

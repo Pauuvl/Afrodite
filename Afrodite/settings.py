@@ -55,22 +55,22 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Afrodite.wsgi.application'
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': os.environ.get('POSTGRES_DB', 'afrodite'),
-#         'USER': os.environ.get('POSTGRES_USER', 'afrodite_usr'),
-#         'PASSWORD': os.environ.get('POSTGRES_PASSWORD', 'afrodite_pwd'),
-#         'HOST': os.environ.get('POSTGRES_HOST', 'localhost'),
-#         'PORT': os.environ.get('POSTGRES_PORT', '5432'),
-#     }
-# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('POSTGRES_DB', 'afrodite'),
+        'USER': os.environ.get('POSTGRES_USER', 'afrodite_usr'),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', 'afrodite_pwd'),
+        'HOST': os.environ.get('POSTGRES_HOST', 'localhost'),
+        'PORT': os.environ.get('POSTGRES_PORT', '5432'),
     }
 }
+# DATABASES = {
+  #  'default': {
+   #     'ENGINE': 'django.db.backends.sqlite3',
+    #    'NAME': BASE_DIR / 'db.sqlite3',
+    #}
+# }
 LANGUAGE_CODE = 'es'
 TIME_ZONE = 'UTC'
 MEDIA_URL = '/media/'
