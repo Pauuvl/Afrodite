@@ -1,3 +1,4 @@
+# Autor: Paulina Velasquez Londoño
 from django.apps import AppConfig
 
 
