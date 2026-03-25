@@ -182,8 +182,13 @@
             </ul>
 
             <div class="d-flex gap-3">
-                <a href="#"><i class="bi bi-heart nav-icon"></i></a> <a href="{% url 'cart_detail' %}"><i class="bi bi-cart nav-icon"></i></a>{% if user.is_authenticated %}
-                <a href="/perfil/"><i class="bi bi-person-fill nav-icon" style="color:#1a1a1a;"></i></a>
+                <a href="#"><i class="bi bi-heart nav-icon"></i></a>
+                <a href="{% url 'carrito:cart_detail' %}">
+                    <i class="bi bi-cart nav-icon"></i>
+                </a>
+
+                {% if user.is_authenticated %}
+                <a href="/perfil/"><i class="bi bi-person-fill nav-icon"></i></a>
                 {% else %}
                 <a href="/login/"><i class="bi bi-person nav-icon"></i></a>
                 {% endif %}
@@ -204,7 +209,7 @@
                 <div class="form-card">
                     <h4 class="titulo mb-3">Agrega un producto al carrito</h4>
 
-                    <form method="post" action="{% url 'add_to_cart' %}">
+                    <form method="post" action="{% url 'carrito:add_to_cart' %}">
                         {% csrf_token %}
                         <div class="row g-3">
                             <div class="col-md-9">
@@ -223,7 +228,6 @@
                                 <label class="form-label">Cantidad</label>
                                 <input type="number" name="quantity" value="1" min="1" class="soft-input" required>
                             </div>
-
                         </div>
 
                         <div class="mt-4">
@@ -240,13 +244,8 @@
                             <div class="cart-item">
                                 <div class="row align-items-center g-3">
                                     <div class="col-md-4">
-                                        {% if item.product %}
-                                            <div class="item-name">{{ item.product.nombre }}</div>
-                                            <div class="item-price">${{ item.product.precio }} cada uno</div>
-                                        {% else %}
-                                            <div class="item-name">{{ item.product_name }}</div>
-                                            <div class="item-price">${{ item.unit_price }} cada uno</div>
-                                        {% endif %}
+                                        <div class="item-name">{{ item.product.nombre }}</div>
+                                        <div class="item-price">${{ item.product.precio }} cada uno</div>
                                     </div>
 
                                     <div class="col-md-3">
@@ -255,16 +254,18 @@
 
                                     <div class="col-md-5">
                                         <div class="d-flex flex-wrap gap-2 justify-content-md-end">
-                                            <form method="post" action="{% url 'update_cart_item' item.id %}" class="d-flex gap-2">
+
+                                            <form method="post" action="{% url 'carrito:update_cart_item' item.id %}" class="d-flex gap-2">
                                                 {% csrf_token %}
-                                                <input type="number" name="quantity" value="{{ item.quantity }}" min="1" class="soft-input" style="width:90px;" required>
+                                                <input type="number" name="quantity" value="{{ item.quantity }}" min="1" class="soft-input" style="width:90px;">
                                                 <button type="submit" class="btn-light-afrodite">Actualiza</button>
                                             </form>
 
-                                            <form method="post" action="{% url 'remove_cart_item' item.id %}">
+                                            <form method="post" action="{% url 'carrito:remove_cart_item' item.id %}">
                                                 {% csrf_token %}
                                                 <button type="submit" class="btn-afrodite">Eliminar</button>
                                             </form>
+
                                         </div>
                                     </div>
                                 </div>
@@ -289,7 +290,7 @@
                     </div>
 
                     {% if items %}
-                        <a href="{% url 'checkout' %}" class="text-decoration-none">
+                        <a href="{% url 'carrito:checkout' %}" class="text-decoration-none">
                             <button type="button" class="btn-afrodite w-100">Completar tu pedido ♡</button>
                         </a>
                     {% else %}
@@ -297,6 +298,7 @@
                     {% endif %}
                 </div>
             </div>
+
         </div>
     </div>
 </section>

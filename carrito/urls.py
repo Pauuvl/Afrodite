@@ -1,7 +1,8 @@
-# Autor: Viviana Arango Tabares
-
+#Autor: Viviana Arango Tabares
 from django.urls import path
 from . import views
+
+app_name = 'carrito'
 
 urlpatterns = [
     path('', views.cart_detail, name='cart_detail'),

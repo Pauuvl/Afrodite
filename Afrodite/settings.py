@@ -1,4 +1,4 @@
-# Autores: Helen Sanabria
+# Autor: todos
 import os
 from pathlib import Path
 

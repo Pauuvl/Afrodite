@@ -1,5 +1,4 @@
 # Autor: Viviana Arango Tabares
-
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 from catalogo.models import Producto
@@ -49,7 +48,7 @@ def add_to_cart(request):
                 quantity=quantity
             )
 
-    return redirect('cart_detail')
+    return redirect('carrito:cart_detail')
 
 
 @login_required
@@ -70,7 +69,7 @@ def update_cart_item(request, item_id):
         else:
             item.delete()
 
-    return redirect('cart_detail')
+    return redirect('carrito:cart_detail')
 
 
 @login_required
@@ -85,7 +84,7 @@ def remove_cart_item(request, item_id):
     if request.method == 'POST':
         item.delete()
 
-    return redirect('cart_detail')
+    return redirect('carrito:cart_detail')
 
 
 @login_required
@@ -99,7 +98,7 @@ def checkout(request):
     )
 
     if not items.exists():
-        return redirect('cart_detail')
+        return redirect('carrito:cart_detail')
 
     if request.method == 'POST':
         method = request.POST.get('method')
@@ -120,7 +119,7 @@ def checkout(request):
         cart.is_active = False
         cart.save()
 
-        return redirect('payment_success')
+        return redirect('carrito:payment_success')
 
     return render(request, 'carrito/checkout.html', {
         'cart': cart,
