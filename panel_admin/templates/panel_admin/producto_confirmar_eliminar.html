@@ -1,0 +1,21 @@
+{% extends "panel_admin/base_admin.html" %}
+{% block title %}Eliminar producto{% endblock %}
+{% block page_title %}Eliminar producto{% endblock %}
+
+{% block content %}
+<div class="card-panel" style="max-width: 480px;">
+    <div class="cp-header"><span><i class="bi bi-exclamation-triangle me-2 text-danger"></i>Confirmar eliminación</span></div>
+    <div class="p-4">
+        <p style="font-size:14px;">¿Segura que deseas eliminar <strong>{{ producto.nombre }}</strong>? Esta acción no se puede deshacer.</p>
+        <div class="d-flex gap-3 mt-4">
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn-admin danger">
+                    <i class="bi bi-trash"></i> Sí, eliminar
+                </button>
+            </form>
+            <a href="{% url 'panel_admin:catalogo' %}" class="btn-admin secondary">Cancelar</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,100 @@
+{% extends "panel_admin/base_admin.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block page_title %}Dashboard{% endblock %}
+
+{% block content %}
+<!-- STATS -->
+<div class="row g-4 mb-4">
+    <div class="col-6 col-lg-3">
+        <div class="stat-card">
+            <div class="icon pink"><i class="bi bi-bag-check"></i></div>
+            <div>
+                <h3>{{ total_pedidos }}</h3>
+                <p>Pedidos totales</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 col-lg-3">
+        <div class="stat-card">
+            <div class="icon green"><i class="bi bi-currency-dollar"></i></div>
+            <div>
+                <h3>${{ ingresos|floatformat:"0" }}</h3>
+                <p>Ingresos totales</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 col-lg-3">
+        <div class="stat-card">
+            <div class="icon blue"><i class="bi bi-grid"></i></div>
+            <div>
+                <h3>{{ total_productos }}</h3>
+                <p>Productos ({{ agotados }} agotados)</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 col-lg-3">
+        <div class="stat-card">
+            <div class="icon amber"><i class="bi bi-envelope"></i></div>
+            <div>
+                <h3>{{ mensajes_nuevos }}</h3>
+                <p>Mensajes sin leer</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- PEDIDOS RECIENTES -->
+<div class="card-panel">
+    <div class="cp-header">
+        <span><i class="bi bi-clock-history me-2"></i>Pedidos recientes</span>
+        <a href="{% url 'panel_admin:pedidos' %}" class="btn-admin secondary" style="font-size:12px; padding:6px 14px;">Ver todos</a>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-admin mb-0">
+            <thead>
+                <tr>
+                    <th class="ps-4">#</th>
+                    <th>Cliente</th>
+                    <th>Total</th>
+                    <th>Estado</th>
+                    <th>Fecha</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pedido in pedidos_recientes %}
+                <tr>
+                    <td class="ps-4 fw-600">#{{ pedido.id }}</td>
+                    <td>{{ pedido.user.first_name|default:pedido.user.username }}</td>
+                    <td>${{ pedido.total|floatformat:"0" }}</td>
+                    <td><span class="estado-{{ pedido.status }}">{{ pedido.get_status_display }}</span></td>
+                    <td>{{ pedido.created_at|date:"d/m/Y" }}</td>
+                    <td><a href="{% url 'panel_admin:pedido_detalle' pedido.pk %}" class="btn-admin secondary" style="padding:5px 12px; font-size:12px;">Ver</a></td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="6" class="text-center py-4 text-muted">No hay pedidos aún.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- ACCESOS RÁPIDOS -->
+<div class="row g-3 mt-2">
+    <div class="col-md-4">
+        <a href="{% url 'panel_admin:producto_nuevo' %}" class="btn-admin d-block text-center py-3" style="border-radius:12px; font-size:14px;">
+            <i class="bi bi-plus-circle fs-5 d-block mb-1"></i>Nuevo producto
+        </a>
+    </div>
+    <div class="col-md-4">
+        <a href="{% url 'panel_admin:pedidos' %}?estado=pending" class="btn-admin secondary d-block text-center py-3" style="border-radius:12px; font-size:14px;">
+            <i class="bi bi-hourglass-split fs-5 d-block mb-1"></i>Pedidos pendientes
+        </a>
+    </div>
+    <div class="col-md-4">
+        <a href="{% url 'panel_admin:mensajes' %}?nuevos=1" class="btn-admin secondary d-block text-center py-3" style="border-radius:12px; font-size:14px;">
+            <i class="bi bi-envelope-open fs-5 d-block mb-1"></i>Mensajes sin leer
+        </a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends "panel_admin/base_admin.html" %}
+{% block title %}Mensajes{% endblock %}
+{% block page_title %}Mensajes de contacto{% endblock %}
+
+{% block content %}
+<div class="d-flex gap-2 mb-4">
+    <a href="{% url 'panel_admin:mensajes' %}" class="btn-admin {% if not solo_nuevos %}{% else %}secondary{% endif %}">Todos</a>
+    <a href="?nuevos=1" class="btn-admin {% if solo_nuevos %}{% else %}secondary{% endif %}">Sin leer</a>
+</div>
+
+<div class="card-panel">
+    <div class="table-responsive">
+        <table class="table table-admin mb-0">
+            <thead>
+                <tr>
+                    <th class="ps-4">De</th>
+                    <th>Email</th>
+                    <th>Asunto</th>
+                    <th>Mensaje</th>
+                    <th>Fecha</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for msg in mensajes %}
+                <tr {% if not msg.leido %}style="background:#fffbf0;"{% endif %}>
+                    <td class="ps-4 fw-semibold">
+                        {% if not msg.leido %}<i class="bi bi-circle-fill text-warning me-2" style="font-size:8px;"></i>{% endif %}
+                        {{ msg.nombre }}
+                    </td>
+                    <td class="text-muted" style="font-size:13px;">{{ msg.email }}</td>
+                    <td>{{ msg.get_asunto_display }}</td>
+                    <td style="font-size:13px; color:#777; max-width:200px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+                        {{ msg.mensaje|truncatechars:60 }}
+                    </td>
+                    <td style="font-size:13px; color:#999;">{{ msg.creado_en|date:"d/m/Y H:i" }}</td>
+                    <td>
+                        <div class="d-flex gap-2">
+                            <a href="{% url 'panel_admin:mensaje_detalle' msg.pk %}" class="btn-admin secondary" style="padding:5px 12px; font-size:12px;">
+                                <i class="bi bi-eye"></i> Leer
+                            </a>
+                            <form method="post" action="{% url 'panel_admin:mensaje_eliminar' msg.pk %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn-admin danger" style="padding:5px 12px; font-size:12px;"
+                                        onclick="return confirm('¿Eliminar este mensaje?')">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="6" class="text-center py-5 text-muted">No hay mensajes.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

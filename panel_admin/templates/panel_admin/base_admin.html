@@ -1,0 +1,191 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}Panel Admin{% endblock %} — Afrodite</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+    --rosa: #f7c5d0;
+    --oscuro: #2b2b2b;
+    --sidebar-w: 240px;
+}
+* { box-sizing: border-box; }
+body { font-family: 'Poppins', sans-serif; background: #f8f5f6; margin: 0; display: flex; min-height: 100vh; }
+
+/* SIDEBAR */
+.sidebar {
+    width: var(--sidebar-w);
+    background: var(--oscuro);
+    color: white;
+    position: fixed;
+    top: 0; left: 0; bottom: 0;
+    display: flex; flex-direction: column;
+    z-index: 100;
+}
+.sidebar-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; letter-spacing: 3px;
+    padding: 28px 24px 20px;
+    border-bottom: 1px solid rgba(255,255,255,.1);
+    text-decoration: none; color: white;
+}
+.sidebar-brand small { display: block; font-family: 'Poppins', sans-serif; font-size: 10px; letter-spacing: 2px; color: var(--rosa); text-transform: uppercase; margin-top: 2px; }
+.sidebar-nav { flex: 1; padding: 20px 0; overflow-y: auto; }
+.sidebar-nav a {
+    display: flex; align-items: center; gap: 12px;
+    padding: 11px 24px;
+    color: rgba(255,255,255,.7);
+    text-decoration: none; font-size: 13.5px;
+    transition: all .2s; border-left: 3px solid transparent;
+    position: relative;
+}
+.sidebar-nav a:hover, .sidebar-nav a.active {
+    color: white;
+    background: rgba(255,255,255,.06);
+    border-left-color: var(--rosa);
+}
+.sidebar-nav a i { font-size: 16px; width: 20px; text-align: center; }
+.sidebar-nav .badge-new {
+    margin-left: auto;
+    background: var(--rosa); color: #5a1a2e;
+    font-size: 10px; font-weight: 700;
+    padding: 2px 8px; border-radius: 20px;
+}
+.sidebar-footer {
+    padding: 16px 24px;
+    border-top: 1px solid rgba(255,255,255,.1);
+    font-size: 12px; color: rgba(255,255,255,.45);
+}
+.sidebar-footer a { color: rgba(255,255,255,.6); text-decoration: none; }
+.sidebar-footer a:hover { color: white; }
+
+/* MAIN */
+.main-content {
+    margin-left: var(--sidebar-w);
+    flex: 1;
+    display: flex; flex-direction: column;
+}
+.topbar {
+    background: white;
+    border-bottom: 1px solid #eee;
+    padding: 16px 32px;
+    display: flex; align-items: center; justify-content: space-between;
+}
+.topbar h1 { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--oscuro); margin: 0; }
+.topbar .user-info { font-size: 13px; color: #777; }
+.topbar .user-info span { font-weight: 600; color: var(--oscuro); }
+
+.page-body { padding: 32px; flex: 1; }
+
+/* CARDS */
+.stat-card {
+    background: white; border-radius: 12px;
+    padding: 20px 24px;
+    box-shadow: 0 2px 12px rgba(0,0,0,.05);
+    display: flex; align-items: center; gap: 18px;
+}
+.stat-card .icon {
+    width: 50px; height: 50px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+}
+.stat-card .icon.pink { background: #fff0f4; color: #c4607a; }
+.stat-card .icon.green { background: #f0fff4; color: #38a169; }
+.stat-card .icon.blue  { background: #ebf8ff; color: #3182ce; }
+.stat-card .icon.amber { background: #fffbeb; color: #d97706; }
+.stat-card h3 { font-size: 22px; font-weight: 600; margin: 0; color: var(--oscuro); }
+.stat-card p  { font-size: 12px; color: #999; margin: 0; }
+
+/* TABLE */
+.card-panel {
+    background: white; border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,.05);
+    overflow: hidden;
+}
+.card-panel .cp-header {
+    padding: 18px 24px;
+    border-bottom: 1px solid #f0e8ec;
+    display: flex; align-items: center; justify-content: space-between;
+    font-weight: 600; font-size: 14px; color: var(--oscuro);
+}
+.table-admin thead { background: #fafafa; }
+.table-admin th { font-size: 12px; text-transform: uppercase; letter-spacing: .5px; color: #888; font-weight: 600; border: none; }
+.table-admin td { font-size: 13.5px; vertical-align: middle; }
+
+/* BADGES DE ESTADO */
+.estado-paid    { background: #d4edda; color: #155724; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+.estado-pending { background: #fff3cd; color: #856404; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+.estado-cancelled { background: #f8d7da; color: #721c24; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+
+/* BTN ADMIN */
+.btn-admin {
+    background: var(--oscuro); color: white; border: none;
+    padding: 8px 18px; border-radius: 8px; font-size: 13px;
+    font-family: 'Poppins', sans-serif; font-weight: 500;
+    text-decoration: none; transition: opacity .2s; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 6px;
+}
+.btn-admin:hover { opacity: .8; color: white; }
+.btn-admin.secondary { background: #f0e8ec; color: var(--oscuro); }
+.btn-admin.secondary:hover { background: #e8d8de; }
+.btn-admin.danger { background: #e53e3e; }
+
+@media (max-width: 768px) {
+    .sidebar { transform: translateX(-100%); }
+    .main-content { margin-left: 0; }
+}
+</style>
+</head>
+<body>
+
+<aside class="sidebar">
+    <a href="{% url 'panel_admin:dashboard' %}" class="sidebar-brand">
+        AFRODITE
+        <small>Panel de administración</small>
+    </a>
+    <nav class="sidebar-nav">
+        <a href="{% url 'panel_admin:dashboard' %}" class="{% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}">
+            <i class="bi bi-grid-1x2"></i> Dashboard
+        </a>
+        <a href="{% url 'panel_admin:pedidos' %}" class="{% if 'pedido' in request.resolver_match.url_name %}active{% endif %}">
+            <i class="bi bi-bag-check"></i> Pedidos
+        </a>
+        <a href="{% url 'panel_admin:catalogo' %}" class="{% if 'catalogo' in request.resolver_match.url_name or 'producto' in request.resolver_match.url_name %}active{% endif %}">
+            <i class="bi bi-grid"></i> Catálogo
+        </a>
+        <a href="{% url 'panel_admin:mensajes' %}" class="{% if 'mensaje' in request.resolver_match.url_name %}active{% endif %}">
+            <i class="bi bi-envelope"></i> Mensajes
+            {% if mensajes_sin_leer %}<span class="badge-new">{{ mensajes_sin_leer }}</span>{% endif %}
+        </a>
+    </nav>
+    <div class="sidebar-footer">
+        <a href="{% url 'index' %}"><i class="bi bi-arrow-left"></i> Ver tienda</a>
+    </div>
+</aside>
+
+<div class="main-content">
+    <div class="topbar">
+        <h1>{% block page_title %}Dashboard{% endblock %}</h1>
+        <div class="user-info">Hola, <span>{{ request.user.first_name|default:request.user.username }}</span></div>
+    </div>
+    <div class="page-body">
+        {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-{% if message.tags == 'error' %}danger{% elif message.tags == 'warning' %}warning{% else %}success{% endif %} alert-dismissible fade show mb-4" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+            {% endfor %}
+        {% endif %}
+        {% block content %}{% endblock %}
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+{% extends "panel_admin/base_admin.html" %}
+{% block title %}Mensaje de {{ msg.nombre }}{% endblock %}
+{% block page_title %}Mensaje de contacto{% endblock %}
+
+{% block content %}
+<div class="mb-3 d-flex gap-2">
+    <a href="{% url 'panel_admin:mensajes' %}" class="btn-admin secondary">
+        <i class="bi bi-arrow-left"></i> Volver
+    </a>
+    <form method="post" action="{% url 'panel_admin:mensaje_eliminar' msg.pk %}">
+        {% csrf_token %}
+        <button type="submit" class="btn-admin danger"
+                onclick="return confirm('¿Eliminar este mensaje?')">
+            <i class="bi bi-trash"></i> Eliminar
+        </button>
+    </form>
+</div>
+
+<div class="card-panel" style="max-width: 680px;">
+    <div class="cp-header">
+        <span><i class="bi bi-envelope-open me-2"></i>{{ msg.get_asunto_display }}</span>
+        <span style="font-size:12px; color:#999;">{{ msg.creado_en|date:"d/m/Y H:i" }}</span>
+    </div>
+    <div class="p-4">
+        <div class="mb-3 pb-3" style="border-bottom: 1px solid #f0e8ec;">
+            <p class="mb-1"><strong>Remitente:</strong> {{ msg.nombre }}</p>
+            <p class="mb-0"><strong>Email:</strong>
+                <a href="mailto:{{ msg.email }}" style="color: #c4607a;">{{ msg.email }}</a>
+            </p>
+        </div>
+        <p style="font-size:14px; line-height:1.7; white-space: pre-wrap; color: #444;">{{ msg.mensaje }}</p>
+        <div class="mt-4">
+            <a href="mailto:{{ msg.email }}?subject=Re: {{ msg.get_asunto_display }}" class="btn-admin">
+                <i class="bi bi-reply"></i> Responder por email
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

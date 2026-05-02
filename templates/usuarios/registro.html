@@ -1,0 +1,124 @@
+<!-- Autores: Helen Sanabria -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Crear Cuenta - Afrodite</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <style>
+    body { font-family: 'Poppins', sans-serif; background: #fafafa; margin: 0; }
+    .navbar-brand { font-family: 'Playfair Display', serif; letter-spacing: 3px; font-size: 30px; }
+    .nav-link { font-size: 14px; font-weight: 500; color: #333 !important; margin: 0 10px; }
+    .nav-link:hover { color: black !important; }
+    .nav-icon { font-size: 18px; color: #333; }
+    .auth-wrapper {
+      min-height: calc(100vh - 70px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 40px 16px;
+    }
+    .auth-card {
+      width: 100%; max-width: 500px; background: white;
+      border-radius: 4px; padding: 44px 40px;
+      box-shadow: 0 2px 24px rgba(0,0,0,0.07);
+    }
+    .auth-title { font-family: 'Playfair Display', serif; font-size: 30px; margin-bottom: 4px; }
+    .btn-afrodite {
+      background: #1a1a1a; color: white; border: none;
+      width: 100%; padding: 13px; font-family: 'Poppins', sans-serif;
+      font-size: 12px; letter-spacing: 2px; text-transform: uppercase; transition: background 0.3s;
+    }
+    .btn-afrodite:hover { background: #3a3a3a; color: white; }
+    .form-control:focus { border-color: #1a1a1a; box-shadow: 0 0 0 0.15rem rgba(26,26,26,0.12); }
+    label { font-size: 12px; font-weight: 500; color: #666; margin-bottom: 5px; letter-spacing: 0.5px; }
+    .link-afrodite { color: #1a1a1a; }
+    .link-afrodite:hover { color: #666; }
+    .helptext { font-size: 11px; color: #aaa; margin-top: 3px; display: block; }
+    .divider { border: none; border-top: 1px solid #f0f0f0; margin: 20px 0; }
+  </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-white border-bottom py-3">
+  <div class="container">
+    <a class="navbar-brand" href="/">AFRODITE</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="menu">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item"><a class="nav-link" href="/">Inicio</a></li>
+        <li class="nav-item"><a class="nav-link" href="/catalogo/">Catálogo</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Ofertas</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Contacto</a></li>
+      </ul>
+      <div class="d-flex gap-3">
+        <a href="#"><i class="bi bi-heart nav-icon"></i></a>
+        <a href="#"><i class="bi bi-cart nav-icon"></i></a>
+        <a href="/login/"><i class="bi bi-person nav-icon"></i></a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="auth-wrapper">
+  <div class="auth-card">
+    <h2 class="auth-title text-center">Crear cuenta</h2>
+    <p class="text-center text-muted mb-4" style="font-size:13px;">Únete a la comunidad Afrodite</p>
+
+    {% if messages %}
+      {% for msg in messages %}
+        <div class="alert alert-success py-2 mb-3" style="font-size:13px; border-radius:2px;">{{ msg }}</div>
+      {% endfor %}
+    {% endif %}
+
+    <form method="POST" novalidate>
+      {% csrf_token %}
+      <div class="row">
+        <div class="col-6 mb-3">
+          <label>Nombre</label>
+          {{ form.first_name }}
+          {% if form.first_name.errors %}<div class="text-danger" style="font-size:11px;">{{ form.first_name.errors.0 }}</div>{% endif %}
+        </div>
+        <div class="col-6 mb-3">
+          <label>Apellido</label>
+          {{ form.last_name }}
+          {% if form.last_name.errors %}<div class="text-danger" style="font-size:11px;">{{ form.last_name.errors.0 }}</div>{% endif %}
+        </div>
+      </div>
+      <div class="mb-3">
+        <label>Usuario</label>
+        {{ form.username }}
+        {% if form.username.errors %}<div class="text-danger" style="font-size:11px;">{{ form.username.errors.0 }}</div>{% endif %}
+      </div>
+      <div class="mb-3">
+        <label>Correo electrónico</label>
+        {{ form.email }}
+        {% if form.email.errors %}<div class="text-danger" style="font-size:11px;">{{ form.email.errors.0 }}</div>{% endif %}
+      </div>
+      <div class="mb-3">
+        <label>Contraseña</label>
+        {{ form.password1 }}
+        {% if form.password1.errors %}<div class="text-danger" style="font-size:11px;">{{ form.password1.errors.0 }}</div>{% endif %}
+        {% if form.password1.help_text %}<span class="helptext">{{ form.password1.help_text }}</span>{% endif %}
+      </div>
+      <div class="mb-3">
+        <label>Confirmar contraseña</label>
+        {{ form.password2 }}
+        {% if form.password2.errors %}<div class="text-danger" style="font-size:11px;">{{ form.password2.errors.0 }}</div>{% endif %}
+      </div>
+      <button type="submit" class="btn btn-afrodite mt-2">Crear cuenta</button>
+    </form>
+
+    <hr class="divider">
+    <p class="text-center mb-0" style="font-size:13px; color:#888;">
+      ¿Ya tienes cuenta?
+      <a href="/login/" class="link-afrodite">Inicia sesión</a>
+    </p>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
