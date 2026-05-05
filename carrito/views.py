@@ -1,5 +1,7 @@
 # Autor: Viviana Arango Tabares
+
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from catalogo.models import Producto
 from .models import Cart, CartItem, Order, Payment
@@ -33,9 +35,10 @@ def add_to_cart(request):
         product = get_object_or_404(Producto, id=product_id)
 
         if product.agotado:
-            from django.contrib import messages
-            messages.error(request, f'"{product.nombre}" está agotado.')
-            return redirect('carrito:cart_detail')
+            return JsonResponse({
+                'success': False,
+                'message': f'El producto "{product.nombre}" está agotado.'
+            }, status=400)
 
         cart, created = Cart.objects.get_or_create(user=request.user, is_active=True)
 
@@ -45,10 +48,12 @@ def add_to_cart(request):
         ).first()
 
         cantidad_actual = existing_item.quantity if existing_item else 0
+
         if cantidad_actual + quantity > product.stock:
-            from django.contrib import messages
-            messages.warning(request, f'Solo hay {product.stock} unidades disponibles de "{product.nombre}".')
-            return redirect('carrito:cart_detail')
+            return JsonResponse({
+                'success': False,
+                'message': f'Solo hay {product.stock} unidades disponibles de "{product.nombre}".'
+            }, status=400)
 
         if existing_item:
             existing_item.quantity += quantity
@@ -60,7 +65,15 @@ def add_to_cart(request):
                 quantity=quantity
             )
 
-    return redirect('carrito:cart_detail')
+        return JsonResponse({
+            'success': True,
+            'message': 'El producto se ha agregado al carrito.'
+        })
+
+    return JsonResponse({
+        'success': False,
+        'message': 'Método no permitido.'
+    }, status=405)
 
 
 @login_required
@@ -121,11 +134,12 @@ def checkout(request):
             status='paid'
         )
 
-        # Crear OrderItems y descontar stock
         from .models import OrderItem
+
         for item in items:
             product = item.product
             price = product.precio if product else item.unit_price
+
             OrderItem.objects.create(
                 order=order,
                 product=product,
@@ -133,7 +147,7 @@ def checkout(request):
                 unit_price=price,
                 quantity=item.quantity,
             )
-            # Descontar stock si hay producto con stock
+
             if product and product.stock > 0:
                 product.stock = max(0, product.stock - item.quantity)
                 product.save(update_fields=['stock'])
