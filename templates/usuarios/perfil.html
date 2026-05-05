@@ -111,12 +111,11 @@
       <ul class="navbar-nav mx-auto">
         <li class="nav-item"><a class="nav-link" href="/">Inicio</a></li>
         <li class="nav-item"><a class="nav-link" href="/catalogo/">Catálogo</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Ofertas</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Contacto</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'contacto' %}">Contacto</a></li>
       </ul>
       <div class="d-flex gap-3 align-items-center">
         <a href="#"><i class="bi bi-heart nav-icon"></i></a>
-        <a href="{% url 'cart_detail' %}"><i class="bi bi-cart nav-icon"></i></a>
+        <a href="{% url 'carrito:cart_detail' %}"><i class="bi bi-cart nav-icon"></i></a>
         <a href="/perfil/"><i class="bi bi-person-fill nav-icon" style="color:#1a1a1a;"></i></a>
       </div>
     </div>

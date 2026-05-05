@@ -1,0 +1,59 @@
+{% extends "panel_admin/base_admin.html" %}
+{% block title %}{{ titulo }}{% endblock %}
+{% block page_title %}{{ titulo }}{% endblock %}
+
+{% block content %}
+<div class="mb-3">
+    <a href="{% url 'panel_admin:catalogo' %}" class="btn-admin secondary">
+        <i class="bi bi-arrow-left"></i> Volver al catálogo
+    </a>
+</div>
+
+<div class="card-panel" style="max-width: 680px;">
+    <div class="cp-header"><span><i class="bi bi-box me-2"></i>{{ titulo }}</span></div>
+    <div class="p-4">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row g-3">
+                <div class="col-12">
+                    <label class="form-label fw-semibold" style="font-size:13px;">{{ form.nombre.label }}</label>
+                    {{ form.nombre }}
+                    {% if form.nombre.errors %}<div class="text-danger" style="font-size:12px;">{{ form.nombre.errors.0 }}</div>{% endif %}
+                </div>
+                <div class="col-12">
+                    <label class="form-label fw-semibold" style="font-size:13px;">{{ form.descripcion.label }}</label>
+                    {{ form.descripcion }}
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold" style="font-size:13px;">{{ form.categoria.label }}</label>
+                    {{ form.categoria }}
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold" style="font-size:13px;">{{ form.tipo_piel.label }}</label>
+                    {{ form.tipo_piel }}
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold" style="font-size:13px;">{{ form.precio.label }}</label>
+                    {{ form.precio }}
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold" style="font-size:13px;">{{ form.stock.label }}</label>
+                    {{ form.stock }}
+                    <div class="form-text" style="font-size:11px;">Pon 0 para marcar como agotado.</div>
+                </div>
+                <div class="col-12">
+                    <label class="form-label fw-semibold" style="font-size:13px;">{{ form.imagen.label }}</label>
+                    {{ form.imagen }}
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="d-flex gap-3">
+                <button type="submit" class="btn-admin">
+                    <i class="bi bi-check-circle"></i> {{ accion }}
+                </button>
+                <a href="{% url 'panel_admin:catalogo' %}" class="btn-admin secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends "panel_admin/base_admin.html" %}
+{% block title %}Catálogo{% endblock %}
+{% block page_title %}Catálogo de productos{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <p class="text-muted mb-0" style="font-size:13px;">{{ productos.count }} productos en total</p>
+    <a href="{% url 'panel_admin:producto_nuevo' %}" class="btn-admin">
+        <i class="bi bi-plus-circle"></i> Nuevo producto
+    </a>
+</div>
+
+<div class="card-panel">
+    <div class="table-responsive">
+        <table class="table table-admin mb-0">
+            <thead>
+                <tr>
+                    <th class="ps-4" style="width:70px;">Imagen</th>
+                    <th>Nombre</th>
+                    <th>Categoría</th>
+                    <th>Tipo piel</th>
+                    <th>Precio</th>
+                    <th>Stock</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in productos %}
+                <tr>
+                    <td class="ps-4">
+                        {% if p.imagen %}
+                            <img src="{{ p.imagen.url }}" alt="{{ p.nombre }}"
+                                 style="width:44px; height:44px; object-fit:cover; border-radius:8px;">
+                        {% else %}
+                            <div style="width:44px; height:44px; background:#f0e8ec; border-radius:8px; display:flex; align-items:center; justify-content:center; color:#ccc;">
+                                <i class="bi bi-image"></i>
+                            </div>
+                        {% endif %}
+                    </td>
+                    <td class="fw-semibold">{{ p.nombre }}</td>
+                    <td>{{ p.get_categoria_display }}</td>
+                    <td>{{ p.get_tipo_piel_display }}</td>
+                    <td>${{ p.precio|floatformat:"0" }}</td>
+                    <td>
+                        {% if p.stock == 0 %}
+                            <span class="estado-cancelled">Agotado</span>
+                        {% elif p.stock <= 5 %}
+                            <span class="estado-pending">{{ p.stock }} uds.</span>
+                        {% else %}
+                            <span class="estado-paid">{{ p.stock }} uds.</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <div class="d-flex gap-2">
+                            <a href="{% url 'panel_admin:producto_editar' p.pk %}" class="btn-admin secondary" style="padding:5px 12px; font-size:12px;">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                            <a href="{% url 'panel_admin:producto_eliminar' p.pk %}" class="btn-admin danger" style="padding:5px 12px; font-size:12px;">
+                                <i class="bi bi-trash"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="7" class="text-center py-5 text-muted">No hay productos. ¡Crea el primero!</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

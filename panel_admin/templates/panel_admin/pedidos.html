@@ -1,0 +1,52 @@
+{% extends "panel_admin/base_admin.html" %}
+{% block title %}Pedidos{% endblock %}
+{% block page_title %}Pedidos{% endblock %}
+
+{% block content %}
+<div class="d-flex gap-2 mb-4 flex-wrap">
+    <a href="{% url 'panel_admin:pedidos' %}" class="btn-admin {% if not estado_filtro %}{% else %}secondary{% endif %}">Todos</a>
+    <a href="?estado=pending" class="btn-admin {% if estado_filtro == 'pending' %}{% else %}secondary{% endif %}">Pendientes</a>
+    <a href="?estado=paid"    class="btn-admin {% if estado_filtro == 'paid' %}{% else %}secondary{% endif %}">Pagados</a>
+    <a href="?estado=cancelled" class="btn-admin {% if estado_filtro == 'cancelled' %}{% else %}secondary{% endif %}">Cancelados</a>
+</div>
+
+<div class="card-panel">
+    <div class="cp-header">
+        <span><i class="bi bi-bag-check me-2"></i>{{ pedidos.count }} pedido{{ pedidos.count|pluralize:"s" }}</span>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-admin mb-0">
+            <thead>
+                <tr>
+                    <th class="ps-4">#</th>
+                    <th>Cliente</th>
+                    <th>Email</th>
+                    <th>Total</th>
+                    <th>Estado</th>
+                    <th>Fecha</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pedido in pedidos %}
+                <tr>
+                    <td class="ps-4 fw-semibold">#{{ pedido.id }}</td>
+                    <td>{{ pedido.user.first_name }} {{ pedido.user.last_name }}</td>
+                    <td class="text-muted">{{ pedido.user.email }}</td>
+                    <td>${{ pedido.total|floatformat:"0" }}</td>
+                    <td><span class="estado-{{ pedido.status }}">{{ pedido.get_status_display }}</span></td>
+                    <td>{{ pedido.created_at|date:"d/m/Y H:i" }}</td>
+                    <td>
+                        <a href="{% url 'panel_admin:pedido_detalle' pedido.pk %}" class="btn-admin secondary" style="padding:5px 12px; font-size:12px;">
+                            <i class="bi bi-eye"></i> Ver
+                        </a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="7" class="text-center py-5 text-muted">No hay pedidos con ese filtro.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

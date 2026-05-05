@@ -1,0 +1,84 @@
+{% extends "panel_admin/base_admin.html" %}
+{% block title %}Pedido #{{ order.id }}{% endblock %}
+{% block page_title %}Pedido #{{ order.id }}{% endblock %}
+
+{% block content %}
+<div class="mb-3">
+    <a href="{% url 'panel_admin:pedidos' %}" class="btn-admin secondary">
+        <i class="bi bi-arrow-left"></i> Volver a pedidos
+    </a>
+</div>
+
+<div class="row g-4">
+    <!-- Info del pedido -->
+    <div class="col-lg-8">
+        <div class="card-panel mb-4">
+            <div class="cp-header">
+                <span><i class="bi bi-list-ul me-2"></i>Productos del pedido</span>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-admin mb-0">
+                    <thead>
+                        <tr>
+                            <th class="ps-4">Producto</th>
+                            <th>Precio unitario</th>
+                            <th>Cantidad</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in items %}
+                        <tr>
+                            <td class="ps-4">{{ item.product_name }}</td>
+                            <td>${{ item.unit_price|floatformat:"0" }}</td>
+                            <td>{{ item.quantity }}</td>
+                            <td>${{ item.subtotal|floatformat:"0" }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr><td colspan="4" class="text-center py-3 text-muted">Sin detalle de items.</td></tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3" class="ps-4 fw-semibold text-end pe-4">Total:</td>
+                            <td class="fw-semibold">${{ order.total|floatformat:"0" }}</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Panel lateral -->
+    <div class="col-lg-4">
+        <div class="card-panel mb-4">
+            <div class="cp-header"><span><i class="bi bi-person me-2"></i>Cliente</span></div>
+            <div class="p-4">
+                <p class="mb-1"><strong>{{ order.user.first_name }} {{ order.user.last_name }}</strong></p>
+                <p class="text-muted mb-1" style="font-size:13px;">{{ order.user.email }}</p>
+                <p class="text-muted mb-0" style="font-size:13px;">@{{ order.user.username }}</p>
+            </div>
+        </div>
+
+        <div class="card-panel">
+            <div class="cp-header"><span><i class="bi bi-gear me-2"></i>Estado del pedido</span></div>
+            <div class="p-4">
+                <p class="mb-3">
+                    Estado actual: <span class="estado-{{ order.status }}">{{ order.get_status_display }}</span>
+                </p>
+                <form method="post">
+                    {% csrf_token %}
+                    <select name="status" class="form-select mb-3" style="font-size:13px;">
+                        <option value="pending"   {% if order.status == 'pending' %}selected{% endif %}>Pendiente</option>
+                        <option value="paid"      {% if order.status == 'paid' %}selected{% endif %}>Pagado</option>
+                        <option value="cancelled" {% if order.status == 'cancelled' %}selected{% endif %}>Cancelado</option>
+                    </select>
+                    <button type="submit" class="btn-admin w-100">
+                        <i class="bi bi-check-circle"></i> Actualizar estado
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

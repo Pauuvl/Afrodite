@@ -1,4 +1,4 @@
-# Autores: Helen Sanabria
+# Autor: todos
 import os
 from pathlib import Path
 
@@ -19,7 +19,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'carrito',
     'catalogo',
-    'usuarios', 
+    'usuarios',
+    'contacto',
+    'panel_admin',
 ]
 
 MIDDLEWARE = [
@@ -48,6 +50,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'panel_admin.context_processors.mensajes_sin_leer',
             ],
         },
     },
@@ -55,22 +58,22 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Afrodite.wsgi.application'
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': os.environ.get('POSTGRES_DB', 'afrodite'),
-#         'USER': os.environ.get('POSTGRES_USER', 'afrodite_usr'),
-#         'PASSWORD': os.environ.get('POSTGRES_PASSWORD', 'afrodite_pwd'),
-#         'HOST': os.environ.get('POSTGRES_HOST', 'localhost'),
-#         'PORT': os.environ.get('POSTGRES_PORT', '5432'),
-#     }
-# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('POSTGRES_DB', 'afrodite'),
+        'USER': os.environ.get('POSTGRES_USER', 'afrodite_usr'),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', 'afrodite_pwd'),
+        'HOST': os.environ.get('POSTGRES_HOST', 'localhost'),
+        'PORT': os.environ.get('POSTGRES_PORT', '5432'),
     }
 }
+# DATABASES = {
+  #  'default': {
+   #     'ENGINE': 'django.db.backends.sqlite3',
+    #    'NAME': BASE_DIR / 'db.sqlite3',
+    #}
+# }
 LANGUAGE_CODE = 'es'
 TIME_ZONE = 'UTC'
 MEDIA_URL = '/media/'

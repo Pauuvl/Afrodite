@@ -1,5 +1,4 @@
 # Autor: Viviana Arango Tabares
-
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 from catalogo.models import Producto
@@ -32,12 +31,24 @@ def add_to_cart(request):
         quantity = int(request.POST.get('quantity', 1))
 
         product = get_object_or_404(Producto, id=product_id)
+
+        if product.agotado:
+            from django.contrib import messages
+            messages.error(request, f'"{product.nombre}" está agotado.')
+            return redirect('carrito:cart_detail')
+
         cart, created = Cart.objects.get_or_create(user=request.user, is_active=True)
 
         existing_item = CartItem.objects.filter(
             cart=cart,
             product=product
         ).first()
+
+        cantidad_actual = existing_item.quantity if existing_item else 0
+        if cantidad_actual + quantity > product.stock:
+            from django.contrib import messages
+            messages.warning(request, f'Solo hay {product.stock} unidades disponibles de "{product.nombre}".')
+            return redirect('carrito:cart_detail')
 
         if existing_item:
             existing_item.quantity += quantity
@@ -49,7 +60,7 @@ def add_to_cart(request):
                 quantity=quantity
             )
 
-    return redirect('cart_detail')
+    return redirect('carrito:cart_detail')
 
 
 @login_required
@@ -70,7 +81,7 @@ def update_cart_item(request, item_id):
         else:
             item.delete()
 
-    return redirect('cart_detail')
+    return redirect('carrito:cart_detail')
 
 
 @login_required
@@ -85,7 +96,7 @@ def remove_cart_item(request, item_id):
     if request.method == 'POST':
         item.delete()
 
-    return redirect('cart_detail')
+    return redirect('carrito:cart_detail')
 
 
 @login_required
@@ -99,7 +110,7 @@ def checkout(request):
     )
 
     if not items.exists():
-        return redirect('cart_detail')
+        return redirect('carrito:cart_detail')
 
     if request.method == 'POST':
         method = request.POST.get('method')
@@ -109,6 +120,23 @@ def checkout(request):
             total=total,
             status='paid'
         )
+
+        # Crear OrderItems y descontar stock
+        from .models import OrderItem
+        for item in items:
+            product = item.product
+            price = product.precio if product else item.unit_price
+            OrderItem.objects.create(
+                order=order,
+                product=product,
+                product_name=product.nombre if product else (item.product_name or ''),
+                unit_price=price,
+                quantity=item.quantity,
+            )
+            # Descontar stock si hay producto con stock
+            if product and product.stock > 0:
+                product.stock = max(0, product.stock - item.quantity)
+                product.save(update_fields=['stock'])
 
         Payment.objects.create(
             order=order,
@@ -120,7 +148,7 @@ def checkout(request):
         cart.is_active = False
         cart.save()
 
-        return redirect('payment_success')
+        return redirect('carrito:payment_success')
 
     return render(request, 'carrito/checkout.html', {
         'cart': cart,
