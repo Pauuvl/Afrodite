@@ -167,10 +167,37 @@ footer p { color: var(--gris); font-size: 13px; margin: 0; }
 /* ANIMACIÓN */
 @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 .fade-up { animation: fadeUp .5s ease both; }
+
+.toast-carrito {
+    position: fixed;
+    top: 90px;
+    right: 24px;
+    background: var(--oscuro);
+    color: white;
+    padding: 14px 20px;
+    border-radius: 12px;
+    font-size: 13px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.18);
+    z-index: 9999;
+    opacity: 0;
+    transform: translateY(-12px);
+    transition: all .3s ease;
+}
+
+.toast-carrito.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.toast-carrito.error {
+    background: #8b1e3f;
+}
 </style>
 </head>
 
 <body>
+
+<div id="toast-carrito" class="toast-carrito"></div>
 
 <!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg bg-white border-bottom py-3 sticky-top">
@@ -322,9 +349,9 @@ footer p { color: var(--gris); font-size: 13px; margin: 0; }
                     {% if producto.agotado %}
                         <span class="btn-agregar disabled-btn mt-2">Sin stock</span>
                     {% else %}
-                        <a href="{% url 'agregar_carrito' producto.id %}" class="btn-agregar mt-2">
+                        <button type="button" class="btn-agregar mt-2" onclick="agregarAlCarrito({{ producto.id }})">
                             <i class="bi bi-bag-plus"></i> Agregar
-                        </a>
+                        </button>
                     {% endif %}
                 </div>
             </div>
@@ -369,9 +396,9 @@ footer p { color: var(--gris); font-size: 13px; margin: 0; }
                     {% if producto.agotado %}
                         <span class="btn-agregar disabled-btn mt-2">Sin stock</span>
                     {% else %}
-                        <a href="{% url 'agregar_carrito' producto.id %}" class="btn-agregar mt-2">
+                        <button type="button" class="btn-agregar mt-2" onclick="agregarAlCarrito({{ producto.id }})">
                             <i class="bi bi-bag-plus"></i> Agregar
-                        </a>
+                        </button>
                     {% endif %}
                 </div>
             </div>
@@ -397,6 +424,66 @@ function filtrar(cat, btn) {
     btn.classList.add('activo');
     document.querySelectorAll('.seccion').forEach(sec => {
         sec.style.display = (cat === 'todos' || sec.dataset.cat === cat) ? '' : 'none';
+    });
+}
+
+function getCookie(name) {
+    const cookies = document.cookie ? document.cookie.split(';') : [];
+
+    for (let cookie of cookies) {
+        cookie = cookie.trim();
+
+        if (cookie.startsWith(name + '=')) {
+            return decodeURIComponent(cookie.substring(name.length + 1));
+        }
+    }
+
+    return null;
+}
+
+function mostrarMensajeCarrito(message, isError = false) {
+    const toast = document.getElementById('toast-carrito');
+
+    toast.textContent = message;
+    toast.classList.toggle('error', isError);
+    toast.classList.add('show');
+
+    setTimeout(() => {
+        toast.classList.remove('show');
+    }, 2500);
+}
+
+function agregarAlCarrito(productId) {
+    fetch("{% url 'carrito:add_to_cart' %}", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+            "X-CSRFToken": getCookie("csrftoken"),
+            "X-Requested-With": "XMLHttpRequest"
+        },
+        body: `product_id=${productId}&quantity=1`
+    })
+    .then(response => {
+        if (response.redirected) {
+            window.location.href = response.url;
+            return null;
+        }
+
+        return response.json().then(data => ({
+            ok: response.ok,
+            data: data
+        }));
+    })
+    .then(result => {
+        if (!result) return;
+
+        mostrarMensajeCarrito(
+            result.data.message || "El producto se ha agregado al carrito.",
+            !result.ok || result.data.success === false
+        );
+    })
+    .catch(() => {
+        mostrarMensajeCarrito("No se pudo agregar el producto al carrito.", true);
     });
 }
 </script>
