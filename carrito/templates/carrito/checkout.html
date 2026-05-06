@@ -116,6 +116,97 @@
         margin-top:20px;
     }
 
+    .payment-extra{
+    display:none;
+    margin-top:12px;
+    margin-bottom:18px;
+    padding:18px;
+    border:1px solid #eeeeee;
+    border-radius:12px;
+    background:#fafafa;
+    }
+
+    .payment-extra.show{
+        display:block;
+    }
+
+    .payment-extra label{
+        font-size:13px;
+        font-weight:500;
+        color:#333;
+        margin-bottom:6px;
+    }
+
+    .payment-extra input{
+        width:100%;
+        border:1px solid #dedede;
+        border-radius:10px;
+        padding:11px 13px;
+        margin-bottom:12px;
+        font-family:'Poppins',sans-serif;
+        font-size:14px;
+    }
+
+    .payment-extra input:focus{
+        outline:none;
+        border-color:#111;
+    }
+
+    .bank-info{
+        background:#fff;
+        border:1px solid #eeeeee;
+        border-radius:12px;
+        padding:16px;
+        margin-bottom:14px;
+    }
+
+    .bank-info p{
+        margin-bottom:7px;
+        font-size:14px;
+        color:#444;
+    }
+
+    .qr-box{
+        width:155px;
+        height:155px;
+        margin:14px auto 4px;
+        background:
+            linear-gradient(90deg, #111 10px, transparent 10px) 0 0/20px 20px,
+            linear-gradient(#111 10px, transparent 10px) 0 0/20px 20px,
+            #fff;
+        border:10px solid #fff;
+        outline:1px solid #ddd;
+        border-radius:8px;
+        position:relative;
+    }
+
+    .qr-box::before,
+    .qr-box::after{
+        content:"";
+        position:absolute;
+        width:38px;
+        height:38px;
+        border:8px solid #111;
+        background:#fff;
+    }
+
+    .qr-box::before{
+        top:8px;
+        left:8px;
+    }
+
+    .qr-box::after{
+        bottom:8px;
+        right:8px;
+    }
+
+    .qr-note{
+        text-align:center;
+        font-size:12px;
+        color:#777;
+        margin-top:8px;
+    }
+
     footer{
         margin-top:60px;
     }
@@ -198,20 +289,63 @@
                         {% csrf_token %}
 
                         <label class="payment-option d-flex align-items-center gap-3 w-100">
-                            <input type="radio" name="method" value="card" required>
+                            <input type="radio" name="method" value="card" required onclick="mostrarMetodoPago('card')">
                             <span>
                                 <strong>Tarjeta</strong><br>
                                 <small class="text-muted">Paga fácilmente con tarjeta de crédito o débito</small>
                             </span>
                         </label>
 
+                        <div id="card-fields" class="payment-extra">
+                            <label>Nombre del titular</label>
+                            <input type="text" name="card_name" placeholder="Nombre completo">
+
+                            <label>Número de tarjeta</label>
+                            <input type="text" name="card_number" maxlength="19" placeholder="0000 0000 0000 0000">
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Fecha de vencimiento</label>
+                                    <input type="text" name="expiry_date" maxlength="5" placeholder="MM/AA">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label>CVV</label>
+                                    <input type="password" name="cvv" maxlength="4" placeholder="123">
+                                </div>
+                            </div>
+
+                            <small class="text-muted">
+                                Datos para simulación del pago.
+                            </small>
+                        </div>
+
                         <label class="payment-option d-flex align-items-center gap-3 w-100">
-                            <input type="radio" name="method" value="transfer" required>
+                            <input type="radio" name="method" value="transfer" required onclick="mostrarMetodoPago('transfer')">
                             <span>
                                 <strong>Transferencia bancaria</strong><br>
                                 <small class="text-muted">Realiza tu pago por transferencia</small>
                             </span>
                         </label>
+
+                        <div id="transfer-fields" class="payment-extra">
+                            <div class="bank-info">
+                                <p><strong>Banco:</strong> Bancolombia</p>
+                                <p><strong>Tipo de cuenta:</strong> Cuenta de ahorros</p>
+                                <p><strong>Número de cuenta:</strong> 123-456789-00</p>
+                                <p><strong>Titular:</strong> Afrodite Beauty S.A.S.</p>
+                                <p><strong>NIT:</strong> 900.123.456-7</p>
+                                <p><strong>Referencia:</strong> AFRODITE-{{ cart.id }}</p>
+                                <p><strong>Monto a transferir:</strong> ${{ total }}</p>
+                            </div>
+
+                            <img 
+                                src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=Bancolombia-Afrodite-123456" 
+                                alt="QR de pago"
+                                style="display:block;margin:15px auto;border-radius:10px;"
+                            >
+                            <p class="qr-note">QR ficticio para demostración</p>
+                        </div>
 
                         <button type="submit" class="btn-afrodite mt-3">Confirmar pago</button>
                     </form>
@@ -227,6 +361,23 @@
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+function mostrarMetodoPago(metodo) {
+    const cardFields = document.getElementById('card-fields');
+    const transferFields = document.getElementById('transfer-fields');
+
+    if (metodo === 'card') {
+        cardFields.classList.add('show');
+        transferFields.classList.remove('show');
+    }
+
+    if (metodo === 'transfer') {
+        transferFields.classList.add('show');
+        cardFields.classList.remove('show');
+    }
+}
+</script>
 
 </body>
 </html>
