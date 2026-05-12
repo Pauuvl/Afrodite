@@ -1,14 +1,14 @@
-#Autor: Viviana Arango Tabares
+# Autor: Viviana Arango Tabares y Helen Sanabria
 from django.urls import path
 from . import views
 
 app_name = 'carrito'
 
 urlpatterns = [
-    path('', views.cart_detail, name='cart_detail'),
-    path('add/', views.add_to_cart, name='add_to_cart'),
-    path('update/<int:item_id>/', views.update_cart_item, name='update_cart_item'),
-    path('remove/<int:item_id>/', views.remove_cart_item, name='remove_cart_item'),
-    path('checkout/', views.checkout, name='checkout'),
-    path('success/', views.payment_success, name='payment_success'),
+    path('',                        views.detalle_carrito, name='detalle_carrito'),
+    path('agregar/',                views.agregar_producto, name='agregar_producto'),
+    path('actualizar/<int:item_id>/', views.actualizar_item, name='actualizar_item'),
+    path('eliminar/<int:item_id>/', views.eliminar_item,    name='eliminar_item'),
+    path('checkout/',               views.checkout,         name='checkout'),
+    path('pago-exitoso/',           views.pago_exitoso,     name='pago_exitoso'),
 ]

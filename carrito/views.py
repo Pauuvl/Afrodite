@@ -1,8 +1,8 @@
-# Autor: Viviana Arango Tabares
+# Autor: Viviana Arango Tabares y Helen Sanabria
 
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import redirect, render
 from catalogo.models import Producto
 from .models import CartItem
 from .services import (
@@ -23,29 +23,31 @@ def cart_detail(request):
     total = calcular_total(cart)
 
     return render(request, 'carrito/cart_detail.html', {
-        'cart': cart,
-        'items': items,
-        'products': products,
-        'total': total,
+        'cart':     carrito,
+        'items':    items,
+        'products': productos,
+        'total':    total,
     })
 
 
 @login_required
-def add_to_cart(request):
+def agregar_producto(request):
     if request.method == 'POST':
-        product_id = request.POST.get('product_id')
-        quantity = int(request.POST.get('quantity', 1))
+        producto_id = request.POST.get('product_id')
+        cantidad = int(request.POST.get('quantity', 1))
 
-        success, message = agregar_producto_al_carrito(
-            user=request.user,
-            product_id=product_id,
-            quantity=quantity
+        exito, mensaje = agregar_producto_al_carrito(
+            request.user,
+            producto_id,
+            cantidad
         )
 
+        codigo = 200 if exito else 400
+
         return JsonResponse({
-            'success': success,
-            'message': message
-        }, status=200 if success else 400)
+            'success': exito,
+            'message': mensaje
+        }, status=codigo)
 
     return JsonResponse({
         'success': False,
@@ -77,7 +79,7 @@ def checkout(request):
     total = calcular_total(cart)
 
     if not items.exists():
-        return redirect('carrito:cart_detail')
+        return redirect('carrito:detalle_carrito')
 
     if request.method == 'POST':
         metodo_pago = request.POST.get('method')
@@ -85,12 +87,12 @@ def checkout(request):
         return redirect('carrito:payment_success')
 
     return render(request, 'carrito/checkout.html', {
-        'cart': cart,
+        'cart':  carrito,
         'items': items,
         'total': total,
     })
 
 
 @login_required
-def payment_success(request):
+def pago_exitoso(request):
     return render(request, 'carrito/payment_success.html')

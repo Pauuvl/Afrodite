@@ -1,6 +1,6 @@
-<!-- Autor: Viviana Arango Tabares-->
+<!-- Autor: Viviana Arango Tabares y Helen Sanabria-->
 
-{% load static %}
+{% load static i18n %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -175,15 +175,14 @@
 
         <div class="collapse navbar-collapse" id="menu">
             <ul class="navbar-nav mx-auto">
-                <li class="nav-item"><a class="nav-link" href="/">Inicio</a></li>
-                <li class="nav-item"><a class="nav-link" href="/catalogo/">Catálogo</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Ofertas</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Contacto</a></li>
+                <li class="nav-item"><a class="nav-link" href="/">{% trans "Inicio" %}</a></li>
+                <li class="nav-item"><a class="nav-link" href="/catalogo/">{% trans "Catálogo" %}</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'contacto' %}">{% trans "Contacto" %}</a></li>
             </ul>
 
             <div class="d-flex gap-3">
                 <a href="#"><i class="bi bi-heart nav-icon"></i></a>
-                <a href="{% url 'carrito:cart_detail' %}">
+                <a href="{% url 'carrito:detalle_carrito' %}">
                     <i class="bi bi-cart nav-icon"></i>
                 </a>
 
@@ -200,22 +199,22 @@
 <section class="cart-section">
     <div class="container">
         <div class="text-center mb-5">
-            <h1 class="titulo">Tu carrito</h1>
-            <p class="section-subtitle">Tus esenciales de belleza están listos, revísalos antes de continuar ✨</p>
+            <h1 class="titulo">{% trans "Tu carrito" %}</h1>
+            <p class="section-subtitle">{% trans "Tus esenciales de belleza están listos, revísalos antes de continuar" %} ✨</p>
         </div>
 
         <div class="row g-4">
             <div class="col-lg-8">
                 <div class="form-card">
-                    <h4 class="titulo mb-3">Agrega un producto al carrito</h4>
+                    <h4 class="titulo mb-3">{% trans "Agrega un producto al carrito" %}</h4>
 
-                    <form method="post" action="{% url 'carrito:add_to_cart' %}">
+                    <form method="post" action="{% url 'carrito:agregar_producto' %}">
                         {% csrf_token %}
                         <div class="row g-3">
                             <div class="col-md-9">
-                                <label class="form-label">Producto</label>
+                                <label class="form-label">{% trans "Producto" %}</label>
                                 <select name="product_id" class="soft-input" required>
-                                    <option value="">Selecciona un producto</option>
+                                    <option value="">{% trans "Selecciona un producto" %}</option>
                                     {% for product in products %}
                                         <option value="{{ product.id }}">
                                             {{ product.nombre }} - ${{ product.precio }} ({{ product.get_categoria_display }})
@@ -225,45 +224,45 @@
                             </div>
 
                             <div class="col-md-3">
-                                <label class="form-label">Cantidad</label>
+                                <label class="form-label">{% trans "Cantidad" %}</label>
                                 <input type="number" name="quantity" value="1" min="1" class="soft-input" required>
                             </div>
                         </div>
 
                         <div class="mt-4">
-                            <button type="submit" class="btn-afrodite">Agrega al carrito</button>
+                            <button type="submit" class="btn-afrodite">{% trans "Agrega al carrito" %}</button>
                         </div>
                     </form>
                 </div>
 
                 {% if items %}
                     <div class="cart-card">
-                        <h4 class="titulo mb-4">Tus productos</h4>
+                        <h4 class="titulo mb-4">{% trans "Tus productos" %}</h4>
 
                         {% for item in items %}
                             <div class="cart-item">
                                 <div class="row align-items-center g-3">
                                     <div class="col-md-4">
                                         <div class="item-name">{{ item.product.nombre }}</div>
-                                        <div class="item-price">${{ item.product.precio }} cada uno</div>
+                                        <div class="item-price">${{ item.product.precio }} {% trans "cada uno" %}</div>
                                     </div>
 
                                     <div class="col-md-3">
-                                        <div class="item-price">Cantidad: {{ item.quantity }}</div>
+                                        <div class="item-price">{% trans "Cantidad:" %} {{ item.quantity }}</div>
                                     </div>
 
                                     <div class="col-md-5">
                                         <div class="d-flex flex-wrap gap-2 justify-content-md-end">
 
-                                            <form method="post" action="{% url 'carrito:update_cart_item' item.id %}" class="d-flex gap-2">
+                                            <form method="post" action="{% url 'carrito:actualizar_item' item.id %}" class="d-flex gap-2">
                                                 {% csrf_token %}
                                                 <input type="number" name="quantity" value="{{ item.quantity }}" min="1" class="soft-input" style="width:90px;">
-                                                <button type="submit" class="btn-light-afrodite">Actualiza</button>
+                                                <button type="submit" class="btn-light-afrodite">{% trans "Actualiza" %}</button>
                                             </form>
 
-                                            <form method="post" action="{% url 'carrito:remove_cart_item' item.id %}">
+                                            <form method="post" action="{% url 'carrito:eliminar_item' item.id %}">
                                                 {% csrf_token %}
-                                                <button type="submit" class="btn-afrodite">Eliminar</button>
+                                                <button type="submit" class="btn-afrodite">{% trans "Eliminar" %}</button>
                                             </form>
 
                                         </div>
@@ -274,27 +273,27 @@
                     </div>
                 {% else %}
                     <div class="empty-cart">
-                        <h4 class="titulo mb-2">Tu carrito está vacío 😔</h4>
-                        <p class="text-muted mb-0">¡Agrega tus productos para continuar con la compra!</p>
+                        <h4 class="titulo mb-2">{% trans "Tu carrito está vacío" %} 😔</h4>
+                        <p class="text-muted mb-0">{% trans "¡Agrega tus productos para continuar con la compra!" %}</p>
                     </div>
                 {% endif %}
             </div>
 
             <div class="col-lg-4">
                 <div class="summary-card">
-                    <h4 class="titulo mb-4">Detalles de tu pedido 🛍️</h4>
+                    <h4 class="titulo mb-4">{% trans "Detalles de tu pedido" %} 🛍️</h4>
 
                     <div class="total-line">
-                        <span>Total</span>
+                        <span>{% trans "Total" %}</span>
                         <span>${{ total }}</span>
                     </div>
 
                     {% if items %}
                         <a href="{% url 'carrito:checkout' %}" class="text-decoration-none">
-                            <button type="button" class="btn-afrodite w-100">Completar tu pedido ♡</button>
+                            <button type="button" class="btn-afrodite w-100">{% trans "Completar tu pedido" %} ♡</button>
                         </a>
                     {% else %}
-                        <button type="button" class="btn-light-afrodite w-100" disabled>Completar tu pedido ♡</button>
+                        <button type="button" class="btn-light-afrodite w-100" disabled>{% trans "Completar tu pedido" %} ♡</button>
                     {% endif %}
                 </div>
             </div>
@@ -303,10 +302,17 @@
 </section>
 
 <footer class="bg-white border-top text-center py-4">
-    <p class="text-muted mb-0">© 2026 Afrodite - Tienda de Belleza</p>
+    <p class="text-muted mb-0">© 2026 Afrodite - {% trans "Tienda de Belleza" %}</p>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
+<!-- SELECTOR DE IDIOMA -->
+<style>.lang-switcher{position:fixed;bottom:20px;right:20px;z-index:9999;display:flex;gap:6px;}.lang-switcher form button{background:#2b2b2b;color:white;border:none;border-radius:6px;padding:5px 12px;font-size:11px;cursor:pointer;transition:background .2s;}.lang-switcher form button:hover{background:#555;}.lang-switcher form button.active-lang{background:#f7c5d0;color:#2b2b2b;}</style>
+<div class="lang-switcher">
+    {% get_current_language as CURRENT_LANG %}
+    <form action="{% url 'set_language' %}" method="post">{% csrf_token %}<input type="hidden" name="language" value="es"><input type="hidden" name="next" value="{{ request.get_full_path }}"><button type="submit" {% if CURRENT_LANG == 'es' %}class="active-lang"{% endif %}>ES</button></form>
+    <form action="{% url 'set_language' %}" method="post">{% csrf_token %}<input type="hidden" name="language" value="en"><input type="hidden" name="next" value="{{ request.get_full_path }}"><button type="submit" {% if CURRENT_LANG == 'en' %}class="active-lang"{% endif %}>EN</button></form>
+</div>
 </body>
 </html>

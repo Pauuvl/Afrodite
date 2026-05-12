@@ -1,0 +1,351 @@
+# Autor: Helen Sanabria
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: es\n"
+
+msgid "Español"
+msgstr "Español"
+
+msgid "English"
+msgstr "English"
+
+msgid "Inicio"
+msgstr "Inicio"
+
+msgid "Catálogo"
+msgstr "Catálogo"
+
+msgid "Contacto"
+msgstr "Contacto"
+
+msgid "Belleza que inspira confianza"
+msgstr "Belleza que inspira confianza"
+
+msgid "Maquillaje y skincare para resaltar tu mejor versión"
+msgstr "Maquillaje y skincare para resaltar tu mejor versión"
+
+msgid "Ver colección"
+msgstr "Ver colección"
+
+msgid "Nuevos en Skincare"
+msgstr "Nuevos en Skincare"
+
+msgid "Ver todos"
+msgstr "Ver todos"
+
+msgid "Agotado"
+msgstr "Agotado"
+
+msgid "Agregar"
+msgstr "Agregar"
+
+msgid "No hay productos de skincare disponibles aún."
+msgstr "No hay productos de skincare disponibles aún."
+
+msgid "Cuidado facial que transforma tu piel"
+msgstr "Cuidado facial que transforma tu piel"
+
+msgid "Descubre rutinas diseñadas para todo tipo de piel con los mejores ingredientes."
+msgstr "Descubre rutinas diseñadas para todo tipo de piel con los mejores ingredientes."
+
+msgid "Explorar skincare"
+msgstr "Explorar skincare"
+
+msgid "Nuevos en Maquillaje"
+msgstr "Nuevos en Maquillaje"
+
+msgid "Maquillaje"
+msgstr "Maquillaje"
+
+msgid "No hay productos de maquillaje disponibles aún."
+msgstr "No hay productos de maquillaje disponibles aún."
+
+msgid "Tienda de Belleza"
+msgstr "Tienda de Belleza"
+
+msgid "Tu carrito"
+msgstr "Tu carrito"
+
+msgid "Tus esenciales de belleza están listos, revísalos antes de continuar"
+msgstr "Tus esenciales de belleza están listos, revísalos antes de continuar"
+
+msgid "Agrega un producto al carrito"
+msgstr "Agrega un producto al carrito"
+
+msgid "Producto"
+msgstr "Producto"
+
+msgid "Selecciona un producto"
+msgstr "Selecciona un producto"
+
+msgid "Cantidad"
+msgstr "Cantidad"
+
+msgid "Agrega al carrito"
+msgstr "Agrega al carrito"
+
+msgid "Tus productos"
+msgstr "Tus productos"
+
+msgid "cada uno"
+msgstr "cada uno"
+
+msgid "Actualiza"
+msgstr "Actualiza"
+
+msgid "Eliminar"
+msgstr "Eliminar"
+
+msgid "Tu carrito está vacío"
+msgstr "Tu carrito está vacío"
+
+msgid "¡Agrega tus productos para continuar con la compra!"
+msgstr "¡Agrega tus productos para continuar con la compra!"
+
+msgid "Detalles de tu pedido"
+msgstr "Detalles de tu pedido"
+
+msgid "Total"
+msgstr "Total"
+
+msgid "Completar tu pedido"
+msgstr "Completar tu pedido"
+
+msgid "Finaliza tu compra"
+msgstr "Finaliza tu compra"
+
+msgid "Finaliza tu compra y selecciona tu método de pago"
+msgstr "Finaliza tu compra y selecciona tu método de pago"
+
+msgid "Cantidad:"
+msgstr "Cantidad:"
+
+msgid "Escoge tu método de pago"
+msgstr "Escoge tu método de pago"
+
+msgid "Tarjeta"
+msgstr "Tarjeta"
+
+msgid "Paga fácilmente con tarjeta de crédito o débito"
+msgstr "Paga fácilmente con tarjeta de crédito o débito"
+
+msgid "Nombre del titular"
+msgstr "Nombre del titular"
+
+msgid "Nombre completo"
+msgstr "Nombre completo"
+
+msgid "Número de tarjeta"
+msgstr "Número de tarjeta"
+
+msgid "Fecha de vencimiento"
+msgstr "Fecha de vencimiento"
+
+msgid "Datos para simulación del pago."
+msgstr "Datos para simulación del pago."
+
+msgid "Transferencia bancaria"
+msgstr "Transferencia bancaria"
+
+msgid "Realiza tu pago por transferencia"
+msgstr "Realiza tu pago por transferencia"
+
+msgid "QR ficticio para demostración"
+msgstr "QR ficticio para demostración"
+
+msgid "Confirmar pago"
+msgstr "Confirmar pago"
+
+msgid "Pago completado éxitosamente"
+msgstr "Pago completado éxitosamente"
+
+msgid "Tu pedido ha sido registrado correctamente"
+msgstr "Tu pedido ha sido registrado correctamente"
+
+msgid "Volver al carrito"
+msgstr "Volver al carrito"
+
+msgid "Catálogo de Productos"
+msgstr "Catálogo de Productos"
+
+msgid "Completa tu perfil con tu tipo de piel y te mostraremos los productos perfectos para ti."
+msgstr "Completa tu perfil con tu tipo de piel y te mostraremos los productos perfectos para ti."
+
+msgid "Ir a mi perfil"
+msgstr "Ir a mi perfil"
+
+msgid "Iniciar sesión"
+msgstr "Iniciar sesión"
+
+msgid "Registrarse"
+msgstr "Registrarse"
+
+msgid "Cerrar sesión"
+msgstr "Cerrar sesión"
+
+msgid "Perfil"
+msgstr "Perfil"
+
+msgid "Explora nuestras colecciones de maquillaje y skincare"
+msgstr "Explora nuestras colecciones de maquillaje y skincare"
+
+msgid "Recomendados para ti"
+msgstr "Recomendados para ti"
+
+msgid "Para ti"
+msgstr "Para ti"
+
+msgid "Skincare"
+msgstr "Skincare"
+
+msgid "Todos"
+msgstr "Todos"
+
+msgid "Sin stock"
+msgstr "Sin stock"
+
+msgid "Solo"
+msgstr "Solo"
+
+msgid "disponibles"
+msgstr "disponibles"
+
+msgid "Inicia sesión y cuéntanos tu tipo de piel para ver productos recomendados especialmente para ti."
+msgstr "Inicia sesión y cuéntanos tu tipo de piel para ver productos recomendados especialmente para ti."
+
+msgid "Ofertas"
+msgstr "Ofertas"
+
+msgid "CVV"
+msgstr "CVV"
+
+msgid "Contáctanos"
+msgstr "Contáctanos"
+
+msgid "¿Tienes dudas sobre un pedido o un producto? Estamos aquí para ayudarte."
+msgstr "¿Tienes dudas sobre un pedido o un producto? Estamos aquí para ayudarte."
+
+msgid "Envíanos un mensaje"
+msgstr "Envíanos un mensaje"
+
+msgid "Enviar mensaje"
+msgstr "Enviar mensaje"
+
+msgid "Información de contacto"
+msgstr "Información de contacto"
+
+msgid "Correo"
+msgstr "Correo"
+
+msgid "WhatsApp"
+msgstr "WhatsApp"
+
+msgid "Horario de atención"
+msgstr "Horario de atención"
+
+msgid "Lunes a viernes · 8 am – 6 pm"
+msgstr "Lunes a viernes · 8 am – 6 pm"
+
+msgid "Ubicación"
+msgstr "Ubicación"
+
+msgid "Medellín, Colombia"
+msgstr "Medellín, Colombia"
+
+msgid "Hecho con amor en Colombia"
+msgstr "Hecho con amor en Colombia"
+
+msgid "Mi Perfil"
+msgstr "Mi Perfil"
+
+msgid "Información personal"
+msgstr "Información personal"
+
+msgid "Nombre"
+msgstr "Nombre"
+
+msgid "Apellido"
+msgstr "Apellido"
+
+msgid "Correo electrónico"
+msgstr "Correo electrónico"
+
+msgid "Documento de identidad"
+msgstr "Documento de identidad"
+
+msgid "Teléfono"
+msgstr "Teléfono"
+
+msgid "Tipo de piel"
+msgstr "Tipo de piel"
+
+msgid "Guardar cambios"
+msgstr "Guardar cambios"
+
+msgid "Direcciones"
+msgstr "Direcciones"
+
+msgid "Dirección predeterminada"
+msgstr "Dirección predeterminada"
+
+msgid "Aún no tienes direcciones guardadas."
+msgstr "Aún no tienes direcciones guardadas."
+
+msgid "Bienvenida"
+msgstr "Bienvenida"
+
+msgid "Inicia sesión en tu cuenta Afrodite"
+msgstr "Inicia sesión en tu cuenta Afrodite"
+
+msgid "¿No tienes cuenta?"
+msgstr "¿No tienes cuenta?"
+
+msgid "Regístrate aquí"
+msgstr "Regístrate aquí"
+
+msgid "Crear cuenta"
+msgstr "Crear cuenta"
+
+msgid "Únete a la comunidad Afrodite"
+msgstr "Únete a la comunidad Afrodite"
+
+msgid "Usuario"
+msgstr "Usuario"
+
+msgid "Contraseña"
+msgstr "Contraseña"
+
+msgid "Confirmar contraseña"
+msgstr "Confirmar contraseña"
+
+msgid "¿Ya tienes cuenta?"
+msgstr "¿Ya tienes cuenta?"
+
+msgid "Inicia sesión"
+msgstr "Inicia sesión"
+
+msgid "Aún no tenemos productos específicos para piel %(tipo_piel)s, ¡pero pronto habrá novedades!"
+msgstr "Aún no tenemos productos específicos para piel %(tipo_piel)s, ¡pero pronto habrá novedades!"
+
+msgid "¡Hola, %(nombre)s!"
+msgstr "¡Hola, %(nombre)s!"
+
+msgid "¡Bienvenida, %(nombre)s!"
+msgstr "¡Bienvenida, %(nombre)s!"
+
+msgid "Perfil actualizado correctamente."
+msgstr "Perfil actualizado correctamente."
+
+msgid "Dirección agregada."
+msgstr "Dirección agregada."
+
+msgid "Dirección actualizada."
+msgstr "Dirección actualizada."
+
+msgid "Dirección eliminada."
+msgstr "Dirección eliminada."
+
+msgid "Usuario o contraseña incorrectos."
+msgstr "Usuario o contraseña incorrectos."

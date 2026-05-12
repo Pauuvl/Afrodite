@@ -1,0 +1,396 @@
+# Autor: Helen Sanabria
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
+
+msgid "Español"
+msgstr "Spanish"
+
+msgid "English"
+msgstr "English"
+
+msgid "Inicio"
+msgstr "Home"
+
+msgid "Catálogo"
+msgstr "Catalog"
+
+msgid "Contacto"
+msgstr "Contact"
+
+msgid "Belleza que inspira confianza"
+msgstr "Beauty that inspires confidence"
+
+msgid "Maquillaje y skincare para resaltar tu mejor versión"
+msgstr "Makeup and skincare to highlight your best self"
+
+msgid "Ver colección"
+msgstr "View collection"
+
+msgid "Nuevos en Skincare"
+msgstr "New in Skincare"
+
+msgid "Ver todos"
+msgstr "View all"
+
+msgid "Agotado"
+msgstr "Out of stock"
+
+msgid "Agregar"
+msgstr "Add"
+
+msgid "No hay productos de skincare disponibles aún."
+msgstr "No skincare products available yet."
+
+msgid "Cuidado facial que transforma tu piel"
+msgstr "Facial care that transforms your skin"
+
+msgid "Descubre rutinas diseñadas para todo tipo de piel con los mejores ingredientes."
+msgstr "Discover routines designed for all skin types with the best ingredients."
+
+msgid "Explorar skincare"
+msgstr "Explore skincare"
+
+msgid "Nuevos en Maquillaje"
+msgstr "New in Makeup"
+
+msgid "Maquillaje"
+msgstr "Makeup"
+
+msgid "No hay productos de maquillaje disponibles aún."
+msgstr "No makeup products available yet."
+
+msgid "Tienda de Belleza"
+msgstr "Beauty Store"
+
+msgid "Tu carrito"
+msgstr "Your cart"
+
+msgid "Tus esenciales de belleza están listos, revísalos antes de continuar"
+msgstr "Your beauty essentials are ready, review them before continuing"
+
+msgid "Agrega un producto al carrito"
+msgstr "Add a product to cart"
+
+msgid "Producto"
+msgstr "Product"
+
+msgid "Selecciona un producto"
+msgstr "Select a product"
+
+msgid "Cantidad"
+msgstr "Quantity"
+
+msgid "Agrega al carrito"
+msgstr "Add to cart"
+
+msgid "Tus productos"
+msgstr "Your products"
+
+msgid "cada uno"
+msgstr "each"
+
+msgid "Actualiza"
+msgstr "Update"
+
+msgid "Eliminar"
+msgstr "Remove"
+
+msgid "Tu carrito está vacío"
+msgstr "Your cart is empty"
+
+msgid "¡Agrega tus productos para continuar con la compra!"
+msgstr "Add your products to continue shopping!"
+
+msgid "Detalles de tu pedido"
+msgstr "Order details"
+
+msgid "Total"
+msgstr "Total"
+
+msgid "Completar tu pedido"
+msgstr "Complete your order"
+
+msgid "Finaliza tu compra"
+msgstr "Complete your purchase"
+
+msgid "Finaliza tu compra y selecciona tu método de pago"
+msgstr "Complete your purchase and select your payment method"
+
+msgid "Cantidad:"
+msgstr "Quantity:"
+
+msgid "Escoge tu método de pago"
+msgstr "Choose your payment method"
+
+msgid "Tarjeta"
+msgstr "Card"
+
+msgid "Paga fácilmente con tarjeta de crédito o débito"
+msgstr "Pay easily with credit or debit card"
+
+msgid "Nombre del titular"
+msgstr "Cardholder name"
+
+msgid "Nombre completo"
+msgstr "Full name"
+
+msgid "Número de tarjeta"
+msgstr "Card number"
+
+msgid "Fecha de vencimiento"
+msgstr "Expiry date"
+
+msgid "Datos para simulación del pago."
+msgstr "Data for payment simulation."
+
+msgid "Transferencia bancaria"
+msgstr "Bank transfer"
+
+msgid "Realiza tu pago por transferencia"
+msgstr "Make your payment by bank transfer"
+
+msgid "QR ficticio para demostración"
+msgstr "Demo QR code"
+
+msgid "Confirmar pago"
+msgstr "Confirm payment"
+
+msgid "Pago completado éxitosamente"
+msgstr "Payment completed successfully"
+
+msgid "Tu pedido ha sido registrado correctamente"
+msgstr "Your order has been placed successfully"
+
+msgid "Volver al carrito"
+msgstr "Back to cart"
+
+msgid "Catálogo de Productos"
+msgstr "Product Catalog"
+
+msgid "Completa tu perfil con tu tipo de piel y te mostraremos los productos perfectos para ti."
+msgstr "Complete your profile with your skin type and we'll show you the perfect products for you."
+
+msgid "Ir a mi perfil"
+msgstr "Go to my profile"
+
+msgid "Iniciar sesión"
+msgstr "Sign in"
+
+msgid "Registrarse"
+msgstr "Register"
+
+msgid "Cerrar sesión"
+msgstr "Sign out"
+
+msgid "Perfil"
+msgstr "Profile"
+
+msgid "Explora nuestras colecciones de maquillaje y skincare"
+msgstr "Explore our makeup and skincare collections"
+
+msgid "Recomendados para ti"
+msgstr "Recommended for you"
+
+msgid "Para ti"
+msgstr "For you"
+
+msgid "Skincare"
+msgstr "Skincare"
+
+msgid "Todos"
+msgstr "All"
+
+msgid "Sin stock"
+msgstr "Out of stock"
+
+msgid "Solo"
+msgstr "Only"
+
+msgid "disponibles"
+msgstr "available"
+
+msgid "Inicia sesión y cuéntanos tu tipo de piel para ver productos recomendados especialmente para ti."
+msgstr "Sign in and tell us your skin type to see products recommended especially for you."
+
+msgid "Ofertas"
+msgstr "Offers"
+
+msgid "CVV"
+msgstr "CVV"
+
+msgid "Contáctanos"
+msgstr "Contact us"
+
+msgid "¿Tienes dudas sobre un pedido o un producto? Estamos aquí para ayudarte."
+msgstr "Have questions about an order or a product? We are here to help you."
+
+msgid "Envíanos un mensaje"
+msgstr "Send us a message"
+
+msgid "Enviar mensaje"
+msgstr "Send message"
+
+msgid "Información de contacto"
+msgstr "Contact information"
+
+msgid "Correo"
+msgstr "Email"
+
+msgid "WhatsApp"
+msgstr "WhatsApp"
+
+msgid "Horario de atención"
+msgstr "Business hours"
+
+msgid "Lunes a viernes · 8 am – 6 pm"
+msgstr "Monday to Friday · 8 am – 6 pm"
+
+msgid "Ubicación"
+msgstr "Location"
+
+msgid "Medellín, Colombia"
+msgstr "Medellín, Colombia"
+
+msgid "Hecho con amor en Colombia"
+msgstr "Made with love in Colombia"
+
+msgid "Mi Perfil"
+msgstr "My Profile"
+
+msgid "Información personal"
+msgstr "Personal information"
+
+msgid "Nombre"
+msgstr "First name"
+
+msgid "Apellido"
+msgstr "Last name"
+
+msgid "Correo electrónico"
+msgstr "Email address"
+
+msgid "Documento de identidad"
+msgstr "ID document"
+
+msgid "Teléfono"
+msgstr "Phone"
+
+msgid "Tipo de piel"
+msgstr "Skin type"
+
+msgid "Guardar cambios"
+msgstr "Save changes"
+
+msgid "Direcciones"
+msgstr "Addresses"
+
+msgid "Dirección predeterminada"
+msgstr "Default address"
+
+msgid "Aún no tienes direcciones guardadas."
+msgstr "You have no saved addresses yet."
+
+msgid "Bienvenida"
+msgstr "Welcome"
+
+msgid "Inicia sesión en tu cuenta Afrodite"
+msgstr "Sign in to your Afrodite account"
+
+msgid "¿No tienes cuenta?"
+msgstr "Don't have an account?"
+
+msgid "Regístrate aquí"
+msgstr "Register here"
+
+msgid "Crear cuenta"
+msgstr "Create account"
+
+msgid "Únete a la comunidad Afrodite"
+msgstr "Join the Afrodite community"
+
+msgid "Usuario"
+msgstr "Username"
+
+msgid "Contraseña"
+msgstr "Password"
+
+msgid "Confirmar contraseña"
+msgstr "Confirm password"
+
+msgid "¿Ya tienes cuenta?"
+msgstr "Already have an account?"
+
+msgid "Inicia sesión"
+msgstr "Sign in"
+
+msgid "Aún no tenemos productos específicos para piel %(tipo_piel)s, ¡pero pronto habrá novedades!"
+msgstr "We don't have specific products for %(tipo_piel)s skin yet, but new arrivals are coming soon!"
+
+msgid "Tu nombre completo"
+msgstr "Your full name"
+
+msgid "¿En qué podemos ayudarte?"
+msgstr "How can we help you?"
+
+msgid "Consulta sobre pedido"
+msgstr "Order inquiry"
+
+msgid "Información de producto"
+msgstr "Product information"
+
+msgid "Devolución o cambio"
+msgstr "Return or exchange"
+
+msgid "Otro"
+msgstr "Other"
+
+msgid "Agregar dirección"
+msgstr "Add address"
+
+msgid "Editar dirección"
+msgstr "Edit address"
+
+msgid "Dirección"
+msgstr "Address"
+
+msgid "Información adicional (apto, torre, etc.)"
+msgstr "Additional info (apt, tower, etc.)"
+
+msgid "Ciudad"
+msgstr "City"
+
+msgid "Departamento"
+msgstr "Department"
+
+msgid "País"
+msgstr "Country"
+
+msgid "Establecer como dirección predeterminada"
+msgstr "Set as default address"
+
+msgid "Cancelar"
+msgstr "Cancel"
+
+msgid "¡Hola, %(nombre)s!"
+msgstr "Hello, %(nombre)s!"
+
+msgid "¡Bienvenida, %(nombre)s!"
+msgstr "Welcome, %(nombre)s!"
+
+msgid "Perfil actualizado correctamente."
+msgstr "Profile updated successfully."
+
+msgid "Dirección agregada."
+msgstr "Address added."
+
+msgid "Dirección actualizada."
+msgstr "Address updated."
+
+msgid "Dirección eliminada."
+msgstr "Address deleted."
+
+msgid "Usuario o contraseña incorrectos."
+msgstr "Incorrect username or password."

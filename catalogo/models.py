@@ -1,4 +1,4 @@
-# Autor: Paulina Velasquez Londoño
+# Autor: Paulina Velasquez Londoño y Helen Sanabria
 from django.db import models
 
 TIPO_PIEL_CHOICES = [
@@ -26,7 +26,7 @@ class Producto(models.Model):
 
     nombre     = models.CharField(max_length=200)
     descripcion = models.TextField(blank=True, default='')
-    precio     = models.DecimalField(max_digits=10, decimal_places=0)
+    precio     = models.DecimalField(max_digits=10, decimal_places=2)
     categoria  = models.CharField(max_length=20, choices=CATEGORIAS)
     imagen     = models.ImageField(upload_to='')
     tipo_piel  = models.CharField(

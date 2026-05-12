@@ -1,4 +1,4 @@
-# Autor: Viviana Arango Tabares
+# Autor: Viviana Arango Tabares y Helen Sanabria
 
 from django.db import models
 from django.contrib.auth.models import User
@@ -15,6 +15,9 @@ class Cart(models.Model):
 
 
 class CartItem(models.Model):
+    # Campos snapshot: almacenan el nombre y precio en el momento en que el
+    # ítem fue añadido al carrito, de modo que si el producto se modifica o
+    # elimina posteriormente, el historial del carrito queda intacto.
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
     product = models.ForeignKey('catalogo.Producto', on_delete=models.CASCADE, null=True, blank=True)
     quantity = models.PositiveIntegerField(default=1)

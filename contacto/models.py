@@ -1,12 +1,14 @@
+#Paulina Velásquez y Helen Sanabria
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 
 class MensajeContacto(models.Model):
     ASUNTO_CHOICES = [
-        ('pedido', 'Consulta sobre pedido'),
-        ('producto', 'Información de producto'),
-        ('devolucion', 'Devolución o cambio'),
-        ('otro', 'Otro'),
+        ('pedido', _('Consulta sobre pedido')),
+        ('producto', _('Información de producto')),
+        ('devolucion', _('Devolución o cambio')),
+        ('otro', _('Otro')),
     ]
 
     nombre = models.CharField(max_length=100)
@@ -21,5 +23,5 @@ class MensajeContacto(models.Model):
 
     class Meta:
         ordering = ['-creado_en']
-        verbose_name = 'Mensaje de contacto'
-        verbose_name_plural = 'Mensajes de contacto'
+        verbose_name = _('Mensaje de contacto')
+        verbose_name_plural = _('Mensajes de contacto')

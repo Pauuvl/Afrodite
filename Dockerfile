@@ -22,7 +22,9 @@ RUN apt-get update && apt-get install -y netcat-openbsd\
     libpq-dev \
     python3-dev \
     libjpeg-dev \
-    zlib1g-dev
+    zlib1g-dev \
+    gettext \
+    && rm -rf /var/lib/apt/lists/*
 
 
 # =========
