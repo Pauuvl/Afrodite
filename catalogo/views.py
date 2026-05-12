@@ -1,43 +1,6 @@
 # Autor: Paulina Velasquez Londoño
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib import messages
+from django.shortcuts import render
 from .models import Producto
-
-# ── CARRITO (sesión) ──────────────────────────────────────────
-def get_carrito(request):
-    return request.session.get('carrito', {})
-
-def save_carrito(request, carrito):
-    request.session['carrito'] = carrito
-    request.session.modified = True
-
-def agregar_carrito(request, producto_id):
-    producto = get_object_or_404(Producto, id=producto_id)
-
-    if producto.agotado:
-        messages.error(request, f'"{producto.nombre}" está agotado.')
-        return redirect(request.META.get('HTTP_REFERER', 'catalogo'))
-
-    carrito  = get_carrito(request)
-    key      = str(producto_id)
-    en_carrito = carrito[key]['cantidad'] if key in carrito else 0
-
-    if en_carrito >= producto.stock:
-        messages.warning(request, f'Solo hay {producto.stock} unidades disponibles de "{producto.nombre}".')
-        return redirect(request.META.get('HTTP_REFERER', 'catalogo'))
-
-    if key in carrito:
-        carrito[key]['cantidad'] += 1
-    else:
-        carrito[key] = {
-            'nombre':   producto.nombre,
-            'precio':   float(producto.precio),
-            'cantidad': 1,
-            'imagen':   producto.imagen.url if producto.imagen else '',
-        }
-    save_carrito(request, carrito)
-    messages.success(request, f'"{producto.nombre}" agregado al carrito ✓')
-    return redirect(request.META.get('HTTP_REFERER', 'catalogo'))
 
 # ── HELPERS ──────────────────────────────────────────────────
 def get_tipo_piel_usuario(request):
