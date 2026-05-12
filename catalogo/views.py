@@ -1,20 +1,4 @@
-<<<<<<< HEAD
-# Autor: Paulina Velasquez Londoño
-from django.shortcuts import render
-from .models import Producto
 
-# ── HELPERS ──────────────────────────────────────────────────
-def get_tipo_piel_usuario(request):
-    if request.user.is_authenticated:
-        try:
-            tipo = request.user.perfil.tipo_piel
-            return tipo if tipo else None   # evita string vacío '' que es falsy pero pasa el try
-        except Exception:
-            return None
-    return None
-
-# ── VISTAS PRINCIPALES ────────────────────────────────────────
-=======
 # Autor: Paulina Velasquez Londoño y Helen Sanabria
 from django.http import JsonResponse
 from django.shortcuts import render
@@ -27,8 +11,6 @@ from .services import (
     obtener_productos_disponibles,
 )
 
-
->>>>>>> origin/main
 def index(request):
     tipo_piel    = obtener_tipo_piel_usuario(request)
     skincare     = obtener_skincare()[:4]

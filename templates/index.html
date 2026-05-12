@@ -190,17 +190,10 @@ footer p { color: var(--gris); font-size: 13px; }
                     <div class="nombre">{{ producto.nombre }}</div>
                     <div class="precio">${{ producto.precio|floatformat:"0" }}</div>
                     {% if not producto.agotado %}
-<<<<<<< HEAD
                     <button type="button" 
                             class="btn-agregar" 
                             onclick="agregarAlCarrito({{ producto.id }})">
                         <i class="bi bi-bag-plus"></i> Agregar
-=======
-                    <button onclick="agregarAlCarritoIndex({{ producto.id }})"
-                       style="display:block;width:100%;margin-top:8px;background:#2b2b2b;color:white;border:none;padding:7px 0;border-radius:8px;font-size:12px;font-family:'Poppins',sans-serif;cursor:pointer;transition:opacity .2s;"
-                       onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">
-                        <i class="bi bi-bag-plus"></i> {% trans "Agregar" %}
->>>>>>> origin/main
                     </button>
                     {% endif %}
                 </div>
@@ -254,17 +247,6 @@ footer p { color: var(--gris); font-size: 13px; }
                     <div class="nombre">{{ producto.nombre }}</div>
                     <div class="precio">${{ producto.precio|floatformat:"0" }}</div>
                     {% if not producto.agotado %}
-<<<<<<< HEAD
-                    <button type="button"
-                            class="btn-agregar"
-                            onclick="agregarAlCarrito({{ producto.id }})">
-                        <i class="bi bi-bag-plus"></i> Agregar
-=======
-                    <button onclick="agregarAlCarritoIndex({{ producto.id }})"
-                       style="display:block;width:100%;margin-top:8px;background:#2b2b2b;color:white;border:none;padding:7px 0;border-radius:8px;font-size:12px;font-family:'Poppins',sans-serif;cursor:pointer;transition:opacity .2s;"
-                       onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">
-                        <i class="bi bi-bag-plus"></i> {% trans "Agregar" %}
->>>>>>> origin/main
                     </button>
                     {% endif %}
                 </div>

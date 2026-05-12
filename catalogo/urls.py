@@ -4,9 +4,5 @@ from . import views
 
 urlpatterns = [
     path('catalogo/', views.catalogo, name='catalogo'),
-<<<<<<< HEAD
-]
-=======
     path('api/productos/', views.api_productos, name='api_productos'),
 ]
->>>>>>> origin/main
