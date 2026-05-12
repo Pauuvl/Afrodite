@@ -1,10 +1,11 @@
-{% load static %}
+<!-- Paulina Velasquez y Helen Sanabria-->
+{% load static i18n %}
 <!DOCTYPE html>
-<html lang="es">
+<html lang="{{ LANGUAGE_CODE|default:'es' }}">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Contacto — Afrodite</title>
+<title>{% trans "Contacto" %} — Afrodite</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
@@ -13,9 +14,10 @@
 body { font-family: 'Poppins', sans-serif; background: #fafafa; margin: 0; }
 
 /* NAVBAR */
-.navbar-brand { font-family: 'Playfair Display', serif; letter-spacing: 3px; font-size: 26px; color: var(--oscuro) !important; }
-.nav-link { font-size: 13px; font-weight: 500; color: #444 !important; margin: 0 8px; }
+.navbar-brand { font-family: 'Playfair Display', serif; letter-spacing: 3px; font-size: 30px; color: var(--oscuro) !important; }
+.nav-link { font-size: 14px; font-weight: 500; color: #333 !important; margin: 0 10px; }
 .nav-link:hover { color: var(--oscuro) !important; }
+.nav-icon { font-size: 18px; color: #333; }
 
 /* HERO */
 .contact-hero {
@@ -73,30 +75,39 @@ body { font-family: 'Poppins', sans-serif; background: #fafafa; margin: 0; }
 
 footer { background: white; border-top: 1px solid #eee; text-align: center; padding: 24px; }
 footer p { color: var(--gris); font-size: 13px; margin: 0; }
+
+/* SELECTOR DE IDIOMA */
+.lang-switcher { position: fixed; bottom: 20px; right: 20px; z-index: 9999; display: flex; gap: 6px; }
+.lang-switcher form button {
+    background: #2b2b2b; color: white; border: none; border-radius: 6px;
+    padding: 5px 12px; font-size: 11px; font-family: 'Poppins', sans-serif;
+    cursor: pointer; transition: background .2s; font-weight: 500; letter-spacing: .5px;
+}
+.lang-switcher form button:hover { background: #555; }
+.lang-switcher form button.active-lang { background: #f7c5d0; color: #2b2b2b; }
 </style>
 </head>
 <body>
 
-<!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg bg-white border-bottom">
+<!-- NAVBAR — centrado y consistente con el resto de páginas -->
+<nav class="navbar navbar-expand-lg bg-white border-bottom py-3">
     <div class="container">
         <a class="navbar-brand" href="{% url 'index' %}">AFRODITE</a>
         <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="nav">
-            <ul class="navbar-nav me-auto ms-4">
-                <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Inicio</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'catalogo' %}">Catálogo</a></li>
-                <li class="nav-item"><a class="nav-link active" href="{% url 'contacto' %}">Contacto</a></li>
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">{% trans "Inicio" %}</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'catalogo' %}">{% trans "Catálogo" %}</a></li>
+                <li class="nav-item"><a class="nav-link active" href="{% url 'contacto' %}">{% trans "Contacto" %}</a></li>
             </ul>
-            <div class="d-flex align-items-center gap-3">
+            <div class="d-flex gap-3 align-items-center">
+                <a href="{% url 'carrito:detalle_carrito' %}"><i class="bi bi-cart nav-icon"></i></a>
                 {% if user.is_authenticated %}
-                    <a href="{% url 'perfil' %}" class="text-decoration-none" style="font-size:13px; color:#444;">
-                        <i class="bi bi-person-circle me-1"></i>{{ user.first_name|default:user.username }}
-                    </a>
+                <a href="{% url 'perfil' %}"><i class="bi bi-person-fill nav-icon" style="color:#1a1a1a;"></i></a>
                 {% else %}
-                    <a href="{% url 'login' %}" style="font-size:13px; color:#444; text-decoration:none;">Iniciar sesión</a>
+                <a href="{% url 'login' %}"><i class="bi bi-person nav-icon"></i></a>
                 {% endif %}
             </div>
         </div>
@@ -106,8 +117,8 @@ footer p { color: var(--gris); font-size: 13px; margin: 0; }
 <!-- HERO -->
 <section class="contact-hero">
     <div class="container">
-        <h1>Contáctanos</h1>
-        <p class="mt-2">¿Tienes dudas sobre un pedido o un producto? Estamos aquí para ayudarte.</p>
+        <h1>{% trans "Contáctanos" %}</h1>
+        <p class="mt-2">{% trans "¿Tienes dudas sobre un pedido o un producto? Estamos aquí para ayudarte." %}</p>
     </div>
 </section>
 
@@ -131,7 +142,7 @@ footer p { color: var(--gris); font-size: 13px; margin: 0; }
         <div class="col-lg-7">
             <div class="contact-card">
                 <h5 style="font-family:'Playfair Display',serif; font-size:1.3rem; margin-bottom:24px; color:var(--oscuro);">
-                    Envíanos un mensaje
+                    {% trans "Envíanos un mensaje" %}
                 </h5>
                 <form method="post">
                     {% csrf_token %}
@@ -157,7 +168,7 @@ footer p { color: var(--gris); font-size: 13px; margin: 0; }
                         </div>
                         <div class="col-12 mt-2">
                             <button type="submit" class="btn-enviar">
-                                <i class="bi bi-send"></i> Enviar mensaje
+                                <i class="bi bi-send"></i> {% trans "Enviar mensaje" %}
                             </button>
                         </div>
                     </div>
@@ -168,34 +179,34 @@ footer p { color: var(--gris); font-size: 13px; margin: 0; }
         <!-- INFO LATERAL -->
         <div class="col-lg-4 d-none d-lg-block">
             <div style="padding-top:20px;">
-                <h5 style="font-family:'Playfair Display',serif; color:var(--oscuro); margin-bottom:28px;">Información de contacto</h5>
+                <h5 style="font-family:'Playfair Display',serif; color:var(--oscuro); margin-bottom:28px;">{% trans "Información de contacto" %}</h5>
 
                 <div class="info-item">
                     <div class="info-icon"><i class="bi bi-envelope"></i></div>
                     <div>
-                        <h6>Correo</h6>
+                        <h6>{% trans "Correo" %}</h6>
                         <p>contacto@afrodite.co</p>
                     </div>
                 </div>
                 <div class="info-item">
                     <div class="info-icon"><i class="bi bi-whatsapp"></i></div>
                     <div>
-                        <h6>WhatsApp</h6>
+                        <h6>{% trans "WhatsApp" %}</h6>
                         <p>+57 300 000 0000</p>
                     </div>
                 </div>
                 <div class="info-item">
                     <div class="info-icon"><i class="bi bi-clock"></i></div>
                     <div>
-                        <h6>Horario de atención</h6>
-                        <p>Lunes a viernes · 8 am – 6 pm</p>
+                        <h6>{% trans "Horario de atención" %}</h6>
+                        <p>{% trans "Lunes a viernes · 8 am – 6 pm" %}</p>
                     </div>
                 </div>
                 <div class="info-item">
                     <div class="info-icon"><i class="bi bi-geo-alt"></i></div>
                     <div>
-                        <h6>Ubicación</h6>
-                        <p>Medellín, Colombia</p>
+                        <h6>{% trans "Ubicación" %}</h6>
+                        <p>{% trans "Medellín, Colombia" %}</p>
                     </div>
                 </div>
             </div>
@@ -205,9 +216,26 @@ footer p { color: var(--gris); font-size: 13px; margin: 0; }
 </section>
 
 <footer>
-    <p>&copy; {% now "Y" %} Afrodite · Hecho con amor en Colombia 🌸</p>
+    <p>&copy; {% now "Y" %} Afrodite · {% trans "Hecho con amor en Colombia" %} 🌸</p>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- SELECTOR DE IDIOMA -->
+<div class="lang-switcher">
+    {% get_current_language as CURRENT_LANG %}
+    <form action="{% url 'set_language' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="language" value="es">
+        <input type="hidden" name="next" value="{{ request.get_full_path }}">
+        <button type="submit" {% if CURRENT_LANG == 'es' %}class="active-lang"{% endif %}>ES</button>
+    </form>
+    <form action="{% url 'set_language' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="language" value="en">
+        <input type="hidden" name="next" value="{{ request.get_full_path }}">
+        <button type="submit" {% if CURRENT_LANG == 'en' %}class="active-lang"{% endif %}>EN</button>
+    </form>
+</div>
 </body>
 </html>

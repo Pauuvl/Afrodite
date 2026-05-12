@@ -1,7 +1,7 @@
-<!-- Paulina Velasquez -->
-{% load static %}
+<!-- Paulina Velasquez y Helen Sanabria-->
+{% load static i18n %}
 <!DOCTYPE html>
-<html lang="es">
+<html lang="{{ LANGUAGE_CODE|default:'es' }}">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -74,6 +74,26 @@ footer p { color: var(--gris); font-size: 13px; }
 /* ANIMACIONES */
 @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 .fade-up { animation: fadeUp .5s ease both; }
+
+/* SELECTOR DE IDIOMA */
+.lang-switcher { position: fixed; bottom: 20px; right: 20px; z-index: 9999; display: flex; gap: 6px; }
+.lang-switcher form button {
+    background: #2b2b2b; color: white; border: none; border-radius: 6px;
+    padding: 5px 12px; font-size: 11px; font-family: 'Poppins', sans-serif;
+    cursor: pointer; transition: background .2s; font-weight: 500; letter-spacing: .5px;
+}
+.lang-switcher form button:hover { background: #555; }
+.lang-switcher form button.active-lang { background: #f7c5d0; color: #2b2b2b; }
+
+/* TOAST CARRITO */
+#toast-index {
+    position: fixed; top: 90px; right: 24px;
+    background: var(--oscuro); color: white;
+    padding: 14px 20px; border-radius: 12px; font-size: 13px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.18); z-index: 9999;
+    opacity: 0; transform: translateY(-12px);
+    transition: all .3s ease; pointer-events: none;
+}
 </style>
 </head>
 
@@ -84,7 +104,7 @@ footer p { color: var(--gris); font-size: 13px; }
 
 <div class="container">
 
-<a class="navbar-brand" href="#">AFRODITE</a>
+<a class="navbar-brand" href="{% url 'index' %}">AFRODITE</a>
 
 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
 <span class="navbar-toggler-icon"></span>
@@ -95,22 +115,22 @@ footer p { color: var(--gris); font-size: 13px; }
 <ul class="navbar-nav mx-auto">
 
 <li class="nav-item">
-<a class="nav-link active" href="{% url 'index' %}">Inicio</a>
+<a class="nav-link active" href="{% url 'index' %}">{% trans "Inicio" %}</a>
 </li>
 
 <li class="nav-item">
-<a class="nav-link" href="{% url 'catalogo' %}">Catálogo</a>
+<a class="nav-link" href="{% url 'catalogo' %}">{% trans "Catálogo" %}</a>
 </li>
 
 <li class="nav-item">
-<a class="nav-link" href="{% url 'contacto' %}">Contacto</a>
+<a class="nav-link" href="{% url 'contacto' %}">{% trans "Contacto" %}</a>
 </li>
 
 </ul>
 
 <div class="d-flex gap-3">
 
-<a href="#"><i class="bi bi-heart nav-icon"></i></a> <a href="{% url 'carrito:cart_detail' %}"><i class="bi bi-cart nav-icon"></i></a>{% if user.is_authenticated %}
+<a href="#"><i class="bi bi-heart nav-icon"></i></a> <a href="{% url 'carrito:detalle_carrito' %}"><i class="bi bi-cart nav-icon"></i></a>{% if user.is_authenticated %}
   <a href="/perfil/"><i class="bi bi-person-fill nav-icon" style="color:#1a1a1a;"></i></a>
   {% if user.is_staff %}<a href="{% url 'panel_admin:dashboard' %}" title="Panel Admin" style="color:#c4607a;"><i class="bi bi-shield-lock nav-icon"></i></a>{% endif %}
 {% else %}
@@ -131,9 +151,9 @@ footer p { color: var(--gris); font-size: 13px; }
     <img src="{% static 'images/indeximage.png' %}" alt="Afrodite Banner">
     <div class="banner-overlay">
         <div>
-            <h1>Belleza que<br>inspira confianza</h1>
-            <p>Maquillaje y skincare para resaltar tu mejor versión</p>
-            <a href="/catalogo/" class="btn-ver">Ver colección</a>
+            <h1>{% trans "Belleza que inspira confianza" %}</h1>
+            <p>{% trans "Maquillaje y skincare para resaltar tu mejor versión" %}</p>
+            <a href="/catalogo/" class="btn-ver">{% trans "Ver colección" %}</a>
         </div>
     </div>
 </div>
@@ -141,9 +161,9 @@ footer p { color: var(--gris); font-size: 13px; }
 <!-- SKINCARE -->
 <section class="container py-5">
     <div class="d-flex justify-content-between align-items-end mb-1">
-        <h2 class="seccion-titulo mb-0">Nuevos en Skincare</h2>
+        <h2 class="seccion-titulo mb-0">{% trans "Nuevos en Skincare" %}</h2>
         <a href="/catalogo/" class="text-muted" style="font-size:13px; text-decoration:none;">
-            Ver todos <i class="bi bi-arrow-right"></i>
+            {% trans "Ver todos" %} <i class="bi bi-arrow-right"></i>
         </a>
     </div>
     <div class="seccion-linea"></div>
@@ -159,7 +179,7 @@ footer p { color: var(--gris); font-size: 13px; }
                         <div class="img-placeholder"><i class="bi bi-image"></i></div>
                     {% endif %}
                     {% if producto.agotado %}
-                        <span class="badge-cat" style="background:#333; color:white;">Agotado</span>
+                        <span class="badge-cat" style="background:#333; color:white;">{% trans "Agotado" %}</span>
                         <div style="position:absolute;inset:0;background:rgba(255,255,255,.45);pointer-events:none;"></div>
                     {% else %}
                         <span class="badge-cat">Skincare</span>
@@ -170,11 +190,11 @@ footer p { color: var(--gris); font-size: 13px; }
                     <div class="nombre">{{ producto.nombre }}</div>
                     <div class="precio">${{ producto.precio|floatformat:"0" }}</div>
                     {% if not producto.agotado %}
-                    <a href="{% url 'agregar_carrito' producto.id %}"
-                       style="display:block;margin-top:8px;background:#2b2b2b;color:white;border:none;padding:7px 0;border-radius:8px;font-size:12px;font-family:'Poppins',sans-serif;text-align:center;text-decoration:none;transition:opacity .2s;"
+                    <button onclick="agregarAlCarritoIndex({{ producto.id }})"
+                       style="display:block;width:100%;margin-top:8px;background:#2b2b2b;color:white;border:none;padding:7px 0;border-radius:8px;font-size:12px;font-family:'Poppins',sans-serif;cursor:pointer;transition:opacity .2s;"
                        onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">
-                        <i class="bi bi-bag-plus"></i> Agregar
-                    </a>
+                        <i class="bi bi-bag-plus"></i> {% trans "Agregar" %}
+                    </button>
                     {% endif %}
                 </div>
             </div>
@@ -182,7 +202,7 @@ footer p { color: var(--gris); font-size: 13px; }
         {% empty %}
         <div class="empty-msg">
             <i class="bi bi-box-seam"></i>
-            No hay productos de skincare disponibles aún.
+            {% trans "No hay productos de skincare disponibles aún." %}
         </div>
         {% endfor %}
     </div>
@@ -190,17 +210,17 @@ footer p { color: var(--gris); font-size: 13px; }
 
 <!-- BANNER INTERMEDIO -->
 <div class="mid-banner">
-    <h2>Cuidado facial que<br>transforma tu piel</h2>
-    <p>Descubre rutinas diseñadas para todo tipo de piel con los mejores ingredientes.</p>
-    <a href="/catalogo/" class="btn-oscuro">Explorar skincare</a>
+    <h2>{% trans "Cuidado facial que transforma tu piel" %}</h2>
+    <p>{% trans "Descubre rutinas diseñadas para todo tipo de piel con los mejores ingredientes." %}</p>
+    <a href="/catalogo/" class="btn-oscuro">{% trans "Explorar skincare" %}</a>
 </div>
 
 <!-- MAQUILLAJE -->
 <section class="container py-5">
     <div class="d-flex justify-content-between align-items-end mb-1">
-        <h2 class="seccion-titulo mb-0">Nuevos en Maquillaje</h2>
+        <h2 class="seccion-titulo mb-0">{% trans "Nuevos en Maquillaje" %}</h2>
         <a href="/catalogo/" class="text-muted" style="font-size:13px; text-decoration:none;">
-            Ver todos <i class="bi bi-arrow-right"></i>
+            {% trans "Ver todos" %} <i class="bi bi-arrow-right"></i>
         </a>
     </div>
     <div class="seccion-linea"></div>
@@ -216,10 +236,10 @@ footer p { color: var(--gris); font-size: 13px; }
                         <div class="img-placeholder"><i class="bi bi-image"></i></div>
                     {% endif %}
                     {% if producto.agotado %}
-                        <span class="badge-cat" style="background:#333; color:white;">Agotado</span>
+                        <span class="badge-cat" style="background:#333; color:white;">{% trans "Agotado" %}</span>
                         <div style="position:absolute;inset:0;background:rgba(255,255,255,.45);pointer-events:none;"></div>
                     {% else %}
-                        <span class="badge-cat">Maquillaje</span>
+                        <span class="badge-cat">{% trans "Maquillaje" %}</span>
                     {% endif %}
                     <a href="#" class="btn-wish"><i class="bi bi-heart"></i></a>
                 </div>
@@ -227,11 +247,11 @@ footer p { color: var(--gris); font-size: 13px; }
                     <div class="nombre">{{ producto.nombre }}</div>
                     <div class="precio">${{ producto.precio|floatformat:"0" }}</div>
                     {% if not producto.agotado %}
-                    <a href="{% url 'agregar_carrito' producto.id %}"
-                       style="display:block;margin-top:8px;background:#2b2b2b;color:white;border:none;padding:7px 0;border-radius:8px;font-size:12px;font-family:'Poppins',sans-serif;text-align:center;text-decoration:none;transition:opacity .2s;"
+                    <button onclick="agregarAlCarritoIndex({{ producto.id }})"
+                       style="display:block;width:100%;margin-top:8px;background:#2b2b2b;color:white;border:none;padding:7px 0;border-radius:8px;font-size:12px;font-family:'Poppins',sans-serif;cursor:pointer;transition:opacity .2s;"
                        onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">
-                        <i class="bi bi-bag-plus"></i> Agregar
-                    </a>
+                        <i class="bi bi-bag-plus"></i> {% trans "Agregar" %}
+                    </button>
                     {% endif %}
                 </div>
             </div>
@@ -239,7 +259,7 @@ footer p { color: var(--gris); font-size: 13px; }
         {% empty %}
         <div class="empty-msg">
             <i class="bi bi-box-seam"></i>
-            No hay productos de maquillaje disponibles aún.
+            {% trans "No hay productos de maquillaje disponibles aún." %}
         </div>
         {% endfor %}
     </div>
@@ -247,10 +267,85 @@ footer p { color: var(--gris); font-size: 13px; }
 
 <!-- FOOTER -->
 <footer>
-    <p>© 2026 Afrodite - Tienda de Belleza</p>
+    <p>© 2026 Afrodite - {% trans "Tienda de Belleza" %}</p>
 </footer>
 
+<!-- Toast para feedback del carrito -->
+<div id="toast-index"></div>
+
+<!-- SELECTOR DE IDIOMA -->
+<div class="lang-switcher">
+    {% get_current_language as CURRENT_LANG %}
+    <form action="{% url 'set_language' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="language" value="es">
+        <input type="hidden" name="next" value="{{ request.get_full_path }}">
+        <button type="submit" {% if CURRENT_LANG == 'es' %}class="active-lang"{% endif %}>ES</button>
+    </form>
+    <form action="{% url 'set_language' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="language" value="en">
+        <input type="hidden" name="next" value="{{ request.get_full_path }}">
+        <button type="submit" {% if CURRENT_LANG == 'en' %}class="active-lang"{% endif %}>EN</button>
+    </form>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+function obtenerCookie(nombre) {
+    let valor = null;
+    document.cookie.split(';').forEach(function(c) {
+        c = c.trim();
+        if (c.startsWith(nombre + '=')) {
+            valor = decodeURIComponent(c.slice(nombre.length + 1));
+        }
+    });
+    return valor;
+}
+
+function mostrarToastIndex(mensaje, esError) {
+    const toast = document.getElementById('toast-index');
+    toast.textContent = mensaje;
+    toast.style.background = esError ? '#c0392b' : '#2b2b2b';
+    toast.style.opacity = '1';
+    toast.style.transform = 'translateY(0)';
+    setTimeout(function() {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(-12px)';
+    }, 2500);
+}
+
+function agregarAlCarritoIndex(productoId) {
+    {% if not user.is_authenticated %}
+    window.location.href = '/login/';
+    return;
+    {% endif %}
+    fetch("{% url 'carrito:agregar_producto' %}", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'X-CSRFToken': obtenerCookie('csrftoken'),
+            'X-Requested-With': 'XMLHttpRequest'
+        },
+        body: 'product_id=' + productoId + '&quantity=1'
+    })
+    .then(function(respuesta) {
+        return respuesta.json().then(function(datos) {
+            return { ok: respuesta.ok, datos: datos };
+        });
+    })
+    .then(function(resultado) {
+        mostrarToastIndex(
+            resultado.datos.message || 'Producto agregado al carrito.',
+            !resultado.ok || resultado.datos.success === false
+        );
+    })
+    .catch(function() {
+        mostrarToastIndex('No se pudo agregar el producto.', true);
+    });
+}
+</script>
 
 </body>
 </html>

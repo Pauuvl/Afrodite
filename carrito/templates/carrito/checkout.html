@@ -1,6 +1,6 @@
-<!-- Autor: Viviana Arango Tabares-->
+<!-- Autor: Viviana Arango Tabares y Helen Sanabria-->
 
-{% load static %}
+{% load static i18n %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -225,15 +225,14 @@
 
         <div class="collapse navbar-collapse" id="menu">
             <ul class="navbar-nav mx-auto">
-                <li class="nav-item"><a class="nav-link" href="/">Inicio</a></li>
-                <li class="nav-item"><a class="nav-link" href="/catalogo/">Catálogo</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Ofertas</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Contacto</a></li>
+                <li class="nav-item"><a class="nav-link" href="/">{% trans "Inicio" %}</a></li>
+                <li class="nav-item"><a class="nav-link" href="/catalogo/">{% trans "Catálogo" %}</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'contacto' %}">{% trans "Contacto" %}</a></li>
             </ul>
 
             <div class="d-flex gap-3">
                 <a href="#"><i class="bi bi-heart nav-icon"></i></a>
-                <a href="{% url 'carrito:cart_detail' %}"><i class="bi bi-cart nav-icon"></i></a>
+                <a href="{% url 'carrito:detalle_carrito' %}"><i class="bi bi-cart nav-icon"></i></a>
                 <a href="#"><i class="bi bi-person nav-icon"></i></a>
             </div>
         </div>
@@ -243,24 +242,24 @@
 <section class="checkout-section">
     <div class="container">
         <div class="text-center mb-5">
-            <h1 class="titulo">Finaliza tu compra</h1>
-            <p class="text-muted">Finaliza tu compra y selecciona tu método de pago</p>
+            <h1 class="titulo">{% trans "Finaliza tu compra" %}</h1>
+            <p class="text-muted">{% trans "Finaliza tu compra y selecciona tu método de pago" %}</p>
         </div>
 
         <div class="row g-4">
             <div class="col-lg-7">
                 <div class="checkout-card">
-                    <h4 class="titulo mb-4">Detalles de tu pedido 🛍️</h4>
+                    <h4 class="titulo mb-4">{% trans "Detalles de tu pedido" %} 🛍️</h4>
 
                     {% for item in items %}
                         <div class="checkout-item d-flex justify-content-between align-items-center">
                             <div>
                                 {% if item.product %}
                                     <div class="item-name">{{ item.product.nombre }}</div>
-                                    <div class="item-price">Cantidad: {{ item.quantity }}</div>
+                                    <div class="item-price">{% trans "Cantidad:" %} {{ item.quantity }}</div>
                                 {% else %}
                                     <div class="item-name">{{ item.product_name }}</div>
-                                    <div class="item-price">Cantidad: {{ item.quantity }}</div>
+                                    <div class="item-price">{% trans "Cantidad:" %} {{ item.quantity }}</div>
                                 {% endif %}
                             </div>
 
@@ -275,7 +274,7 @@
                     {% endfor %}
 
                     <div class="total-line">
-                        <span>Total</span>
+                        <span>{% trans "Total" %}</span>
                         <span>${{ total }}</span>
                     </div>
                 </div>
@@ -283,7 +282,7 @@
 
             <div class="col-lg-5">
                 <div class="payment-card">
-                    <h4 class="titulo mb-4">Escoge tu método de pago</h4>
+                    <h4 class="titulo mb-4">{% trans "Escoge tu método de pago" %}</h4>
 
                     <form method="post">
                         {% csrf_token %}
@@ -291,40 +290,40 @@
                         <label class="payment-option d-flex align-items-center gap-3 w-100">
                             <input type="radio" name="method" value="card" required onclick="mostrarMetodoPago('card')">
                             <span>
-                                <strong>Tarjeta</strong><br>
-                                <small class="text-muted">Paga fácilmente con tarjeta de crédito o débito</small>
+                                <strong>{% trans "Tarjeta" %}</strong><br>
+                                <small class="text-muted">{% trans "Paga fácilmente con tarjeta de crédito o débito" %}</small>
                             </span>
                         </label>
 
                         <div id="card-fields" class="payment-extra">
-                            <label>Nombre del titular</label>
-                            <input type="text" name="card_name" placeholder="Nombre completo">
+                            <label>{% trans "Nombre del titular" %}</label>
+                            <input type="text" name="card_name" placeholder="{% trans 'Nombre completo' %}">
 
-                            <label>Número de tarjeta</label>
+                            <label>{% trans "Número de tarjeta" %}</label>
                             <input type="text" name="card_number" maxlength="19" placeholder="0000 0000 0000 0000">
 
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label>Fecha de vencimiento</label>
+                                    <label>{% trans "Fecha de vencimiento" %}</label>
                                     <input type="text" name="expiry_date" maxlength="5" placeholder="MM/AA">
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label>CVV</label>
+                                    <label>{% trans "CVV" %}</label>
                                     <input type="password" name="cvv" maxlength="4" placeholder="123">
                                 </div>
                             </div>
 
                             <small class="text-muted">
-                                Datos para simulación del pago.
+                                {% trans "Datos para simulación del pago." %}
                             </small>
                         </div>
 
                         <label class="payment-option d-flex align-items-center gap-3 w-100">
                             <input type="radio" name="method" value="transfer" required onclick="mostrarMetodoPago('transfer')">
                             <span>
-                                <strong>Transferencia bancaria</strong><br>
-                                <small class="text-muted">Realiza tu pago por transferencia</small>
+                                <strong>{% trans "Transferencia bancaria" %}</strong><br>
+                                <small class="text-muted">{% trans "Realiza tu pago por transferencia" %}</small>
                             </span>
                         </label>
 
@@ -344,10 +343,10 @@
                                 alt="QR de pago"
                                 style="display:block;margin:15px auto;border-radius:10px;"
                             >
-                            <p class="qr-note">QR ficticio para demostración</p>
+                            <p class="qr-note">{% trans "QR ficticio para demostración" %}</p>
                         </div>
 
-                        <button type="submit" class="btn-afrodite mt-3">Confirmar pago</button>
+                        <button type="submit" class="btn-afrodite mt-3">{% trans "Confirmar pago" %}</button>
                     </form>
                 </div>
             </div>
@@ -356,7 +355,7 @@
 </section>
 
 <footer class="bg-white border-top text-center py-4">
-    <p class="text-muted mb-0">© 2026 Afrodite - Tienda de Belleza</p>
+    <p class="text-muted mb-0">© 2026 Afrodite - {% trans "Tienda de Belleza" %}</p>
 </footer>
 
 
@@ -379,5 +378,11 @@ function mostrarMetodoPago(metodo) {
 }
 </script>
 
+<style>.lang-switcher{position:fixed;bottom:20px;right:20px;z-index:9999;display:flex;gap:6px;}.lang-switcher form button{background:#2b2b2b;color:white;border:none;border-radius:6px;padding:5px 12px;font-size:11px;cursor:pointer;transition:background .2s;}.lang-switcher form button:hover{background:#555;}.lang-switcher form button.active-lang{background:#f7c5d0;color:#2b2b2b;}</style>
+<div class="lang-switcher">
+    {% get_current_language as CURRENT_LANG %}
+    <form action="{% url 'set_language' %}" method="post">{% csrf_token %}<input type="hidden" name="language" value="es"><input type="hidden" name="next" value="{{ request.get_full_path }}"><button type="submit" {% if CURRENT_LANG == 'es' %}class="active-lang"{% endif %}>ES</button></form>
+    <form action="{% url 'set_language' %}" method="post">{% csrf_token %}<input type="hidden" name="language" value="en"><input type="hidden" name="next" value="{{ request.get_full_path }}"><button type="submit" {% if CURRENT_LANG == 'en' %}class="active-lang"{% endif %}>EN</button></form>
+</div>
 </body>
 </html>

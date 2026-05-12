@@ -1,11 +1,11 @@
 <!-- Autores: Helen Sanabria -->
-{% load static %}
+{% load static i18n %}
 <!DOCTYPE html>
-<html lang="es">
+<html lang="{{ LANGUAGE_CODE|default:'es' }}">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Iniciar Sesión - Afrodite</title>
+  <title>{% trans "Iniciar sesión" %} - Afrodite</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
@@ -37,6 +37,16 @@
     .link-afrodite { color: #1a1a1a; }
     .link-afrodite:hover { color: #666; }
     .divider { border: none; border-top: 1px solid #f0f0f0; margin: 20px 0; }
+
+    /* SELECTOR DE IDIOMA */
+    .lang-switcher { position: fixed; bottom: 20px; right: 20px; z-index: 9999; display: flex; gap: 6px; }
+    .lang-switcher form button {
+        background: #2b2b2b; color: white; border: none; border-radius: 6px;
+        padding: 5px 12px; font-size: 11px; font-family: 'Poppins', sans-serif;
+        cursor: pointer; transition: background .2s; font-weight: 500; letter-spacing: .5px;
+    }
+    .lang-switcher form button:hover { background: #555; }
+    .lang-switcher form button.active-lang { background: #f7c5d0; color: #2b2b2b; }
   </style>
 </head>
 <body>
@@ -48,10 +58,9 @@
     </button>
     <div class="collapse navbar-collapse" id="menu">
       <ul class="navbar-nav mx-auto">
-        <li class="nav-item"><a class="nav-link" href="/">Inicio</a></li>
-        <li class="nav-item"><a class="nav-link" href="/catalogo/">Catálogo</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Ofertas</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Contacto</a></li>
+        <li class="nav-item"><a class="nav-link" href="/">{% trans "Inicio" %}</a></li>
+        <li class="nav-item"><a class="nav-link" href="/catalogo/">{% trans "Catálogo" %}</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'contacto' %}">{% trans "Contacto" %}</a></li>
       </ul>
       <div class="d-flex gap-3">
         <a href="#"><i class="bi bi-heart nav-icon"></i></a>
@@ -64,8 +73,8 @@
 
 <div class="auth-wrapper">
   <div class="auth-card">
-    <h2 class="auth-title text-center">Bienvenida</h2>
-    <p class="text-center text-muted mb-4" style="font-size:13px;">Inicia sesión en tu cuenta Afrodite</p>
+    <h2 class="auth-title text-center">{% trans "Bienvenida" %}</h2>
+    <p class="text-center text-muted mb-4" style="font-size:13px;">{% trans "Inicia sesión en tu cuenta Afrodite" %}</p>
 
     {% if messages %}
       {% for msg in messages %}
@@ -84,16 +93,34 @@
           {% endif %}
         </div>
       {% endfor %}
-      <button type="submit" class="btn btn-afrodite mt-3">Iniciar sesión</button>
+      <button type="submit" class="btn btn-afrodite mt-3">{% trans "Iniciar sesión" %}</button>
     </form>
 
     <hr class="divider">
     <p class="text-center mb-0" style="font-size:13px; color:#888;">
-      ¿No tienes cuenta?
-      <a href="/registro/" class="link-afrodite fw-500">Regístrate aquí</a>
+      {% trans "¿No tienes cuenta?" %}
+      <a href="/registro/" class="link-afrodite fw-500">{% trans "Regístrate aquí" %}</a>
     </p>
   </div>
 </div>
+
+<!-- SELECTOR DE IDIOMA -->
+<div class="lang-switcher">
+    {% get_current_language as CURRENT_LANG %}
+    <form action="{% url 'set_language' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="language" value="es">
+        <input type="hidden" name="next" value="{{ request.get_full_path }}">
+        <button type="submit" {% if CURRENT_LANG == 'es' %}class="active-lang"{% endif %}>ES</button>
+    </form>
+    <form action="{% url 'set_language' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="language" value="en">
+        <input type="hidden" name="next" value="{{ request.get_full_path }}">
+        <button type="submit" {% if CURRENT_LANG == 'en' %}class="active-lang"{% endif %}>EN</button>
+    </form>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

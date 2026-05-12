@@ -1,6 +1,7 @@
-<!-- Autor: Viviana Arango Tabares-->
+<!-- Autor: Viviana Arango Tabares y Helen Sanabria-->
 
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block content %}
 <style>
@@ -58,9 +59,9 @@
 <div class="success-wrapper">
     <div class="success-card">
         <div class="success-icon">✓</div>
-        <h1 class="titulo mb-3">Pago completado éxitosamente</h1>
-        <p class="text-muted">Tu pedido ha sido registrado correctamente ♡</p>
-        <a href="{% url 'carrito:cart_detail' %}" class="btn-afrodite">Volver al carrito</a>
+        <h1 class="titulo mb-3">{% trans "Pago completado éxitosamente" %}</h1>
+        <p class="text-muted">{% trans "Tu pedido ha sido registrado correctamente" %} ♡</p>
+        <a href="{% url 'carrito:detalle_carrito' %}" class="btn-afrodite">{% trans "Volver al carrito" %}</a>
     </div>
 </div>
 {% endblock %}

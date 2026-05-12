@@ -1,5 +1,5 @@
-<!-- Paulina Velasquez -->
-{% load static %}
+<!-- Paulina Velasquez y Helen Sanabria-->
+{% load static i18n %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -192,6 +192,16 @@ footer p { color: var(--gris); font-size: 13px; margin: 0; }
 .toast-carrito.error {
     background: #8b1e3f;
 }
+
+/* SELECTOR DE IDIOMA */
+.lang-switcher { position: fixed; bottom: 20px; right: 20px; z-index: 9999; display: flex; gap: 6px; }
+.lang-switcher form button {
+    background: #2b2b2b; color: white; border: none; border-radius: 6px;
+    padding: 5px 12px; font-size: 11px; font-family: 'Poppins', sans-serif;
+    cursor: pointer; transition: background .2s; font-weight: 500; letter-spacing: .5px;
+}
+.lang-switcher form button:hover { background: #555; }
+.lang-switcher form button.active-lang { background: #f7c5d0; color: #2b2b2b; }
 </style>
 </head>
 
@@ -208,9 +218,9 @@ footer p { color: var(--gris); font-size: 13px; margin: 0; }
     </button>
     <div class="collapse navbar-collapse" id="menu">
         <ul class="navbar-nav mx-auto">
-            <li class="nav-item"><a class="nav-link" href="/">Inicio</a></li>
-            <li class="nav-item"><a class="nav-link active" href="/catalogo/">Catálogo</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'contacto' %}">Contacto</a></li>
+            <li class="nav-item"><a class="nav-link" href="/">{% trans "Inicio" %}</a></li>
+            <li class="nav-item"><a class="nav-link active" href="/catalogo/">{% trans "Catálogo" %}</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'contacto' %}">{% trans "Contacto" %}</a></li>
         </ul>
         <div class="d-flex gap-3 align-items-center">
             <a href="#"><i class="bi bi-heart nav-icon"></i></a>
@@ -232,8 +242,8 @@ footer p { color: var(--gris); font-size: 13px; margin: 0; }
 
 <!-- HERO -->
 <div class="cat-hero">
-    <h1>Catálogo de Productos</h1>
-    <p>Explora nuestras colecciones de maquillaje y skincare</p>
+    <h1>{% trans "Catálogo de Productos" %}</h1>
+    <p>{% trans "Explora nuestras colecciones de maquillaje y skincare" %}</p>
 </div>
 
 <!-- ══════════════════════════════════════════════════ -->
@@ -249,7 +259,7 @@ footer p { color: var(--gris); font-size: 13px; margin: 0; }
                 <div class="d-flex align-items-center mb-1 flex-wrap gap-2">
                     <h2 class="seccion-titulo mb-0">
                         <i class="bi bi-stars me-2" style="color:var(--rosa);font-size:1.3rem;"></i>
-                        Recomendados para ti
+                        {% trans "Recomendados para ti" %}
                     </h2>
                     <span class="piel-chip">Piel {{ tipo_piel }}</span>
                 </div>
@@ -268,7 +278,7 @@ footer p { color: var(--gris); font-size: 13px; margin: 0; }
                                 {% endif %}
                                 <!-- Badge especial de recomendado -->
                                 <span class="badge-recomendado">
-                                    <i class="bi bi-stars"></i> Para ti
+                                    <i class="bi bi-stars"></i> {% trans "Para ti" %}
                                 </span>
                                 <a href="#" class="btn-wish"><i class="bi bi-heart"></i></a>
                             </div>
@@ -285,7 +295,7 @@ footer p { color: var(--gris); font-size: 13px; margin: 0; }
                 <!-- Logueado, tiene tipo de piel, pero no hay productos que coincidan -->
                 <div class="empty-msg">
                     <i class="bi bi-bag-heart"></i>
-                    Aún no tenemos productos específicos para piel {{ tipo_piel }}, ¡pero pronto habrá novedades!
+                    {% blocktrans %}Aún no tenemos productos específicos para piel {{ tipo_piel }}, ¡pero pronto habrá novedades!{% endblocktrans %}
                 </div>
                 {% endif %}
 
@@ -293,8 +303,8 @@ footer p { color: var(--gris); font-size: 13px; margin: 0; }
                 <!-- Usuario logueado PERO sin tipo de piel configurado -->
                 <div class="login-prompt">
                     <i class="bi bi-person-lines-fill"></i>
-                    <p>Completa tu perfil con tu tipo de piel y te mostraremos los productos perfectos para ti.</p>
-                    <a href="/perfil/" class="btn-rosa">Ir a mi perfil</a>
+                    <p>{% trans "Completa tu perfil con tu tipo de piel y te mostraremos los productos perfectos para ti." %}</p>
+                    <a href="/perfil/" class="btn-rosa">{% trans "Ir a mi perfil" %}</a>
                 </div>
             {% endif %}
 
@@ -302,8 +312,8 @@ footer p { color: var(--gris); font-size: 13px; margin: 0; }
             <!-- Usuario NO logueado -->
             <div class="login-prompt">
                 <i class="bi bi-magic"></i>
-                <p>Inicia sesión y cuéntanos tu tipo de piel para ver productos recomendados especialmente para ti.</p>
-                <a href="/login/" class="btn-rosa">Iniciar sesión</a>
+                <p>{% trans "Inicia sesión y cuéntanos tu tipo de piel para ver productos recomendados especialmente para ti." %}</p>
+                <a href="/login/" class="btn-rosa">{% trans "Iniciar sesión" %}</a>
             </div>
         {% endif %}
 
@@ -313,7 +323,7 @@ footer p { color: var(--gris); font-size: 13px; margin: 0; }
 
 <!-- FILTROS -->
 <div class="filtros">
-    <button class="filtro-btn activo" onclick="filtrar('todos', this)">Todos</button>
+    <button class="filtro-btn activo" onclick="filtrar('todos', this)">{% trans "Todos" %}</button>
     <button class="filtro-btn" onclick="filtrar('skincare', this)">Skincare</button>
     <button class="filtro-btn" onclick="filtrar('maquillaje', this)">Maquillaje</button>
 </div>
@@ -333,12 +343,12 @@ footer p { color: var(--gris); font-size: 13px; margin: 0; }
                         <div class="img-placeholder"><i class="bi bi-image"></i></div>
                     {% endif %}
                     {% if producto.agotado %}
-                        <span class="badge-agotado">Agotado</span>
+                        <span class="badge-agotado">{% trans "Agotado" %}</span>
                         <div class="overlay-agotado"></div>
                     {% else %}
                         <span class="badge-cat">Skincare</span>
                         {% if producto.stock <= 5 %}
-                            <span class="badge-stock-low">Solo {{ producto.stock }} disponibles</span>
+                            <span class="badge-stock-low">{% trans "Solo" %} {{ producto.stock }} {% trans "disponibles" %}</span>
                         {% endif %}
                     {% endif %}
                     <a href="#" class="btn-wish"><i class="bi bi-heart"></i></a>
@@ -347,10 +357,10 @@ footer p { color: var(--gris); font-size: 13px; margin: 0; }
                     <div class="nombre">{{ producto.nombre }}</div>
                     <div class="precio">${{ producto.precio|floatformat:"0" }}</div>
                     {% if producto.agotado %}
-                        <span class="btn-agregar disabled-btn mt-2">Sin stock</span>
+                        <span class="btn-agregar disabled-btn mt-2">{% trans "Sin stock" %}</span>
                     {% else %}
                         <button type="button" class="btn-agregar mt-2" onclick="agregarAlCarrito({{ producto.id }})">
-                            <i class="bi bi-bag-plus"></i> Agregar
+                            <i class="bi bi-bag-plus"></i> {% trans "Agregar" %}
                         </button>
                     {% endif %}
                 </div>
@@ -359,7 +369,7 @@ footer p { color: var(--gris); font-size: 13px; margin: 0; }
         {% empty %}
         <div class="empty-msg">
             <i class="bi bi-box-seam"></i>
-            No hay productos de skincare disponibles aún.
+            {% trans "No hay productos de skincare disponibles aún." %}
         </div>
         {% endfor %}
     </div>
@@ -367,7 +377,7 @@ footer p { color: var(--gris); font-size: 13px; margin: 0; }
 
 <!-- MAQUILLAJE -->
 <section class="container py-5 seccion" data-cat="maquillaje">
-    <h2 class="seccion-titulo">Maquillaje</h2>
+    <h2 class="seccion-titulo">{% trans "Maquillaje" %}</h2>
     <div class="seccion-linea"></div>
     <div class="row g-4">
         {% for producto in maquillaje %}
@@ -380,12 +390,12 @@ footer p { color: var(--gris); font-size: 13px; margin: 0; }
                         <div class="img-placeholder"><i class="bi bi-image"></i></div>
                     {% endif %}
                     {% if producto.agotado %}
-                        <span class="badge-agotado">Agotado</span>
+                        <span class="badge-agotado">{% trans "Agotado" %}</span>
                         <div class="overlay-agotado"></div>
                     {% else %}
-                        <span class="badge-cat">Maquillaje</span>
+                        <span class="badge-cat">{% trans "Maquillaje" %}</span>
                         {% if producto.stock <= 5 %}
-                            <span class="badge-stock-low">Solo {{ producto.stock }} disponibles</span>
+                            <span class="badge-stock-low">{% trans "Solo" %} {{ producto.stock }} {% trans "disponibles" %}</span>
                         {% endif %}
                     {% endif %}
                     <a href="#" class="btn-wish"><i class="bi bi-heart"></i></a>
@@ -394,10 +404,10 @@ footer p { color: var(--gris); font-size: 13px; margin: 0; }
                     <div class="nombre">{{ producto.nombre }}</div>
                     <div class="precio">${{ producto.precio|floatformat:"0" }}</div>
                     {% if producto.agotado %}
-                        <span class="btn-agregar disabled-btn mt-2">Sin stock</span>
+                        <span class="btn-agregar disabled-btn mt-2">{% trans "Sin stock" %}</span>
                     {% else %}
                         <button type="button" class="btn-agregar mt-2" onclick="agregarAlCarrito({{ producto.id }})">
-                            <i class="bi bi-bag-plus"></i> Agregar
+                            <i class="bi bi-bag-plus"></i> {% trans "Agregar" %}
                         </button>
                     {% endif %}
                 </div>
@@ -406,7 +416,7 @@ footer p { color: var(--gris); font-size: 13px; margin: 0; }
         {% empty %}
         <div class="empty-msg">
             <i class="bi bi-box-seam"></i>
-            No hay productos de maquillaje disponibles aún.
+            {% trans "No hay productos de maquillaje disponibles aún." %}
         </div>
         {% endfor %}
     </div>
@@ -454,7 +464,7 @@ function mostrarMensajeCarrito(message, isError = false) {
 }
 
 function agregarAlCarrito(productId) {
-    fetch("{% url 'carrito:add_to_cart' %}", {
+    fetch("{% url 'carrito:agregar_producto' %}", {
         method: "POST",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded",
@@ -487,6 +497,23 @@ function agregarAlCarrito(productId) {
     });
 }
 </script>
+
+<!-- SELECTOR DE IDIOMA -->
+<div class="lang-switcher">
+    {% get_current_language as CURRENT_LANG %}
+    <form action="{% url 'set_language' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="language" value="es">
+        <input type="hidden" name="next" value="{{ request.get_full_path }}">
+        <button type="submit" {% if CURRENT_LANG == 'es' %}class="active-lang"{% endif %}>ES</button>
+    </form>
+    <form action="{% url 'set_language' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="language" value="en">
+        <input type="hidden" name="next" value="{{ request.get_full_path }}">
+        <button type="submit" {% if CURRENT_LANG == 'en' %}class="active-lang"{% endif %}>EN</button>
+    </form>
+</div>
 
 </body>
 </html>
