@@ -48,7 +48,7 @@ def vista_logout(request):
 
 @login_required
 def vista_perfil(request):
-    perfil, _ = PerfilUsuario.objects.get_or_create(usuario=request.user)
+    perfil, created = PerfilUsuario.objects.get_or_create(usuario=request.user)
     direcciones = perfil.direcciones.all()
 
     if request.method == 'POST':
@@ -77,7 +77,7 @@ def vista_perfil(request):
 
 @login_required
 def agregar_direccion(request):
-    perfil, _ = PerfilUsuario.objects.get_or_create(usuario=request.user)
+    perfil, created = PerfilUsuario.objects.get_or_create(usuario=request.user)
     if request.method == 'POST':
         form = FormularioDireccion(request.POST)
         if form.is_valid():
@@ -95,7 +95,7 @@ def agregar_direccion(request):
 
 @login_required
 def editar_direccion(request, pk):
-    perfil, _ = PerfilUsuario.objects.get_or_create(usuario=request.user)
+    perfil, created = PerfilUsuario.objects.get_or_create(usuario=request.user)
     direccion = get_object_or_404(DireccionUsuario, pk=pk, perfil=perfil)
     if request.method == 'POST':
         form = FormularioDireccion(request.POST, instance=direccion)
@@ -112,7 +112,7 @@ def editar_direccion(request, pk):
 
 @login_required
 def eliminar_direccion(request, pk):
-    perfil, _ = PerfilUsuario.objects.get_or_create(usuario=request.user)
+    perfil, created = PerfilUsuario.objects.get_or_create(usuario=request.user)
     direccion = get_object_or_404(DireccionUsuario, pk=pk, perfil=perfil)
     direccion.delete()
     messages.success(request, _('Dirección eliminada.'))

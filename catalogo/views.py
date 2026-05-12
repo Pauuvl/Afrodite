@@ -1,3 +1,4 @@
+
 # Autor: Paulina Velasquez Londoño y Helen Sanabria
 from django.http import JsonResponse
 from django.shortcuts import render
@@ -9,7 +10,6 @@ from .services import (
     obtener_recomendados_catalogo,
     obtener_productos_disponibles,
 )
-
 
 def index(request):
     tipo_piel    = obtener_tipo_piel_usuario(request)

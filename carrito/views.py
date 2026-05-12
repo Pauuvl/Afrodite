@@ -2,24 +2,30 @@
 
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
-from django.shortcuts import get_object_or_404, redirect, render
-
-from .models import Cart, CartItem
-from . import services
+from django.shortcuts import redirect, render
+from catalogo.models import Producto
+from .models import CartItem
+from .services import (
+    agregar_producto_al_carrito,
+    actualizar_item_carrito,
+    calcular_total,
+    eliminar_item_carrito,
+    obtener_carrito_activo,
+    procesar_checkout,
+)
 
 
 @login_required
-def detalle_carrito(request):
-    from catalogo.models import Producto
-    carrito = services.obtener_o_crear_carrito(request.user)
-    items   = CartItem.objects.filter(cart=carrito)
-    productos = Producto.objects.all().order_by('categoria', 'nombre')
-    total   = services.calcular_total(items)
+def cart_detail(request):
+    cart = obtener_carrito_activo(request.user)
+    items = CartItem.objects.filter(cart=cart).select_related('product')
+    products = Producto.objects.all().order_by('categoria', 'nombre')
+    total = calcular_total(cart)
 
     return render(request, 'carrito/cart_detail.html', {
-        'cart':     carrito,
+        'cart':     cart,
         'items':    items,
-        'products': productos,
+        'products': products,
         'total':    total,
     })
 
@@ -28,45 +34,61 @@ def detalle_carrito(request):
 def agregar_producto(request):
     if request.method == 'POST':
         producto_id = request.POST.get('product_id')
-        cantidad    = int(request.POST.get('quantity', 1))
-        exito, mensaje = services.agregar_al_carrito(request.user, producto_id, cantidad)
-        codigo = 200 if exito else 400
-        return JsonResponse({'success': exito, 'message': mensaje}, status=codigo)
-
-    return JsonResponse({'success': False, 'message': 'Método no permitido.'}, status=405)
-
-
-@login_required
-def actualizar_item(request, item_id):
-    if request.method == 'POST':
         cantidad = int(request.POST.get('quantity', 1))
-        services.actualizar_item_carrito(request.user, item_id, cantidad)
-    return redirect('carrito:detalle_carrito')
+
+        exito, mensaje = agregar_producto_al_carrito(
+            request.user,
+            producto_id,
+            cantidad
+        )
+
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            return JsonResponse({
+                'success': exito,
+                'message': mensaje
+            }, status=200 if exito else 400)
+
+        return redirect('carrito:cart_detail')
+
+    return JsonResponse({
+        'success': False,
+        'message': 'Método no permitido.'
+    }, status=405)
 
 
 @login_required
-def eliminar_item(request, item_id):
+def update_cart_item(request, item_id):
     if request.method == 'POST':
-        services.eliminar_item_carrito(request.user, item_id)
-    return redirect('carrito:detalle_carrito')
+        quantity = int(request.POST.get('quantity', 1))
+        actualizar_item_carrito(request.user, item_id, quantity)
+
+    return redirect('carrito:cart_detail')
+
+
+@login_required
+def remove_cart_item(request, item_id):
+    if request.method == 'POST':
+        eliminar_item_carrito(request.user, item_id)
+
+    return redirect('carrito:cart_detail')
 
 
 @login_required
 def checkout(request):
-    carrito = get_object_or_404(Cart, user=request.user, is_active=True)
-    items   = CartItem.objects.filter(cart=carrito)
-    total   = services.calcular_total(items)
+    cart = obtener_carrito_activo(request.user)
+    items = CartItem.objects.filter(cart=cart).select_related('product')
+    total = calcular_total(cart)
 
     if not items.exists():
-        return redirect('carrito:detalle_carrito')
+        return redirect('carrito:cart_detail')
 
     if request.method == 'POST':
-        metodo = request.POST.get('method')
-        services.procesar_checkout(request.user, metodo)
-        return redirect('carrito:pago_exitoso')
+        metodo_pago = request.POST.get('method')
+        procesar_checkout(request.user, cart, metodo_pago)
+        return redirect('carrito:payment_success')
 
     return render(request, 'carrito/checkout.html', {
-        'cart':  carrito,
+        'cart':  cart,
         'items': items,
         'total': total,
     })
