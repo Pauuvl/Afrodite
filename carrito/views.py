@@ -1,176 +1,77 @@
-# Autor: Viviana Arango Tabares
+# Autor: Viviana Arango Tabares y Helen Sanabria
 
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
-from catalogo.models import Producto
-from .models import Cart, CartItem, Order, Payment
+
+from .models import Cart, CartItem
+from . import services
 
 
 @login_required
-def cart_detail(request):
-    cart, created = Cart.objects.get_or_create(user=request.user, is_active=True)
-    items = CartItem.objects.filter(cart=cart)
-    products = Producto.objects.all().order_by('categoria', 'nombre')
-
-    total = sum(
-        ((item.product.precio if item.product else item.unit_price) * item.quantity)
-        for item in items
-    )
+def detalle_carrito(request):
+    from catalogo.models import Producto
+    carrito = services.obtener_o_crear_carrito(request.user)
+    items   = CartItem.objects.filter(cart=carrito)
+    productos = Producto.objects.all().order_by('categoria', 'nombre')
+    total   = services.calcular_total(items)
 
     return render(request, 'carrito/cart_detail.html', {
-        'cart': cart,
-        'items': items,
-        'products': products,
-        'total': total,
+        'cart':     carrito,
+        'items':    items,
+        'products': productos,
+        'total':    total,
     })
 
 
 @login_required
-def add_to_cart(request):
+def agregar_producto(request):
     if request.method == 'POST':
-        product_id = request.POST.get('product_id')
-        quantity = int(request.POST.get('quantity', 1))
+        producto_id = request.POST.get('product_id')
+        cantidad    = int(request.POST.get('quantity', 1))
+        exito, mensaje = services.agregar_al_carrito(request.user, producto_id, cantidad)
+        codigo = 200 if exito else 400
+        return JsonResponse({'success': exito, 'message': mensaje}, status=codigo)
 
-        product = get_object_or_404(Producto, id=product_id)
-
-        if product.agotado:
-            return JsonResponse({
-                'success': False,
-                'message': f'El producto "{product.nombre}" está agotado.'
-            }, status=400)
-
-        cart, created = Cart.objects.get_or_create(user=request.user, is_active=True)
-
-        existing_item = CartItem.objects.filter(
-            cart=cart,
-            product=product
-        ).first()
-
-        cantidad_actual = existing_item.quantity if existing_item else 0
-
-        if cantidad_actual + quantity > product.stock:
-            return JsonResponse({
-                'success': False,
-                'message': f'Solo hay {product.stock} unidades disponibles de "{product.nombre}".'
-            }, status=400)
-
-        if existing_item:
-            existing_item.quantity += quantity
-            existing_item.save()
-        else:
-            CartItem.objects.create(
-                cart=cart,
-                product=product,
-                quantity=quantity
-            )
-
-        return JsonResponse({
-            'success': True,
-            'message': 'El producto se ha agregado al carrito.'
-        })
-
-    return JsonResponse({
-        'success': False,
-        'message': 'Método no permitido.'
-    }, status=405)
+    return JsonResponse({'success': False, 'message': 'Método no permitido.'}, status=405)
 
 
 @login_required
-def update_cart_item(request, item_id):
-    item = get_object_or_404(
-        CartItem,
-        id=item_id,
-        cart__user=request.user,
-        cart__is_active=True
-    )
-
+def actualizar_item(request, item_id):
     if request.method == 'POST':
-        quantity = int(request.POST.get('quantity', 1))
-
-        if quantity > 0:
-            item.quantity = quantity
-            item.save()
-        else:
-            item.delete()
-
-    return redirect('carrito:cart_detail')
+        cantidad = int(request.POST.get('quantity', 1))
+        services.actualizar_item_carrito(request.user, item_id, cantidad)
+    return redirect('carrito:detalle_carrito')
 
 
 @login_required
-def remove_cart_item(request, item_id):
-    item = get_object_or_404(
-        CartItem,
-        id=item_id,
-        cart__user=request.user,
-        cart__is_active=True
-    )
-
+def eliminar_item(request, item_id):
     if request.method == 'POST':
-        item.delete()
-
-    return redirect('carrito:cart_detail')
+        services.eliminar_item_carrito(request.user, item_id)
+    return redirect('carrito:detalle_carrito')
 
 
 @login_required
 def checkout(request):
-    cart = get_object_or_404(Cart, user=request.user, is_active=True)
-    items = CartItem.objects.filter(cart=cart)
-
-    total = sum(
-        ((item.product.precio if item.product else item.unit_price) * item.quantity)
-        for item in items
-    )
+    carrito = get_object_or_404(Cart, user=request.user, is_active=True)
+    items   = CartItem.objects.filter(cart=carrito)
+    total   = services.calcular_total(items)
 
     if not items.exists():
-        return redirect('carrito:cart_detail')
+        return redirect('carrito:detalle_carrito')
 
     if request.method == 'POST':
-        method = request.POST.get('method')
-
-        order = Order.objects.create(
-            user=request.user,
-            total=total,
-            status='paid'
-        )
-
-        from .models import OrderItem
-
-        for item in items:
-            product = item.product
-            price = product.precio if product else item.unit_price
-
-            OrderItem.objects.create(
-                order=order,
-                product=product,
-                product_name=product.nombre if product else (item.product_name or ''),
-                unit_price=price,
-                quantity=item.quantity,
-            )
-
-            if product and product.stock > 0:
-                product.stock = max(0, product.stock - item.quantity)
-                product.save(update_fields=['stock'])
-
-        Payment.objects.create(
-            order=order,
-            method=method,
-            status='completed',
-            transaction_id=f"TXN-{order.id}-{request.user.id}"
-        )
-
-        cart.is_active = False
-        cart.save()
-
-        return redirect('carrito:payment_success')
+        metodo = request.POST.get('method')
+        services.procesar_checkout(request.user, metodo)
+        return redirect('carrito:pago_exitoso')
 
     return render(request, 'carrito/checkout.html', {
-        'cart': cart,
+        'cart':  carrito,
         'items': items,
         'total': total,
     })
 
 
 @login_required
-def payment_success(request):
+def pago_exitoso(request):
     return render(request, 'carrito/payment_success.html')

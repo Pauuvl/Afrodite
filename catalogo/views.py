@@ -1,90 +1,62 @@
-# Autor: Paulina Velasquez Londoño
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib import messages
-from .models import Producto
+# Autor: Paulina Velasquez Londoño y Helen Sanabria
+from django.http import JsonResponse
+from django.shortcuts import render
+from .services import (
+    obtener_tipo_piel_usuario,
+    obtener_skincare,
+    obtener_maquillaje,
+    obtener_recomendados,
+    obtener_recomendados_catalogo,
+    obtener_productos_disponibles,
+)
 
-# ── CARRITO (sesión) ──────────────────────────────────────────
-def get_carrito(request):
-    return request.session.get('carrito', {})
 
-def save_carrito(request, carrito):
-    request.session['carrito'] = carrito
-    request.session.modified = True
-
-def agregar_carrito(request, producto_id):
-    producto = get_object_or_404(Producto, id=producto_id)
-
-    if producto.agotado:
-        messages.error(request, f'"{producto.nombre}" está agotado.')
-        return redirect(request.META.get('HTTP_REFERER', 'catalogo'))
-
-    carrito  = get_carrito(request)
-    key      = str(producto_id)
-    en_carrito = carrito[key]['cantidad'] if key in carrito else 0
-
-    if en_carrito >= producto.stock:
-        messages.warning(request, f'Solo hay {producto.stock} unidades disponibles de "{producto.nombre}".')
-        return redirect(request.META.get('HTTP_REFERER', 'catalogo'))
-
-    if key in carrito:
-        carrito[key]['cantidad'] += 1
-    else:
-        carrito[key] = {
-            'nombre':   producto.nombre,
-            'precio':   float(producto.precio),
-            'cantidad': 1,
-            'imagen':   producto.imagen.url if producto.imagen else '',
-        }
-    save_carrito(request, carrito)
-    messages.success(request, f'"{producto.nombre}" agregado al carrito ✓')
-    return redirect(request.META.get('HTTP_REFERER', 'catalogo'))
-
-# ── HELPERS ──────────────────────────────────────────────────
-def get_tipo_piel_usuario(request):
-    if request.user.is_authenticated:
-        try:
-            tipo = request.user.perfil.tipo_piel
-            return tipo if tipo else None   # evita string vacío '' que es falsy pero pasa el try
-        except Exception:
-            return None
-    return None
-
-# ── VISTAS PRINCIPALES ────────────────────────────────────────
 def index(request):
-    tipo_piel     = get_tipo_piel_usuario(request)
-    skincare      = Producto.objects.filter(categoria='skincare')
-    maquillaje    = Producto.objects.filter(categoria='maquillaje')
-
-    # Recomendados: productos que coincidan con tipo de piel del usuario
-    recomendados  = []
-    if tipo_piel:
-        recomendados = Producto.objects.filter(
-            tipo_piel__in=[tipo_piel, 'todos']
-        )[:4]
+    tipo_piel    = obtener_tipo_piel_usuario(request)
+    skincare     = obtener_skincare()[:4]
+    maquillaje   = obtener_maquillaje()[:4]
+    recomendados = obtener_recomendados(tipo_piel, 4)
 
     return render(request, 'index.html', {
-        'skincare':    skincare[:4],
-        'maquillaje':  maquillaje[:4],
+        'skincare':     skincare,
+        'maquillaje':   maquillaje,
         'recomendados': recomendados,
-        'tipo_piel':   tipo_piel,
+        'tipo_piel':    tipo_piel,
     })
+
 
 def catalogo(request):
-    tipo_piel  = get_tipo_piel_usuario(request)
-    skincare   = Producto.objects.filter(categoria='skincare')
-    maquillaje = Producto.objects.filter(categoria='maquillaje')
-
-    # Recomendados: filtra por tipo de piel del usuario + productos para "todos"
-    # Si tipo_piel es None o vacío, recomendados queda vacío (usuario no logueado o sin perfil)
-    recomendados = []
-    if tipo_piel:
-        recomendados = list(
-            Producto.objects.filter(tipo_piel__in=[tipo_piel, 'todos'])
-        )
+    tipo_piel    = obtener_tipo_piel_usuario(request)
+    skincare     = obtener_skincare()
+    maquillaje   = obtener_maquillaje()
+    recomendados = obtener_recomendados_catalogo(tipo_piel)
 
     return render(request, 'catalogo/catalogo.html', {
-        'skincare':      skincare,
-        'maquillaje':    maquillaje,
-        'recomendados':  recomendados,
-        'tipo_piel':     tipo_piel,
+        'skincare':     skincare,
+        'maquillaje':   maquillaje,
+        'recomendados': recomendados,
+        'tipo_piel':    tipo_piel,
     })
+
+
+def api_productos(request):
+    """Servicio web que provee información de productos en formato JSON"""
+    productos = obtener_productos_disponibles()
+    data = {
+        'count': productos.count(),
+        'productos': [
+            {
+                'id': p.id,
+                'nombre': p.nombre,
+                'precio': str(p.precio),
+                'categoria': p.categoria,
+                'tipo_piel': p.tipo_piel,
+                'stock': p.stock,
+                'descripcion': p.descripcion,
+                'imagen_url': p.imagen.url if p.imagen else None,
+                'enlace_detalle': f'/catalogo/?producto={p.id}',
+            }
+            for p in productos
+        ],
+    }
+    return JsonResponse(data, json_dumps_params={'ensure_ascii': False})
