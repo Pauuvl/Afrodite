@@ -1,5 +1,4 @@
-
-# Autor: Viviana Arango y Helen Sanabria
+# Autor: Viviana Arango Tabares
 
 from django.db import transaction
 from django.shortcuts import get_object_or_404
@@ -111,3 +110,11 @@ def procesar_checkout(user, cart, metodo_pago):
     cart.save(update_fields=['is_active'])
 
     return order
+
+# Alias para tests
+def agregar_al_carrito(user, producto_id, cantidad=1):
+    return agregar_producto_al_carrito(
+        user=user,
+        product_id=producto_id,
+        quantity=cantidad
+    )

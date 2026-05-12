@@ -1,4 +1,4 @@
-#Autor: Helen Sanabria Y Viviana Arango
+#Autor: Helen Sanabria
 from .models import Producto
 
 def obtener_tipo_piel_usuario(request):
