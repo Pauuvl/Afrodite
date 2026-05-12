@@ -1,4 +1,6 @@
+#Paulina Velasquez y Helen Sanabria
 from django import forms
+from django.utils.translation import gettext_lazy as _
 from .models import MensajeContacto
 
 
@@ -9,7 +11,7 @@ class FormularioContacto(forms.ModelForm):
         widgets = {
             'nombre': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Tu nombre completo',
+                'placeholder': _('Tu nombre completo'),
             }),
             'email': forms.EmailInput(attrs={
                 'class': 'form-control',
@@ -21,12 +23,12 @@ class FormularioContacto(forms.ModelForm):
             'mensaje': forms.Textarea(attrs={
                 'class': 'form-control',
                 'rows': 5,
-                'placeholder': '¿En qué podemos ayudarte?',
+                'placeholder': _('¿En qué podemos ayudarte?'),
             }),
         }
         labels = {
-            'nombre': 'Nombre',
-            'email': 'Correo electrónico',
-            'asunto': 'Asunto',
-            'mensaje': 'Mensaje',
+            'nombre': _('Nombre'),
+            'email': _('Correo electrónico'),
+            'asunto': _('Asunto'),
+            'mensaje': _('Mensaje'),
         }

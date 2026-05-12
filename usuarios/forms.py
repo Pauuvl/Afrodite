@@ -1,18 +1,20 @@
 # Autores: Helen Sanabria
 from django import forms
+from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .models import PerfilUsuario, DireccionUsuario
 
+
 class FormularioRegistro(UserCreationForm):
     email = forms.EmailField(required=True, widget=forms.EmailInput(attrs={
-        'class': 'form-control', 'placeholder': 'Correo electrónico'
+        'class': 'form-control', 'placeholder': _('Correo electrónico')
     }))
     first_name = forms.CharField(required=True, widget=forms.TextInput(attrs={
-        'class': 'form-control', 'placeholder': 'Nombre'
+        'class': 'form-control', 'placeholder': _('Nombre')
     }))
     last_name = forms.CharField(required=True, widget=forms.TextInput(attrs={
-        'class': 'form-control', 'placeholder': 'Apellido'
+        'class': 'form-control', 'placeholder': _('Apellido')
     }))
 
     class Meta:
@@ -35,17 +37,17 @@ class FormularioLogin(AuthenticationForm):
 
 
 class FormularioPerfilUsuario(forms.ModelForm):
-    first_name = forms.CharField(required=False, label='Nombre', widget=forms.TextInput(attrs={'class': 'form-control'}))
-    last_name = forms.CharField(required=False, label='Apellido', widget=forms.TextInput(attrs={'class': 'form-control'}))
-    email = forms.EmailField(required=False, label='Correo electrónico', widget=forms.EmailInput(attrs={'class': 'form-control'}))
+    first_name = forms.CharField(required=False, label=_('Nombre'), widget=forms.TextInput(attrs={'class': 'form-control'}))
+    last_name = forms.CharField(required=False, label=_('Apellido'), widget=forms.TextInput(attrs={'class': 'form-control'}))
+    email = forms.EmailField(required=False, label=_('Correo electrónico'), widget=forms.EmailInput(attrs={'class': 'form-control'}))
 
     class Meta:
         model = PerfilUsuario
         fields = ['documento_identidad', 'telefono', 'tipo_piel']
         labels = {
-            'documento_identidad': 'Documento de identidad',
-            'telefono': 'Teléfono',
-            'tipo_piel': 'Tipo de piel',
+            'documento_identidad': _('Documento de identidad'),
+            'telefono': _('Teléfono'),
+            'tipo_piel': _('Tipo de piel'),
         }
         widgets = {
             'documento_identidad': forms.TextInput(attrs={'class': 'form-control'}),
@@ -59,14 +61,14 @@ class FormularioDireccion(forms.ModelForm):
         model = DireccionUsuario
         fields = ['nombre_destinatario', 'direccion', 'info_adicional', 'ciudad', 'departamento', 'pais', 'telefono', 'es_predeterminada']
         labels = {
-            'nombre_destinatario': 'Nombre completo',
-            'direccion': 'Dirección',
-            'info_adicional': 'Información adicional (apto, torre, etc.)',
-            'ciudad': 'Ciudad',
-            'departamento': 'Departamento',
-            'pais': 'País',
-            'telefono': 'Teléfono',
-            'es_predeterminada': 'Establecer como dirección predeterminada',
+            'nombre_destinatario': _('Nombre completo'),
+            'direccion': _('Dirección'),
+            'info_adicional': _('Información adicional (apto, torre, etc.)'),
+            'ciudad': _('Ciudad'),
+            'departamento': _('Departamento'),
+            'pais': _('País'),
+            'telefono': _('Teléfono'),
+            'es_predeterminada': _('Establecer como dirección predeterminada'),
         }
         widgets = {
             'nombre_destinatario': forms.TextInput(attrs={'class': 'form-control'}),

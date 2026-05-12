@@ -1,9 +1,9 @@
-# Autores: Helen Sanabria 
+# Autores: Helen Sanabria
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.contrib.auth.forms import AuthenticationForm
+from django.utils.translation import gettext as _
 from .forms import FormularioRegistro, FormularioLogin, FormularioPerfilUsuario, FormularioDireccion
 from .models import PerfilUsuario, DireccionUsuario
 
@@ -17,7 +17,7 @@ def vista_registro(request):
             user = form.save()
             PerfilUsuario.objects.create(usuario=user)
             login(request, user)
-            messages.success(request, f'¡Bienvenida, {user.first_name}!')
+            messages.success(request, _('¡Bienvenida, %(nombre)s!') % {'nombre': user.first_name})
             return redirect('index')
     else:
         form = FormularioRegistro()
@@ -32,10 +32,10 @@ def vista_login(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            messages.success(request, f'¡Hola, {user.first_name or user.username}!')
+            messages.success(request, _('¡Hola, %(nombre)s!') % {'nombre': user.first_name or user.username})
             return redirect('index')
         else:
-            messages.error(request, 'Usuario o contraseña incorrectos.')
+            messages.error(request, _('Usuario o contraseña incorrectos.'))
     else:
         form = FormularioLogin()
     return render(request, 'usuarios/login.html', {'form': form})
@@ -59,7 +59,7 @@ def vista_perfil(request):
             request.user.email = form.cleaned_data.get('email', '')
             request.user.save()
             form.save()
-            messages.success(request, 'Perfil actualizado correctamente.')
+            messages.success(request, _('Perfil actualizado correctamente.'))
             return redirect('perfil')
     else:
         form = FormularioPerfilUsuario(instance=perfil, initial={
@@ -86,7 +86,7 @@ def agregar_direccion(request):
             if direccion.es_predeterminada:
                 perfil.direcciones.update(es_predeterminada=False)
             direccion.save()
-            messages.success(request, 'Dirección agregada.')
+            messages.success(request, _('Dirección agregada.'))
             return redirect('perfil')
     else:
         form = FormularioDireccion()
@@ -103,7 +103,7 @@ def editar_direccion(request, pk):
             if form.cleaned_data.get('es_predeterminada'):
                 perfil.direcciones.update(es_predeterminada=False)
             form.save()
-            messages.success(request, 'Dirección actualizada.')
+            messages.success(request, _('Dirección actualizada.'))
             return redirect('perfil')
     else:
         form = FormularioDireccion(instance=direccion)
@@ -115,5 +115,5 @@ def eliminar_direccion(request, pk):
     perfil, _ = PerfilUsuario.objects.get_or_create(usuario=request.user)
     direccion = get_object_or_404(DireccionUsuario, pk=pk, perfil=perfil)
     direccion.delete()
-    messages.success(request, 'Dirección eliminada.')
+    messages.success(request, _('Dirección eliminada.'))
     return redirect('perfil')
