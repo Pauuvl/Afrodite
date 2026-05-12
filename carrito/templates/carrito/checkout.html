@@ -337,6 +337,20 @@
                             <p class="qr-note">{% trans "QR ficticio para demostración" %}</p>
                         </div>
 
+                        <label class="payment-option d-flex align-items-center gap-3 w-100">
+                            <input type="radio" name="method" value="check" required onclick="mostrarMetodoPago('check')">
+                            <span>
+                                <strong>{% trans "Cheque PDF" %}</strong><br>
+                                <small class="text-muted">{% trans "Genera un cheque simulado en PDF para el pago" %}</small>
+                            </span>
+                        </label>
+
+                        <div id="check-fields" class="payment-extra">
+                            <p><strong>{% trans "Pago con cheque:" %}</strong> {% trans "Se generará un PDF con la información del pago." %}</p>
+                            <p><strong>{% trans "Beneficiario:" %}</strong> Afrodite Beauty S.A.S.</p>
+                            <p><strong>{% trans "Estado:" %}</strong> {% trans "Pendiente de validación" %}</p>
+                        </div>
+
                         <button type="submit" class="btn-afrodite mt-3">{% trans "Confirmar pago" %}</button>
                     </form>
                 </div>
@@ -356,16 +370,15 @@
 function mostrarMetodoPago(metodo) {
     const cardFields = document.getElementById('card-fields');
     const transferFields = document.getElementById('transfer-fields');
+    const checkFields = document.getElementById('check-fields');
 
-    if (metodo === 'card') {
-        cardFields.classList.add('show');
-        transferFields.classList.remove('show');
-    }
+    cardFields.classList.remove('show');
+    transferFields.classList.remove('show');
+    checkFields.classList.remove('show');
 
-    if (metodo === 'transfer') {
-        transferFields.classList.add('show');
-        cardFields.classList.remove('show');
-    }
+    if (metodo === 'card') cardFields.classList.add('show');
+    if (metodo === 'transfer') transferFields.classList.add('show');
+    if (metodo === 'check') checkFields.classList.add('show');
 }
 </script>
 

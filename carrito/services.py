@@ -1,10 +1,10 @@
-
-# Autor: Viviana Arango y Helen Sanabria
+# Autor: Viviana Arango Tabares
 
 from django.db import transaction
 from django.shortcuts import get_object_or_404
 from catalogo.models import Producto
 from .models import Cart, CartItem, Order, OrderItem, Payment
+from .payment_processors import obtener_procesador_pago
 
 
 def obtener_carrito_activo(user):
@@ -100,14 +100,26 @@ def procesar_checkout(user, cart, metodo_pago):
         product.stock = max(0, product.stock - item.quantity)
         product.save(update_fields=['stock'])
 
-    Payment.objects.create(
+    procesador = obtener_procesador_pago(metodo_pago)
+    resultado_pago = procesador.procesar(order)
+
+    payment = Payment.objects.create(
         order=order,
         method=metodo_pago,
-        status='completed',
-        transaction_id=f"TXN-{order.id}-{user.id}"
+        status=resultado_pago['status'],
+        transaction_id=resultado_pago['transaction_id'],
+        payment_file=resultado_pago.get('payment_file')
     )
 
     cart.is_active = False
     cart.save(update_fields=['is_active'])
 
     return order
+
+# Alias para tests
+def agregar_al_carrito(user, producto_id, cantidad=1):
+    return agregar_producto_al_carrito(
+        user=user,
+        product_id=producto_id,
+        quantity=cantidad
+    )

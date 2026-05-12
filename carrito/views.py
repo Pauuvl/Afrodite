@@ -2,9 +2,9 @@
 
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from catalogo.models import Producto
-from .models import CartItem
+from .models import CartItem, Order, Payment
 from .services import (
     agregar_producto_al_carrito,
     actualizar_item_carrito,
@@ -84,8 +84,8 @@ def checkout(request):
 
     if request.method == 'POST':
         metodo_pago = request.POST.get('method')
-        procesar_checkout(request.user, cart, metodo_pago)
-        return redirect('carrito:payment_success')
+        order = procesar_checkout(request.user, cart, metodo_pago)
+        return redirect('carrito:payment_success', order_id=order.id)
 
     return render(request, 'carrito/checkout.html', {
         'cart':  cart,
@@ -95,5 +95,11 @@ def checkout(request):
 
 
 @login_required
-def pago_exitoso(request):
-    return render(request, 'carrito/payment_success.html')
+def pago_exitoso(request, order_id):
+    order = get_object_or_404(Order, id=order_id, user=request.user)
+    payment = Payment.objects.filter(order=order).first()
+
+    return render(request, 'carrito/payment_success.html', {
+        'order': order,
+        'payment': payment,
+    })

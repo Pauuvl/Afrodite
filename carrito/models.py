@@ -62,6 +62,7 @@ class Payment(models.Model):
     METHOD_CHOICES = [
         ('card', 'Card'),
         ('transfer', 'Transfer'),
+        ('check', 'Cheque PDF'),
     ]
 
     STATUS_CHOICES = [
@@ -74,6 +75,7 @@ class Payment(models.Model):
     method = models.CharField(max_length=20, choices=METHOD_CHOICES)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
     transaction_id = models.CharField(max_length=100, blank=True, null=True)
+    payment_file = models.FileField(upload_to='cheques/', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
