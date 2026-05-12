@@ -1,396 +1,644 @@
 # Autor: Helen Sanabria
 msgid ""
 msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-12 05:03+0000\n"
+"Language: en\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: en\n"
 
+#: Afrodite/settings.py:87
 msgid "Español"
 msgstr "Spanish"
 
+#: Afrodite/settings.py:88
 msgid "English"
 msgstr "English"
 
+#: carrito/templates/carrito/cart_detail.html:178
+#: carrito/templates/carrito/checkout.html:228
+#: catalogo/templates/catalogo/catalogo.html:221
+#: contacto/templates/contacto/contacto.html:101 templates/catalogo.html:220
+#: templates/index.html:130 templates/usuarios/direccion_form.html:59
+#: templates/usuarios/login.html:61 templates/usuarios/perfil.html:122
+#: templates/usuarios/registro.html:62
 msgid "Inicio"
 msgstr "Home"
 
+#: carrito/templates/carrito/cart_detail.html:179
+#: carrito/templates/carrito/checkout.html:229
+#: catalogo/templates/catalogo/catalogo.html:222
+#: contacto/templates/contacto/contacto.html:102 templates/catalogo.html:221
+#: templates/index.html:134 templates/usuarios/direccion_form.html:60
+#: templates/usuarios/login.html:62 templates/usuarios/perfil.html:123
+#: templates/usuarios/registro.html:63
 msgid "Catálogo"
 msgstr "Catalog"
 
+#: carrito/templates/carrito/cart_detail.html:180
+#: carrito/templates/carrito/checkout.html:230
+#: catalogo/templates/catalogo/catalogo.html:223
+#: contacto/templates/contacto/contacto.html:8
+#: contacto/templates/contacto/contacto.html:103 templates/catalogo.html:222
+#: templates/index.html:138 templates/usuarios/direccion_form.html:61
+#: templates/usuarios/login.html:63 templates/usuarios/perfil.html:124
+#: templates/usuarios/registro.html:64
 msgid "Contacto"
 msgstr "Contact"
 
-msgid "Belleza que inspira confianza"
-msgstr "Beauty that inspires confidence"
-
-msgid "Maquillaje y skincare para resaltar tu mejor versión"
-msgstr "Makeup and skincare to highlight your best self"
-
-msgid "Ver colección"
-msgstr "View collection"
-
-msgid "Nuevos en Skincare"
-msgstr "New in Skincare"
-
-msgid "Ver todos"
-msgstr "View all"
-
-msgid "Agotado"
-msgstr "Out of stock"
-
-msgid "Agregar"
-msgstr "Add"
-
-msgid "No hay productos de skincare disponibles aún."
-msgstr "No skincare products available yet."
-
-msgid "Cuidado facial que transforma tu piel"
-msgstr "Facial care that transforms your skin"
-
-msgid "Descubre rutinas diseñadas para todo tipo de piel con los mejores ingredientes."
-msgstr "Discover routines designed for all skin types with the best ingredients."
-
-msgid "Explorar skincare"
-msgstr "Explore skincare"
-
-msgid "Nuevos en Maquillaje"
-msgstr "New in Makeup"
-
-msgid "Maquillaje"
-msgstr "Makeup"
-
-msgid "No hay productos de maquillaje disponibles aún."
-msgstr "No makeup products available yet."
-
-msgid "Tienda de Belleza"
-msgstr "Beauty Store"
-
+#: carrito/templates/carrito/cart_detail.html:202
 msgid "Tu carrito"
 msgstr "Your cart"
 
+#: carrito/templates/carrito/cart_detail.html:203
 msgid "Tus esenciales de belleza están listos, revísalos antes de continuar"
 msgstr "Your beauty essentials are ready, review them before continuing"
 
+#: carrito/templates/carrito/cart_detail.html:209
 msgid "Agrega un producto al carrito"
 msgstr "Add a product to cart"
 
+#: carrito/templates/carrito/cart_detail.html:215
 msgid "Producto"
 msgstr "Product"
 
+#: carrito/templates/carrito/cart_detail.html:217
 msgid "Selecciona un producto"
 msgstr "Select a product"
 
+#: carrito/templates/carrito/cart_detail.html:227
 msgid "Cantidad"
 msgstr "Quantity"
 
+#: carrito/templates/carrito/cart_detail.html:233
 msgid "Agrega al carrito"
 msgstr "Add to cart"
 
+#: carrito/templates/carrito/cart_detail.html:240
 msgid "Tus productos"
 msgstr "Your products"
 
+#: carrito/templates/carrito/cart_detail.html:247
 msgid "cada uno"
 msgstr "each"
 
-msgid "Actualiza"
-msgstr "Update"
-
-msgid "Eliminar"
-msgstr "Remove"
-
-msgid "Tu carrito está vacío"
-msgstr "Your cart is empty"
-
-msgid "¡Agrega tus productos para continuar con la compra!"
-msgstr "Add your products to continue shopping!"
-
-msgid "Detalles de tu pedido"
-msgstr "Order details"
-
-msgid "Total"
-msgstr "Total"
-
-msgid "Completar tu pedido"
-msgstr "Complete your order"
-
-msgid "Finaliza tu compra"
-msgstr "Complete your purchase"
-
-msgid "Finaliza tu compra y selecciona tu método de pago"
-msgstr "Complete your purchase and select your payment method"
-
+#: carrito/templates/carrito/cart_detail.html:251
 msgid "Cantidad:"
 msgstr "Quantity:"
 
+#: carrito/templates/carrito/cart_detail.html:260
+msgid "Actualiza"
+msgstr "Update"
+
+#: carrito/templates/carrito/cart_detail.html:265
+msgid "Eliminar"
+msgstr "Remove"
+
+#: carrito/templates/carrito/cart_detail.html:276
+msgid "Tu carrito está vacío"
+msgstr "Your cart is empty"
+
+#: carrito/templates/carrito/cart_detail.html:277
+msgid "¡Agrega tus productos para continuar con la compra!"
+msgstr "Add your products to continue shopping!"
+
+#: carrito/templates/carrito/cart_detail.html:284
+#: carrito/templates/carrito/checkout.html:252
+msgid "Detalles de tu pedido"
+msgstr "Order details"
+
+#: carrito/templates/carrito/cart_detail.html:287
+#: carrito/templates/carrito/checkout.html:268
+msgid "Total"
+msgstr "Total"
+
+#: carrito/templates/carrito/cart_detail.html:293
+#: carrito/templates/carrito/cart_detail.html:296
+msgid "Completar tu pedido"
+msgstr "Complete your order"
+
+#: carrito/templates/carrito/cart_detail.html:305
+#: carrito/templates/carrito/checkout.html:363 templates/catalogo.html:426
+#: templates/index.html:302 templates/usuarios/perfil.html:266
+msgid "Tienda de Belleza"
+msgstr "Beauty Store"
+
+#: carrito/templates/carrito/checkout.html:245
+msgid "Finaliza tu compra"
+msgstr "Complete your purchase"
+
+#: carrito/templates/carrito/checkout.html:246
+msgid "Finaliza tu compra y selecciona tu método de pago"
+msgstr "Complete your purchase and select your payment method"
+
+#: carrito/templates/carrito/checkout.html:276
 msgid "Escoge tu método de pago"
 msgstr "Choose your payment method"
 
+#: carrito/templates/carrito/checkout.html:284
 msgid "Tarjeta"
 msgstr "Card"
 
+#: carrito/templates/carrito/checkout.html:285
 msgid "Paga fácilmente con tarjeta de crédito o débito"
 msgstr "Pay easily with credit or debit card"
 
+#: carrito/templates/carrito/checkout.html:290
 msgid "Nombre del titular"
 msgstr "Cardholder name"
 
+#: carrito/templates/carrito/checkout.html:291 usuarios/forms.py:64
 msgid "Nombre completo"
 msgstr "Full name"
 
+#: carrito/templates/carrito/checkout.html:293
 msgid "Número de tarjeta"
 msgstr "Card number"
 
+#: carrito/templates/carrito/checkout.html:298
 msgid "Fecha de vencimiento"
 msgstr "Expiry date"
 
-msgid "Datos para simulación del pago."
-msgstr "Data for payment simulation."
-
-msgid "Transferencia bancaria"
-msgstr "Bank transfer"
-
-msgid "Realiza tu pago por transferencia"
-msgstr "Make your payment by bank transfer"
-
-msgid "QR ficticio para demostración"
-msgstr "Demo QR code"
-
-msgid "Confirmar pago"
-msgstr "Confirm payment"
-
-msgid "Pago completado éxitosamente"
-msgstr "Payment completed successfully"
-
-msgid "Tu pedido ha sido registrado correctamente"
-msgstr "Your order has been placed successfully"
-
-msgid "Volver al carrito"
-msgstr "Back to cart"
-
-msgid "Catálogo de Productos"
-msgstr "Product Catalog"
-
-msgid "Completa tu perfil con tu tipo de piel y te mostraremos los productos perfectos para ti."
-msgstr "Complete your profile with your skin type and we'll show you the perfect products for you."
-
-msgid "Ir a mi perfil"
-msgstr "Go to my profile"
-
-msgid "Iniciar sesión"
-msgstr "Sign in"
-
-msgid "Registrarse"
-msgstr "Register"
-
-msgid "Cerrar sesión"
-msgstr "Sign out"
-
-msgid "Perfil"
-msgstr "Profile"
-
-msgid "Explora nuestras colecciones de maquillaje y skincare"
-msgstr "Explore our makeup and skincare collections"
-
-msgid "Recomendados para ti"
-msgstr "Recommended for you"
-
-msgid "Para ti"
-msgstr "For you"
-
-msgid "Skincare"
-msgstr "Skincare"
-
-msgid "Todos"
-msgstr "All"
-
-msgid "Sin stock"
-msgstr "Out of stock"
-
-msgid "Solo"
-msgstr "Only"
-
-msgid "disponibles"
-msgstr "available"
-
-msgid "Inicia sesión y cuéntanos tu tipo de piel para ver productos recomendados especialmente para ti."
-msgstr "Sign in and tell us your skin type to see products recommended especially for you."
-
-msgid "Ofertas"
-msgstr "Offers"
-
+#: carrito/templates/carrito/checkout.html:303
 msgid "CVV"
 msgstr "CVV"
 
-msgid "Contáctanos"
-msgstr "Contact us"
+#: carrito/templates/carrito/checkout.html:309
+msgid "Datos para simulación del pago."
+msgstr "Data for payment simulation."
 
-msgid "¿Tienes dudas sobre un pedido o un producto? Estamos aquí para ayudarte."
-msgstr "Have questions about an order or a product? We are here to help you."
+#: carrito/templates/carrito/checkout.html:316
+msgid "Transferencia bancaria"
+msgstr "Bank transfer"
 
-msgid "Envíanos un mensaje"
-msgstr "Send us a message"
+#: carrito/templates/carrito/checkout.html:317
+msgid "Realiza tu pago por transferencia"
+msgstr "Make your payment by bank transfer"
 
-msgid "Enviar mensaje"
-msgstr "Send message"
+#: carrito/templates/carrito/checkout.html:337
+msgid "QR ficticio para demostración"
+msgstr "Demo QR code"
 
-msgid "Información de contacto"
-msgstr "Contact information"
+#: carrito/templates/carrito/checkout.html:343
+msgid "Cheque PDF"
+msgstr "PDF Check"
 
-msgid "Correo"
-msgstr "Email"
+#: carrito/templates/carrito/checkout.html:344
+msgid "Genera un cheque simulado en PDF para el pago"
+msgstr "Generate a simulated PDF check for payment"
 
-msgid "WhatsApp"
-msgstr "WhatsApp"
+#: carrito/templates/carrito/checkout.html:349
+msgid "Pago con cheque:"
+msgstr "Payment by check:"
 
-msgid "Horario de atención"
-msgstr "Business hours"
+#: carrito/templates/carrito/checkout.html:349
+msgid "Se generará un PDF con la información del pago."
+msgstr "A PDF with the payment information will be generated."
 
-msgid "Lunes a viernes · 8 am – 6 pm"
-msgstr "Monday to Friday · 8 am – 6 pm"
+#: carrito/templates/carrito/checkout.html:350
+msgid "Beneficiario:"
+msgstr "Beneficiary:"
 
-msgid "Ubicación"
-msgstr "Location"
+#: carrito/templates/carrito/checkout.html:351
+msgid "Estado:"
+msgstr "Status:"
 
-msgid "Medellín, Colombia"
-msgstr "Medellín, Colombia"
+#: carrito/templates/carrito/checkout.html:351
+msgid "Pendiente de validación"
+msgstr "Pending validation"
 
-msgid "Hecho con amor en Colombia"
-msgstr "Made with love in Colombia"
+#: carrito/templates/carrito/checkout.html:354
+msgid "Confirmar pago"
+msgstr "Confirm payment"
 
-msgid "Mi Perfil"
-msgstr "My Profile"
+#: carrito/templates/carrito/payment_success.html:62
+msgid "Pago completado éxitosamente"
+msgstr "Payment completed successfully"
 
-msgid "Información personal"
-msgstr "Personal information"
+#: carrito/templates/carrito/payment_success.html:63
+msgid "Tu pedido ha sido registrado correctamente"
+msgstr "Your order has been placed successfully"
 
-msgid "Nombre"
-msgstr "First name"
+#: carrito/templates/carrito/payment_success.html:66
+msgid "Descargar cheque PDF"
+msgstr "Download PDF Check"
 
-msgid "Apellido"
-msgstr "Last name"
+#: carrito/templates/carrito/payment_success.html:69
+msgid "Volver al carrito"
+msgstr "Back to cart"
 
-msgid "Correo electrónico"
-msgstr "Email address"
+#: catalogo/templates/catalogo/catalogo.html:245 templates/catalogo.html:244
+msgid "Catálogo de Productos"
+msgstr "Product Catalog"
 
-msgid "Documento de identidad"
-msgstr "ID document"
+#: catalogo/templates/catalogo/catalogo.html:246 templates/catalogo.html:245
+msgid "Explora nuestras colecciones de maquillaje y skincare"
+msgstr "Explore our makeup and skincare collections"
 
-msgid "Teléfono"
-msgstr "Phone"
+#: catalogo/templates/catalogo/catalogo.html:262 templates/catalogo.html:261
+msgid "Recomendados para ti"
+msgstr "Recommended for you"
 
-msgid "Tipo de piel"
-msgstr "Skin type"
+#: catalogo/templates/catalogo/catalogo.html:281 templates/catalogo.html:280
+msgid "Para ti"
+msgstr "For you"
 
-msgid "Guardar cambios"
-msgstr "Save changes"
+#: catalogo/templates/catalogo/catalogo.html:298
+#, python-format
+msgid ""
+"Aún no tenemos productos específicos para piel %(tipo_piel)s, ¡pero pronto "
+"habrá novedades!"
+msgstr ""
+"We don't have specific products for %(tipo_piel)s skin yet, but new arrivals "
+"are coming soon!"
 
-msgid "Direcciones"
-msgstr "Addresses"
+#: catalogo/templates/catalogo/catalogo.html:306 templates/catalogo.html:305
+msgid ""
+"Completa tu perfil con tu tipo de piel y te mostraremos los productos "
+"perfectos para ti."
+msgstr ""
+"Complete your profile with your skin type and we'll show you the perfect "
+"products for you."
 
-msgid "Dirección predeterminada"
-msgstr "Default address"
+#: catalogo/templates/catalogo/catalogo.html:307 templates/catalogo.html:306
+msgid "Ir a mi perfil"
+msgstr "Go to my profile"
 
-msgid "Aún no tienes direcciones guardadas."
-msgstr "You have no saved addresses yet."
+#: catalogo/templates/catalogo/catalogo.html:315
+msgid ""
+"Inicia sesión y cuéntanos tu tipo de piel para ver productos recomendados "
+"especialmente para ti."
+msgstr ""
+"Sign in and tell us your skin type to see products recommended especially "
+"for you."
 
-msgid "Bienvenida"
-msgstr "Welcome"
-
-msgid "Inicia sesión en tu cuenta Afrodite"
-msgstr "Sign in to your Afrodite account"
-
-msgid "¿No tienes cuenta?"
-msgstr "Don't have an account?"
-
-msgid "Regístrate aquí"
-msgstr "Register here"
-
-msgid "Crear cuenta"
-msgstr "Create account"
-
-msgid "Únete a la comunidad Afrodite"
-msgstr "Join the Afrodite community"
-
-msgid "Usuario"
-msgstr "Username"
-
-msgid "Contraseña"
-msgstr "Password"
-
-msgid "Confirmar contraseña"
-msgstr "Confirm password"
-
-msgid "¿Ya tienes cuenta?"
-msgstr "Already have an account?"
-
-msgid "Inicia sesión"
+#: catalogo/templates/catalogo/catalogo.html:316 templates/catalogo.html:315
+#: templates/usuarios/login.html:8 templates/usuarios/login.html:96
+msgid "Iniciar sesión"
 msgstr "Sign in"
 
-msgid "Aún no tenemos productos específicos para piel %(tipo_piel)s, ¡pero pronto habrá novedades!"
-msgstr "We don't have specific products for %(tipo_piel)s skin yet, but new arrivals are coming soon!"
+#: catalogo/templates/catalogo/catalogo.html:326 templates/catalogo.html:325
+msgid "Todos"
+msgstr "All"
 
+#: catalogo/templates/catalogo/catalogo.html:346
+#: catalogo/templates/catalogo/catalogo.html:393 templates/catalogo.html:345
+#: templates/catalogo.html:392 templates/index.html:194
+#: templates/index.html:251
+msgid "Agotado"
+msgstr "Out of stock"
+
+#: catalogo/templates/catalogo/catalogo.html:351
+#: catalogo/templates/catalogo/catalogo.html:398
+msgid "Solo"
+msgstr "Only"
+
+#: catalogo/templates/catalogo/catalogo.html:351
+#: catalogo/templates/catalogo/catalogo.html:398
+msgid "disponibles"
+msgstr "available"
+
+#: catalogo/templates/catalogo/catalogo.html:360
+#: catalogo/templates/catalogo/catalogo.html:407 templates/catalogo.html:359
+#: templates/catalogo.html:406
+msgid "Sin stock"
+msgstr "Out of stock"
+
+#: catalogo/templates/catalogo/catalogo.html:363
+#: catalogo/templates/catalogo/catalogo.html:410 templates/catalogo.html:362
+#: templates/catalogo.html:409 templates/usuarios/perfil.html:225
+msgid "Agregar"
+msgstr "Add"
+
+#: catalogo/templates/catalogo/catalogo.html:372 templates/catalogo.html:371
+#: templates/index.html:217
+msgid "No hay productos de skincare disponibles aún."
+msgstr "No skincare products available yet."
+
+#: catalogo/templates/catalogo/catalogo.html:380
+#: catalogo/templates/catalogo/catalogo.html:396 templates/catalogo.html:327
+#: templates/catalogo.html:379 templates/catalogo.html:395
+#: templates/index.html:254
+msgid "Maquillaje"
+msgstr "Makeup"
+
+#: catalogo/templates/catalogo/catalogo.html:419 templates/catalogo.html:418
+#: templates/index.html:274
+msgid "No hay productos de maquillaje disponibles aún."
+msgstr "No makeup products available yet."
+
+#: contacto/forms.py:14
 msgid "Tu nombre completo"
 msgstr "Your full name"
 
+#: contacto/forms.py:26
 msgid "¿En qué podemos ayudarte?"
 msgstr "How can we help you?"
 
+#: contacto/forms.py:30 templates/usuarios/perfil.html:172
+#: templates/usuarios/registro.html:90 usuarios/forms.py:14
+#: usuarios/forms.py:40
+msgid "Nombre"
+msgstr "First name"
+
+#: contacto/forms.py:31 templates/usuarios/perfil.html:181
+#: templates/usuarios/registro.html:106 usuarios/forms.py:11
+#: usuarios/forms.py:42
+msgid "Correo electrónico"
+msgstr "Email address"
+
+#: contacto/forms.py:32
+msgid "Asunto"
+msgstr ""
+
+#: contacto/forms.py:33
+msgid "Mensaje"
+msgstr ""
+
+#: contacto/models.py:8
 msgid "Consulta sobre pedido"
 msgstr "Order inquiry"
 
+#: contacto/models.py:9
 msgid "Información de producto"
 msgstr "Product information"
 
+#: contacto/models.py:10
 msgid "Devolución o cambio"
 msgstr "Return or exchange"
 
+#: contacto/models.py:11
 msgid "Otro"
 msgstr "Other"
 
-msgid "Agregar dirección"
-msgstr "Add address"
+#: contacto/models.py:26
+#, fuzzy
+#| msgid "Información de contacto"
+msgid "Mensaje de contacto"
+msgstr "Contact information"
 
-msgid "Editar dirección"
-msgstr "Edit address"
+#: contacto/models.py:27
+#, fuzzy
+#| msgid "Información de contacto"
+msgid "Mensajes de contacto"
+msgstr "Contact information"
 
+#: contacto/templates/contacto/contacto.html:120
+msgid "Contáctanos"
+msgstr "Contact us"
+
+#: contacto/templates/contacto/contacto.html:121
+msgid ""
+"¿Tienes dudas sobre un pedido o un producto? Estamos aquí para ayudarte."
+msgstr "Have questions about an order or a product? We are here to help you."
+
+#: contacto/templates/contacto/contacto.html:145
+msgid "Envíanos un mensaje"
+msgstr "Send us a message"
+
+#: contacto/templates/contacto/contacto.html:171
+msgid "Enviar mensaje"
+msgstr "Send message"
+
+#: contacto/templates/contacto/contacto.html:182
+msgid "Información de contacto"
+msgstr "Contact information"
+
+#: contacto/templates/contacto/contacto.html:187
+msgid "Correo"
+msgstr "Email"
+
+#: contacto/templates/contacto/contacto.html:194
+msgid "WhatsApp"
+msgstr "WhatsApp"
+
+#: contacto/templates/contacto/contacto.html:201
+msgid "Horario de atención"
+msgstr "Business hours"
+
+#: contacto/templates/contacto/contacto.html:202
+msgid "Lunes a viernes · 8 am – 6 pm"
+msgstr "Monday to Friday · 8 am – 6 pm"
+
+#: contacto/templates/contacto/contacto.html:208
+msgid "Ubicación"
+msgstr "Location"
+
+#: contacto/templates/contacto/contacto.html:209
+msgid "Medellín, Colombia"
+msgstr "Medellín, Colombia"
+
+#: contacto/templates/contacto/contacto.html:219
+msgid "Hecho con amor en Colombia"
+msgstr "Made with love in Colombia"
+
+#: templates/catalogo.html:326 templates/catalogo.html:332
+#: templates/catalogo.html:348
+msgid "Skincare"
+msgstr "Skincare"
+
+#: templates/index.html:166
+msgid "Belleza que inspira confianza"
+msgstr "Beauty that inspires confidence"
+
+#: templates/index.html:167
+msgid "Maquillaje y skincare para resaltar tu mejor versión"
+msgstr "Makeup and skincare to highlight your best self"
+
+#: templates/index.html:168
+msgid "Ver colección"
+msgstr "View collection"
+
+#: templates/index.html:176
+msgid "Nuevos en Skincare"
+msgstr "New in Skincare"
+
+#: templates/index.html:178 templates/index.html:235
+msgid "Ver todos"
+msgstr "View all"
+
+#: templates/index.html:225
+msgid "Cuidado facial que transforma tu piel"
+msgstr "Facial care that transforms your skin"
+
+#: templates/index.html:226
+msgid ""
+"Descubre rutinas diseñadas para todo tipo de piel con los mejores "
+"ingredientes."
+msgstr ""
+"Discover routines designed for all skin types with the best ingredients."
+
+#: templates/index.html:227
+msgid "Explorar skincare"
+msgstr "Explore skincare"
+
+#: templates/index.html:233
+msgid "Nuevos en Maquillaje"
+msgstr "New in Makeup"
+
+#: templates/usuarios/direccion_form.html:8 usuarios/forms.py:65
 msgid "Dirección"
 msgstr "Address"
 
-msgid "Información adicional (apto, torre, etc.)"
-msgstr "Additional info (apt, tower, etc.)"
+#: templates/usuarios/direccion_form.html:78
+#: templates/usuarios/direccion_form.html:120
+msgid "Agregar dirección"
+msgstr "Add address"
 
-msgid "Ciudad"
-msgstr "City"
+#: templates/usuarios/direccion_form.html:78
+#: templates/usuarios/direccion_form.html:120
+msgid "Editar dirección"
+msgstr "Edit address"
 
-msgid "Departamento"
-msgstr "Department"
-
-msgid "País"
-msgstr "Country"
-
-msgid "Establecer como dirección predeterminada"
-msgstr "Set as default address"
-
+#: templates/usuarios/direccion_form.html:122
 msgid "Cancelar"
 msgstr "Cancel"
 
-msgid "¡Hola, %(nombre)s!"
-msgstr "Hello, %(nombre)s!"
+#: templates/usuarios/login.html:76
+msgid "Bienvenida"
+msgstr "Welcome"
 
+#: templates/usuarios/login.html:77
+msgid "Inicia sesión en tu cuenta Afrodite"
+msgstr "Sign in to your Afrodite account"
+
+#: templates/usuarios/login.html:101
+msgid "¿No tienes cuenta?"
+msgstr "Don't have an account?"
+
+#: templates/usuarios/login.html:102
+msgid "Regístrate aquí"
+msgstr "Register here"
+
+#: templates/usuarios/perfil.html:8 templates/usuarios/perfil.html:144
+msgid "Mi Perfil"
+msgstr "My Profile"
+
+#: templates/usuarios/perfil.html:147
+msgid "Cerrar sesión"
+msgstr "Sign out"
+
+#: templates/usuarios/perfil.html:153
+msgid "Información personal"
+msgstr "Personal information"
+
+#: templates/usuarios/perfil.html:176 templates/usuarios/registro.html:95
+#: usuarios/forms.py:17 usuarios/forms.py:41
+msgid "Apellido"
+msgstr "Last name"
+
+#: templates/usuarios/perfil.html:186 usuarios/forms.py:48
+msgid "Documento de identidad"
+msgstr "ID document"
+
+#: templates/usuarios/perfil.html:190 usuarios/forms.py:49 usuarios/forms.py:70
+msgid "Teléfono"
+msgstr "Phone"
+
+#: templates/usuarios/perfil.html:197 usuarios/forms.py:50
+msgid "Tipo de piel"
+msgstr "Skin type"
+
+#: templates/usuarios/perfil.html:216
+msgid "Guardar cambios"
+msgstr "Save changes"
+
+#: templates/usuarios/perfil.html:223
+msgid "Direcciones"
+msgstr "Addresses"
+
+#: templates/usuarios/perfil.html:235
+msgid "Dirección predeterminada"
+msgstr "Default address"
+
+#: templates/usuarios/perfil.html:258
+msgid "Aún no tienes direcciones guardadas."
+msgstr "You have no saved addresses yet."
+
+#: templates/usuarios/registro.html:8 templates/usuarios/registro.html:77
+#: templates/usuarios/registro.html:121
+msgid "Crear cuenta"
+msgstr "Create account"
+
+#: templates/usuarios/registro.html:78
+msgid "Únete a la comunidad Afrodite"
+msgstr "Join the Afrodite community"
+
+#: templates/usuarios/registro.html:101
+msgid "Usuario"
+msgstr "Username"
+
+#: templates/usuarios/registro.html:111
+msgid "Contraseña"
+msgstr "Password"
+
+#: templates/usuarios/registro.html:117
+msgid "Confirmar contraseña"
+msgstr "Confirm password"
+
+#: templates/usuarios/registro.html:126
+msgid "¿Ya tienes cuenta?"
+msgstr "Already have an account?"
+
+#: templates/usuarios/registro.html:127
+msgid "Inicia sesión"
+msgstr "Sign in"
+
+#: usuarios/forms.py:66
+msgid "Información adicional (apto, torre, etc.)"
+msgstr "Additional info (apt, tower, etc.)"
+
+#: usuarios/forms.py:67
+msgid "Ciudad"
+msgstr "City"
+
+#: usuarios/forms.py:68
+msgid "Departamento"
+msgstr "Department"
+
+#: usuarios/forms.py:69
+msgid "País"
+msgstr "Country"
+
+#: usuarios/forms.py:71
+msgid "Establecer como dirección predeterminada"
+msgstr "Set as default address"
+
+#: usuarios/views.py:20
+#, python-format
 msgid "¡Bienvenida, %(nombre)s!"
 msgstr "Welcome, %(nombre)s!"
 
+#: usuarios/views.py:35
+#, python-format
+msgid "¡Hola, %(nombre)s!"
+msgstr "Hello, %(nombre)s!"
+
+#: usuarios/views.py:38
+msgid "Usuario o contraseña incorrectos."
+msgstr "Incorrect username or password."
+
+#: usuarios/views.py:62
 msgid "Perfil actualizado correctamente."
 msgstr "Profile updated successfully."
 
+#: usuarios/views.py:89
 msgid "Dirección agregada."
 msgstr "Address added."
 
+#: usuarios/views.py:106
 msgid "Dirección actualizada."
 msgstr "Address updated."
 
+#: usuarios/views.py:118
 msgid "Dirección eliminada."
 msgstr "Address deleted."
 
-msgid "Usuario o contraseña incorrectos."
-msgstr "Incorrect username or password."
+#~ msgid "Registrarse"
+#~ msgstr "Register"
+
+#~ msgid "Perfil"
+#~ msgstr "Profile"
+
+#~ msgid "Ofertas"
+#~ msgstr "Offers"
