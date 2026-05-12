@@ -23,9 +23,9 @@ def cart_detail(request):
     total = calcular_total(cart)
 
     return render(request, 'carrito/cart_detail.html', {
-        'cart':     carrito,
+        'cart':     cart,
         'items':    items,
-        'products': productos,
+        'products': products,
         'total':    total,
     })
 
@@ -42,12 +42,13 @@ def agregar_producto(request):
             cantidad
         )
 
-        codigo = 200 if exito else 400
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            return JsonResponse({
+                'success': exito,
+                'message': mensaje
+            }, status=200 if exito else 400)
 
-        return JsonResponse({
-            'success': exito,
-            'message': mensaje
-        }, status=codigo)
+        return redirect('carrito:cart_detail')
 
     return JsonResponse({
         'success': False,
@@ -79,7 +80,7 @@ def checkout(request):
     total = calcular_total(cart)
 
     if not items.exists():
-        return redirect('carrito:detalle_carrito')
+        return redirect('carrito:cart_detail')
 
     if request.method == 'POST':
         metodo_pago = request.POST.get('method')
@@ -87,7 +88,7 @@ def checkout(request):
         return redirect('carrito:payment_success')
 
     return render(request, 'carrito/checkout.html', {
-        'cart':  carrito,
+        'cart':  cart,
         'items': items,
         'total': total,
     })
