@@ -170,11 +170,11 @@ footer p { color: var(--gris); font-size: 13px; }
                     <div class="nombre">{{ producto.nombre }}</div>
                     <div class="precio">${{ producto.precio|floatformat:"0" }}</div>
                     {% if not producto.agotado %}
-                    <a href="{% url 'agregar_carrito' producto.id %}"
-                       style="display:block;margin-top:8px;background:#2b2b2b;color:white;border:none;padding:7px 0;border-radius:8px;font-size:12px;font-family:'Poppins',sans-serif;text-align:center;text-decoration:none;transition:opacity .2s;"
-                       onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">
+                    <button type="button" 
+                            class="btn-agregar" 
+                            onclick="agregarAlCarrito({{ producto.id }})">
                         <i class="bi bi-bag-plus"></i> Agregar
-                    </a>
+                    </button>
                     {% endif %}
                 </div>
             </div>
@@ -227,11 +227,11 @@ footer p { color: var(--gris); font-size: 13px; }
                     <div class="nombre">{{ producto.nombre }}</div>
                     <div class="precio">${{ producto.precio|floatformat:"0" }}</div>
                     {% if not producto.agotado %}
-                    <a href="{% url 'agregar_carrito' producto.id %}"
-                       style="display:block;margin-top:8px;background:#2b2b2b;color:white;border:none;padding:7px 0;border-radius:8px;font-size:12px;font-family:'Poppins',sans-serif;text-align:center;text-decoration:none;transition:opacity .2s;"
-                       onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">
+                    <button type="button"
+                            class="btn-agregar"
+                            onclick="agregarAlCarrito({{ producto.id }})">
                         <i class="bi bi-bag-plus"></i> Agregar
-                    </a>
+                    </button>
                     {% endif %}
                 </div>
             </div>
@@ -244,6 +244,26 @@ footer p { color: var(--gris); font-size: 13px; }
         {% endfor %}
     </div>
 </section>
+
+<script>
+function agregarAlCarrito(productId) {
+    fetch("/carrito/add/", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+            "X-CSRFToken": "{{ csrf_token }}"
+        },
+        body: `product_id=${productId}&quantity=1`
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.message);
+    })
+    .catch(error => {
+        console.error("Error:", error);
+    });
+}
+</script>
 
 <!-- FOOTER -->
 <footer>
